@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trump's Wallet — Trends Over Time — Hunter Index</title>
+<meta name="description" content="How Donald Trump's assets, income, and net worth have changed across OGE disclosure filings.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black-olive:#3E3E3C; --dirty-white:#E8E9C9; --sea-green:#228D57; --dollar-bill:#85BB65;
+    --rule:rgba(62,62,60,0.13); --rule-strong:rgba(62,62,60,0.28);
+    --green-light:rgba(34,141,87,0.07); --green-mid:rgba(34,141,87,0.16);
+    --shadow:0 2px 12px rgba(62,62,60,0.10); --radius:4px;
+    --mono:'Space Mono',monospace; --sans:'Ubuntu',sans-serif;
+    --c2016:#228D57; --c2020:#85BB65; --c2022:#e8b84b; --c2024:#e07b4a; --c2025:#5b8fd4;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--sans);background:var(--dirty-white);color:var(--black-olive);font-size:15px;line-height:1.6;min-height:100vh;}
+  .skip-nav{position:absolute;top:-100px;left:1rem;background:var(--sea-green);color:#fff;padding:.5rem 1rem;border-radius:var(--radius);font-family:var(--sans);font-size:14px;z-index:1000;transition:top .2s;text-decoration:none;}
+  .skip-nav:focus{top:1rem;}
+
+  /* ── HEADER ── */
+  header{background:var(--black-olive);color:var(--dirty-white);padding:2.5rem 2rem 2rem;position:relative;overflow:hidden;}
+  header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(232,233,201,.03) 60px,rgba(232,233,201,.03) 61px);pointer-events:none;}
+  .header-inner{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:.6rem;}
+  .header-nav{display:flex;align-items:center;gap:1rem;margin-bottom:.25rem;}
+  .header-nav a{font-family:var(--mono);font-size:11px;color:var(--dollar-bill);text-decoration:none;letter-spacing:.06em;border-bottom:1px solid rgba(133,187,101,.3);padding-bottom:1px;transition:color .15s;}
+  .header-nav a:hover,.header-nav a.active{color:#fff;border-bottom-color:rgba(255,255,255,.4);}
+  h1{font-family:var(--mono);font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;color:var(--dirty-white);letter-spacing:-.02em;}
+  h1 span{color:var(--sea-green);}
+  .header-desc{font-family:var(--sans);font-size:15px;color:rgba(232,233,201,.75);max-width:640px;font-weight:300;}
+  .header-meta{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;margin-top:.25rem;}
+  .header-meta a{font-family:var(--mono);font-size:12px;color:var(--dollar-bill);text-decoration:none;letter-spacing:.05em;border-bottom:1px solid rgba(133,187,101,.4);padding-bottom:1px;}
+  .header-meta a:hover{color:var(--dirty-white);}
+
+  /* ── LAYOUT ── */
+  main{max-width:1200px;margin:0 auto;padding:2rem 1.5rem 4rem;}
+  section+section{margin-top:3rem;}
+  .section-label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--sea-green);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem;}
+  .section-label::after{content:'';flex:1;height:1px;background:var(--rule-strong);}
+  .section-desc{font-family:var(--sans);font-size:13px;color:rgba(62,62,60,.6);margin-bottom:1.25rem;font-weight:300;}
+
+  /* ── CHART GRID ── */
+  .charts-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;}
+  .chart-card{background:#fff;border:1px solid var(--rule);border-radius:var(--radius);padding:1.25rem 1.25rem 1rem;animation:fadeUp .4s ease both;}
+  .chart-card:nth-child(1){animation-delay:.05s;}.chart-card:nth-child(2){animation-delay:.10s;}.chart-card:nth-child(3){animation-delay:.15s;}.chart-card:nth-child(4){animation-delay:.20s;}
+  .chart-title{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--black-olive);margin-bottom:.15rem;font-weight:700;}
+  .chart-subtitle{font-family:var(--sans);font-size:11px;color:rgba(62,62,60,.45);margin-bottom:.9rem;font-weight:300;}
+  .chart-canvas-wrap{position:relative;width:100%;height:200px;}
+  canvas{display:block;}
+
+  /* ── ASSET LOOKUP ── */
+  .lookup-input-wrap{position:relative;max-width:580px;}
+  .lookup-input-wrap input{
+    font-family:var(--sans);font-size:14px;
+    padding:.6rem .9rem .6rem 2.25rem;
+    border:1px solid var(--rule-strong);border-radius:var(--radius);
+    background:#fff;color:var(--black-olive);width:100%;
+    transition:border-color .15s,box-shadow .15s;
+  }
+  .lookup-input-wrap input:focus{outline:none;border-color:var(--sea-green);box-shadow:0 0 0 2px rgba(34,141,87,.15);}
+  .lookup-input-wrap::before{content:'⌕';position:absolute;left:.7rem;top:50%;transform:translateY(-50%);font-size:16px;color:rgba(62,62,60,.4);pointer-events:none;}
+  .suggestions{position:absolute;top:100%;left:0;right:0;background:#fff;border:1px solid var(--rule-strong);border-top:none;border-radius:0 0 var(--radius) var(--radius);z-index:20;max-height:260px;overflow-y:auto;display:none;box-shadow:var(--shadow);}
+  .suggestions.open{display:block;}
+  .suggestion-item{padding:.55rem .9rem;font-family:var(--sans);font-size:13px;cursor:pointer;border-bottom:1px solid var(--rule);transition:background .1s;line-height:1.35;}
+  .suggestion-item:last-child{border-bottom:none;}
+  .suggestion-item:hover,.suggestion-item.focused{background:var(--green-light);}
+  .suggestion-years{font-family:var(--mono);font-size:10px;color:rgba(62,62,60,.4);margin-top:2px;}
+  .suggestion-note{font-family:var(--mono);font-size:10px;color:rgba(34,141,87,.7);margin-top:1px;}
+
+  /* ── ASSET RESULT PANEL ── */
+  .asset-panel{display:none;margin-top:1.5rem;background:#fff;border:1px solid var(--rule);border-radius:var(--radius);overflow:hidden;}
+  .asset-panel.visible{display:block;}
+  .asset-panel-header{background:var(--black-olive);color:var(--dirty-white);padding:1rem 1.25rem;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;}
+  .asset-panel-name{font-family:var(--mono);font-size:13px;font-weight:700;line-height:1.35;flex:1;}
+  .asset-panel-meta{font-family:var(--mono);font-size:10px;color:rgba(232,233,201,.45);margin-top:.25rem;}
+  .asset-panel-note{font-family:var(--sans);font-size:11px;color:#e8b84b;margin-top:.3rem;}
+  .asset-panel-body{padding:1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;}
+  .asset-chart-wrap{position:relative;height:220px;}
+  .asset-table{width:100%;border-collapse:collapse;}
+  .asset-table th{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;padding:.5rem .75rem;text-align:left;background:var(--black-olive);color:var(--dirty-white);white-space:nowrap;}
+  .asset-table td{padding:.5rem .75rem;border-bottom:1px solid var(--rule);font-family:var(--mono);font-size:11px;vertical-align:middle;}
+  .asset-table tr:last-child td{border-bottom:none;}
+  .asset-table tr:hover td{background:var(--green-light);}
+  .asset-table .val{font-weight:700;color:var(--black-olive);}
+  .asset-table .absent{color:rgba(62,62,60,.25);font-style:italic;font-family:var(--sans);font-size:11px;}
+  .yr-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle;flex-shrink:0;}
+
+  /* ── EMPTY / LOADING ── */
+  .lookup-placeholder{font-family:var(--mono);font-size:12px;color:rgba(62,62,60,.38);text-align:center;padding:2.5rem;border:1px dashed var(--rule-strong);border-radius:var(--radius);margin-top:1rem;}
+  .loader{display:inline-block;width:16px;height:16px;border:2px solid var(--rule);border-top-color:var(--sea-green);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:.5rem;}
+
+  /* ── FOOTER ── */
+  footer{background:var(--black-olive);color:rgba(232,233,201,.6);padding:2.5rem 2rem;font-size:12px;font-family:var(--sans);font-weight:300;line-height:1.8;}
+  .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+  .footer-col-title{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dollar-bill);margin-bottom:.6rem;}
+  footer a{color:var(--dollar-bill);text-decoration:none;border-bottom:1px solid rgba(133,187,101,.3);}
+  footer a:hover{color:var(--dirty-white);}
+  .footer-rule{height:1px;background:rgba(232,233,201,.1);grid-column:1/-1;}
+  .footer-bottom{grid-column:1/-1;color:rgba(232,233,201,.35);font-size:11px;}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  @media(max-width:800px){
+    .charts-grid{grid-template-columns:1fr;}
+    .asset-panel-body{grid-template-columns:1fr;}
+    .footer-inner{grid-template-columns:1fr;}
+    header{padding:1.75rem 1rem 1.5rem;}
+    main{padding:1.5rem 1rem 3rem;}
+  }
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+
+<header role="banner">
+  <div class="header-inner">
+    <div class="header-nav">
+      <a href="trumps-wallet.html">Asset Browser</a>
+      <span style="color:rgba(232,233,201,.2)">·</span>
+      <a href="trumps-wallet-trends.html" class="active">Trends Over Time</a>
+    </div>
+    <h1>Trump's <span>Wallet</span></h1>
+    <p class="header-desc">How Donald Trump's assets, income, and net worth have changed across five OGE disclosure filings, 2016–2025.</p>
+    <div class="header-meta">
+      <a href="https://hunterindex.org" target="_blank" rel="noopener">hunterindex.org</a>
+      <a href="https://huntrjay.substack.com" target="_blank" rel="noopener">Subscribe on Substack</a>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <!-- SUMMARY CHARTS -->
+  <section aria-labelledby="trends-heading">
+    <div class="section-label" id="trends-heading">Portfolio-Wide Trends</div>
+    <p class="section-desc">Median estimates from OGE-reported ranges across all five filings. Note: filing years cover different time periods — see the Asset Browser for coverage details.</p>
+    <div class="charts-grid">
+      <div class="chart-card">
+        <div class="chart-title">Net Worth</div>
+        <div class="chart-subtitle">Calculated median estimate (assets minus liabilities)</div>
+        <div class="chart-canvas-wrap"><canvas id="c-networth" role="img" aria-label="Net worth by filing year"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Total Assets &amp; Total Income</div>
+        <div class="chart-subtitle">Median estimates — assets (green) vs. income (amber)</div>
+        <div class="chart-canvas-wrap"><canvas id="c-assets-income" role="img" aria-label="Total assets and income by filing year"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Total Liabilities</div>
+        <div class="chart-subtitle">Median estimate of all reported liabilities</div>
+        <div class="chart-canvas-wrap"><canvas id="c-liabilities" role="img" aria-label="Total liabilities by filing year"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Number of Disclosed Assets</div>
+        <div class="chart-subtitle">Count of individual asset rows per filing</div>
+        <div class="chart-canvas-wrap"><canvas id="c-count" role="img" aria-label="Asset count by filing year"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ASSET LOOKUP -->
+  <section aria-labelledby="lookup-heading">
+    <div class="section-label" id="lookup-heading">Individual Asset Tracker</div>
+    <p class="section-desc">Search for a specific asset to see how its value and income have changed across filing years. Assets are matched by name. Note: asset IDs will be manually linked in a future update — name matching may surface near-duplicates.</p>
+    <div class="lookup-input-wrap">
+      <input type="search" id="asset-search" placeholder="e.g. Mar-a-Lago, Trump Tower, 40 Wall Street…" autocomplete="off" aria-label="Search for an asset" aria-autocomplete="list" aria-controls="suggestions-box">
+      <div class="suggestions" id="suggestions-box" role="listbox"></div>
+    </div>
+    <div class="lookup-placeholder" id="lookup-placeholder">Search for an asset above to see how its value and income have changed over time.</div>
+    <div class="asset-panel" id="asset-panel" aria-live="polite"></div>
+  </section>
+
+</main>
+
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-col-title">Hunter Index</div>
+      A nonprofit accountability publication tracking U.S. politicians' personal finances.<br>
+      EIN: 33-3157569<br>
+      <a href="https://hunterindex.org" target="_blank" rel="noopener">hunterindex.org</a> ·
+      <a href="https://huntrjay.substack.com" target="_blank" rel="noopener">Substack</a>
+    </div>
+    <div>
+      <div class="footer-col-title">Data & Attribution</div>
+      Data from public OGE Form 278 disclosures. Any use must be attributed to Hunter Index with a link to hunterindex.org.<br>
+      <a href="mailto:jay@hunterindex.org">jay@hunterindex.org</a> · 202-240-2414
+    </div>
+    <div class="footer-rule"></div>
+    <div class="footer-bottom">Medians are calculated estimates from OGE-reported ranges. Data covers May 2015 – June 13, 2025.</div>
+  </div>
+</footer>
+
+<script>
+/* ── TOPLINE DATA ── */
+const FILINGS = [
+  { year:'2016', label:'May 2016',   netWorth:1339963645,  assets:1748013651, income:669524867,  liabilities:408050005,  count:509  },
+  { year:'2020', label:'Dec. 2019',  netWorth:1325878071,  assets:1733378076, income:466703975,  liabilities:407500004,  count:221  },
+  { year:'2022', label:'Apr. 2023',  netWorth:1037193200,  assets:1567193204, income:1287625989, liabilities:530000004,  count:2319 },
+  { year:'2024', label:'Aug. 2024',  netWorth:1674070796,  assets:2074570801, income:796287858,  liabilities:400500005,  count:4531 },
+  { year:'2025', label:'Dec. 2024',  netWorth:2446544516,  assets:2759577024, income:615998373,  liabilities:313032508,  count:3573 },
+];
+const YR_COLORS = { '2016':'#228D57','2020':'#85BB65','2022':'#e8b84b','2024':'#e07b4a','2025':'#5b8fd4' };
+
+/* ── NUMBER FORMAT ── */
+function fmt(n) {
+  if (n == null) return '—';
+  const v = Number(n); if (isNaN(v)) return '—';
+  const neg = v < 0, abs = Math.abs(v);
+  let s;
+  if (abs >= 1e9)      s = '$' + (Math.trunc(abs / 1e7) / 100) + ' billion';
+  else if (abs >= 1e6) s = '$' + (Math.trunc(abs / 1e4) / 100) + ' million';
+  else if (abs >= 1e3) s = '$' + Math.trunc(abs / 1e3) + 'k';
+  else                 s = '$' + abs.toLocaleString();
+  return neg ? '-' + s : s;
+}
+
+/* Format axis label always in millions */
+function fmtM(n) {
+  if (n == null || isNaN(n)) return '';
+  const m = n / 1e6;
+  if (m >= 1000) return '$' + (Math.trunc(m / 10) / 100) + 'B';
+  if (m >= 100)  return '$' + Math.round(m) + 'M';
+  if (m >= 10)   return '$' + Math.round(m * 10) / 10 + 'M';
+  return '$' + Math.round(m * 100) / 100 + 'M';
+}
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ── CANVAS CHART ENGINE ── */
+function drawChart(canvasId, datasets, opts = {}) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const wrap = canvas.parentElement;
+  const W = wrap.clientWidth || 400;
+  const H = wrap.clientHeight || 200;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width  = W + 'px';
+  canvas.style.height = H + 'px';
+  ctx.scale(dpr, dpr);
+
+  const isBar = opts.type === 'bar';
+  const labels = opts.labels || FILINGS.map(f => f.year);
+  const n = labels.length;
+  const PAD = { top: 18, right: 16, bottom: 32, left: 68 };
+  const cW = W - PAD.left - PAD.right;
+  const cH = H - PAD.top  - PAD.bottom;
+
+  /* value range */
+  const allVals = datasets.flatMap(d => d.values.filter(v => v != null && !isNaN(v)));
+  if (!allVals.length) return;
+  const rawMax = Math.max(...allVals);
+  const rawMin = isBar ? 0 : Math.min(...allVals) * 0.88;
+  /* nice tick spacing in millions */
+  const rangeMil = (rawMax - rawMin) / 1e6;
+  const steps = [1,2,5,10,20,50,100,200,500,1000,2000,5000];
+  const tickSizeMil = steps.find(s => rangeMil / s <= 5) || steps[steps.length - 1];
+  const tickSize = tickSizeMil * 1e6;
+  const minTick = Math.floor(rawMin / tickSize) * tickSize;
+  const maxTick = Math.ceil(rawMax  / tickSize) * tickSize;
+  const tickCount = Math.round((maxTick - minTick) / tickSize);
+
+  const toX = i => PAD.left + (n === 1 ? cW / 2 : (i / (n - 1)) * cW);
+  const toY = v => PAD.top + cH - ((v - minTick) / (maxTick - minTick)) * cH;
+
+  /* grid + y-axis labels */
+  ctx.font = `10px 'Space Mono',monospace`;
+  ctx.textAlign = 'right';
+  for (let i = 0; i <= tickCount; i++) {
+    const val = minTick + i * tickSize;
+    const y   = toY(val);
+    ctx.strokeStyle = 'rgba(62,62,60,0.08)';
+    ctx.lineWidth   = 1;
+    ctx.beginPath(); ctx.moveTo(PAD.left, y); ctx.lineTo(PAD.left + cW, y); ctx.stroke();
+    ctx.fillStyle   = 'rgba(62,62,60,0.45)';
+    ctx.fillText(fmtM(val), PAD.left - 5, y + 3.5);
+  }
+
+  /* x-axis labels */
+  ctx.textAlign   = 'center';
+  ctx.fillStyle   = 'rgba(62,62,60,0.5)';
+  labels.forEach((lb, i) => ctx.fillText(lb, toX(i), H - PAD.bottom + 14));
+
+  if (isBar) {
+    const barW = (cW / n) * 0.52;
+    datasets[0].values.forEach((v, i) => {
+      if (v == null) return;
+      const x  = toX(i) - barW / 2;
+      const bH = toY(minTick) - toY(v);
+      const y  = toY(v);
+      ctx.fillStyle = datasets[0].colors ? datasets[0].colors[i] : datasets[0].color;
+      ctx.beginPath();
+      if (ctx.roundRect) ctx.roundRect(x, y, barW, bH, 2); else ctx.rect(x, y, barW, bH);
+      ctx.fill();
+    });
+  } else {
+    datasets.forEach(ds => {
+      const pts = ds.values.map((v, i) => v != null ? { x: toX(i), y: toY(v) } : null);
+      /* fill */
+      ctx.beginPath();
+      let started = false;
+      pts.forEach(p => { if (!p) return; if (!started) { ctx.moveTo(p.x, p.y); started = true; } else ctx.lineTo(p.x, p.y); });
+      if (started) {
+        const validPts = pts.filter(Boolean);
+        ctx.lineTo(validPts.at(-1).x, toY(minTick));
+        ctx.lineTo(validPts[0].x, toY(minTick));
+        ctx.closePath();
+        ctx.fillStyle = ds.color + '18';
+        ctx.fill();
+      }
+      /* line */
+      ctx.beginPath(); started = false;
+      pts.forEach(p => { if (!p) return; if (!started) { ctx.moveTo(p.x, p.y); started = true; } else ctx.lineTo(p.x, p.y); });
+      ctx.strokeStyle = ds.color; ctx.lineWidth = 2.5; ctx.lineJoin = 'round'; ctx.stroke();
+      /* dots */
+      pts.forEach(p => {
+        if (!p) return;
+        ctx.beginPath(); ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
+        ctx.fillStyle = '#fff'; ctx.fill();
+        ctx.strokeStyle = ds.color; ctx.lineWidth = 2.5; ctx.stroke();
+      });
+    });
+
+    /* legend (multi-dataset) */
+    if (datasets.length > 1) {
+      let lx = PAD.left;
+      datasets.forEach(ds => {
+        ctx.fillStyle = ds.color;
+        ctx.fillRect(lx, 4, 16, 3);
+        ctx.fillStyle = 'rgba(62,62,60,0.55)';
+        ctx.font = `10px 'Ubuntu',sans-serif`;
+        ctx.textAlign = 'left';
+        ctx.fillText(ds.label, lx + 20, 10);
+        lx += ctx.measureText(ds.label).width + 40;
+      });
+    }
+  }
+}
+
+function renderSummaryCharts() {
+  drawChart('c-networth', [{ values: FILINGS.map(f => f.netWorth), color: '#228D57' }]);
+  drawChart('c-assets-income', [
+    { values: FILINGS.map(f => f.assets),  color: '#228D57', label: 'Total Assets' },
+    { values: FILINGS.map(f => f.income),  color: '#e8b84b', label: 'Total Income' },
+  ]);
+  drawChart('c-liabilities', [{ values: FILINGS.map(f => f.liabilities), color: '#e07b4a' }]);
+  drawChart('c-count', [{
+    values: FILINGS.map(f => f.count),
+    color: '#5b8fd4',
+    colors: FILINGS.map(f => YR_COLORS[f.year]),
+  }], { type: 'bar', labels: FILINGS.map(f => f.year) });
+}
+
+/* ── ASSET DATA + NAME-BASED LOOKUP ── */
+let allData = [];
+let nameIndex = {}; /* normalized name → [{filing_year, asset, median_value, median_income, income_type, owner}] */
+
+async function loadData() {
+  try {
+    const res = await fetch('trump_assets.json');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    allData = await res.json();
+    buildNameIndex();
+    setupSearch();
+  } catch(e) {
+    document.getElementById('lookup-placeholder').innerHTML = `⚠ Could not load data: ${e.message}`;
+  }
+}
+
+function normalizeName(s) {
+  if (!s) return '';
+  return s.toLowerCase()
+    .replace(/underlying assets:.*/i, '')
+    .replace(/location:.*/i, '')
+    .replace(/value reported.*/i, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 60);
+}
+
+function buildNameIndex() {
+  allData.forEach(r => {
+    const key = normalizeName(r.asset);
+    if (!key) return;
+    if (!nameIndex[key]) nameIndex[key] = [];
+    nameIndex[key].push(r);
+  });
+  /* Keep only keys present in 2+ years */
+  Object.keys(nameIndex).forEach(k => {
+    const years = new Set(nameIndex[k].map(r => r.filing_year));
+    if (years.size < 2) delete nameIndex[k];
+  });
+}
+
+function setupSearch() {
+  const input = document.getElementById('asset-search');
+  const box   = document.getElementById('suggestions-box');
+  let focusIdx = -1;
+
+  function showSuggestions(q) {
+    if (!q || q.length < 2) { box.classList.remove('open'); return; }
+    const ql = q.toLowerCase();
+    const matches = Object.entries(nameIndex)
+      .filter(([k]) => k.includes(ql))
+      .sort((a, b) => {
+        const aYears = new Set(a[1].map(r => r.filing_year)).size;
+        const bYears = new Set(b[1].map(r => r.filing_year)).size;
+        return bYears - aYears;
+      })
+      .slice(0, 14);
+
+    if (!matches.length) { box.classList.remove('open'); return; }
+
+    box.innerHTML = matches.map(([key, rows]) => {
+      const years = [...new Set(rows.map(r => r.filing_year))].sort();
+      /* use the longest/most descriptive asset name as display */
+      const displayName = rows.reduce((a, b) => (b.asset||'').length > (a.asset||'').length ? b : a).asset || key;
+      const truncated = displayName.length > 80 ? displayName.slice(0, 80) + '…' : displayName;
+      return `<div class="suggestion-item" data-key="${esc(key)}" role="option" tabindex="-1">
+        ${esc(truncated)}
+        <div class="suggestion-years">${years.map(y => `<span style="color:${YR_COLORS[y]}">${y}</span>`).join(' · ')}</div>
+      </div>`;
+    }).join('');
+    box.classList.add('open');
+    focusIdx = -1;
+
+    box.querySelectorAll('.suggestion-item').forEach(el => {
+      el.addEventListener('mousedown', e => {
+        e.preventDefault();
+        input.value = nameIndex[el.dataset.key]?.reduce((a,b)=>(b.asset||'').length>(a.asset||'').length?b:a)?.asset || el.dataset.key;
+        renderAsset(el.dataset.key);
+        box.classList.remove('open');
+      });
+    });
+  }
+
+  input.addEventListener('input', () => showSuggestions(input.value));
+  input.addEventListener('keydown', e => {
+    const items = [...box.querySelectorAll('.suggestion-item')];
+    if (e.key === 'ArrowDown') { e.preventDefault(); focusIdx = Math.min(focusIdx + 1, items.length - 1); items.forEach((el, i) => el.classList.toggle('focused', i === focusIdx)); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); focusIdx = Math.max(focusIdx - 1, 0); items.forEach((el, i) => el.classList.toggle('focused', i === focusIdx)); }
+    else if (e.key === 'Enter' && focusIdx >= 0) {
+      const el = items[focusIdx];
+      input.value = nameIndex[el.dataset.key]?.reduce((a,b)=>(b.asset||'').length>(a.asset||'').length?b:a)?.asset || el.dataset.key;
+      renderAsset(el.dataset.key);
+      box.classList.remove('open');
+    }
+    else if (e.key === 'Escape') box.classList.remove('open');
+  });
+  document.addEventListener('click', e => { if (!e.target.closest('.lookup-input-wrap')) box.classList.remove('open'); });
+}
+
+function renderAsset(key) {
+  const rows = nameIndex[key];
+  if (!rows) return;
+
+  const years = ['2016','2020','2022','2024','2025'];
+  const byYear = {};
+  years.forEach(y => {
+    const matches = rows.filter(r => r.filing_year === y);
+    /* if multiple rows match (same name, same year), pick highest value */
+    byYear[y] = matches.length ? matches.sort((a,b) => (b.median_value||0) - (a.median_value||0))[0] : null;
+  });
+
+  const presentYears = years.filter(y => byYear[y]);
+  const displayName  = rows.reduce((a,b) => (b.asset||'').length > (a.asset||'').length ? b : a).asset || key;
+  const hasMultiMatch = rows.length > presentYears.length;
+
+  const valData = years.map(y => byYear[y]?.median_value ?? null);
+  const incData = years.map(y => byYear[y]?.median_income ?? null);
+  const hasVal  = valData.some(v => v != null && v > 0);
+  const hasInc  = incData.some(v => v != null && v > 0);
+
+  /* table rows */
+  const tableRows = years.map(y => {
+    const r = byYear[y];
+    if (!r) return `<tr>
+      <td><span class="yr-dot" style="background:${YR_COLORS[y]}"></span>${y}</td>
+      <td colspan="3" class="absent">Not present in this filing</td>
+    </tr>`;
+    return `<tr>
+      <td><span class="yr-dot" style="background:${YR_COLORS[y]}"></span>${y}</td>
+      <td class="val">${fmt(r.median_value)}</td>
+      <td class="val">${fmt(r.median_income)}</td>
+      <td style="color:rgba(62,62,60,.6);max-width:120px;word-break:break-word;line-height:1.3">${r.income_type ? esc(r.income_type) : '<span style="opacity:.3">—</span>'}</td>
+    </tr>`;
+  }).join('');
+
+  const panel = document.getElementById('asset-panel');
+  const placeholder = document.getElementById('lookup-placeholder');
+
+  panel.innerHTML = `
+    <div class="asset-panel-header">
+      <div>
+        <div class="asset-panel-name">${esc(displayName.length > 100 ? displayName.slice(0, 100) + '…' : displayName)}</div>
+        <div class="asset-panel-meta">Present in: ${presentYears.map(y => `<span style="color:${YR_COLORS[y]}">${y}</span>`).join(' · ')}</div>
+        ${hasMultiMatch ? `<div class="asset-panel-note">⚑ Multiple rows matched — showing highest value per year. Asset IDs will be manually linked in a future update.</div>` : ''}
+      </div>
+    </div>
+    <div class="asset-panel-body">
+      <div>
+        ${(hasVal || hasInc)
+          ? `<div style="font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(62,62,60,.45);margin-bottom:.5rem">Value &amp; Income Over Time</div>
+             <div class="asset-chart-wrap"><canvas id="asset-chart" role="img" aria-label="Asset value and income over time"></canvas></div>`
+          : `<div style="font-family:var(--mono);font-size:12px;color:rgba(62,62,60,.35);padding:2rem 0;text-align:center">No numeric value data available</div>`
+        }
+      </div>
+      <div style="overflow-x:auto">
+        <table class="asset-table" aria-label="Asset data by filing year">
+          <thead><tr><th>Year</th><th>Est. Value</th><th>Est. Income</th><th>Income Type</th></tr></thead>
+          <tbody>${tableRows}</tbody>
+        </table>
+      </div>
+    </div>`;
+
+  panel.classList.add('visible');
+  placeholder.style.display = 'none';
+
+  if (hasVal || hasInc) {
+    requestAnimationFrame(() => {
+      const ds = [];
+      if (hasVal) ds.push({ values: valData,  color: '#228D57', label: 'Est. Value' });
+      if (hasInc) ds.push({ values: incData,  color: '#e8b84b', label: 'Est. Income' });
+      drawChart('asset-chart', ds, { labels: years });
+    });
+  }
+}
+
+/* ── INIT ── */
+window.addEventListener('load', () => {
+  renderSummaryCharts();
+  loadData();
+  window.addEventListener('resize', () => {
+    renderSummaryCharts();
+  });
+});
+</script>
+</body>
+</html>
