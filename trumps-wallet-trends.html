@@ -94,6 +94,18 @@
   .lookup-placeholder{font-family:var(--mono);font-size:12px;color:rgba(62,62,60,.38);text-align:center;padding:2.5rem;border:1px dashed var(--rule-strong);border-radius:var(--radius);margin-top:1rem;}
   .loader{display:inline-block;width:16px;height:16px;border:2px solid var(--rule);border-top-color:var(--sea-green);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:.5rem;}
 
+  /* ── TOOLTIP ── */
+  .chart-tooltip{
+    position:fixed;pointer-events:none;z-index:200;
+    background:var(--black-olive);color:var(--dirty-white);
+    font-family:var(--mono);font-size:11px;font-weight:700;
+    padding:5px 10px;border-radius:var(--radius);
+    white-space:nowrap;opacity:0;transition:opacity .1s;
+    box-shadow:0 2px 8px rgba(62,62,60,0.25);
+  }
+  .chart-tooltip.visible{opacity:1;}
+  .chart-tooltip .tt-label{font-family:var(--sans);font-size:10px;font-weight:300;color:rgba(232,233,201,.6);display:block;margin-bottom:1px;}
+
   /* ── FOOTER ── */
   footer{background:var(--black-olive);color:rgba(232,233,201,.6);padding:2.5rem 2rem;font-size:12px;font-family:var(--sans);font-weight:300;line-height:1.8;}
   .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
@@ -117,6 +129,7 @@
 </head>
 <body>
 <a href="#main-content" class="skip-nav">Skip to main content</a>
+<div class="chart-tooltip" id="chart-tooltip"><span class="tt-label" id="tt-label"></span><span id="tt-value"></span></div>
 
 <header role="banner">
   <div class="header-inner">
@@ -256,6 +269,8 @@ function drawChart(canvasId, datasets, opts = {}) {
   const PAD = { top: 18, right: 16, bottom: 32, left: 68 };
   const cW = W - PAD.left - PAD.right;
   const cH = H - PAD.top  - PAD.bottom;
+  /* reset hit areas for this canvas on each render */
+  canvas._hitAreas = [];
 
   /* value range */
   const allVals = datasets.flatMap(d => d.values.filter(v => v != null && !isNaN(v)));
@@ -298,6 +313,7 @@ function drawChart(canvasId, datasets, opts = {}) {
 
   if (isBar) {
     const barW = (cW / n) * 0.52;
+    const hitAreas = [];
     datasets[0].values.forEach((v, i) => {
       if (v == null) return;
       const x  = toX(i) - barW / 2;
@@ -307,7 +323,9 @@ function drawChart(canvasId, datasets, opts = {}) {
       ctx.beginPath();
       if (ctx.roundRect) ctx.roundRect(x, y, barW, bH, 2); else ctx.rect(x, y, barW, bH);
       ctx.fill();
+      hitAreas.push({ x, y, w: barW, h: bH, value: v, label: labels[i], color: datasets[0].colors ? datasets[0].colors[i] : datasets[0].color });
     });
+    attachTooltip(canvas, hitAreas, opts);
   } else {
     datasets.forEach(ds => {
       const pts = ds.values.map((v, i) => v != null ? { x: toX(i), y: toY(v) } : null);
@@ -328,12 +346,15 @@ function drawChart(canvasId, datasets, opts = {}) {
       pts.forEach(p => { if (!p) return; if (!started) { ctx.moveTo(p.x, p.y); started = true; } else ctx.lineTo(p.x, p.y); });
       ctx.strokeStyle = ds.color; ctx.lineWidth = 2.5; ctx.lineJoin = 'round'; ctx.stroke();
       /* dots */
-      pts.forEach(p => {
+      const dotHits = [];
+      pts.forEach((p, i) => {
         if (!p) return;
         ctx.beginPath(); ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
         ctx.fillStyle = '#fff'; ctx.fill();
         ctx.strokeStyle = ds.color; ctx.lineWidth = 2.5; ctx.stroke();
+        dotHits.push({ x: p.x - 10, y: p.y - 10, w: 20, h: 20, value: ds.values[i], label: labels[i], color: ds.color, dsLabel: ds.label });
       });
+      attachTooltip(canvas, dotHits, opts);
     });
 
     /* legend (multi-dataset) */
@@ -350,6 +371,45 @@ function drawChart(canvasId, datasets, opts = {}) {
       });
     }
   }
+}
+
+/* ── TOOLTIP LOGIC ── */
+const ttEl    = () => document.getElementById('chart-tooltip');
+const ttLabel = () => document.getElementById('tt-label');
+const ttValue = () => document.getElementById('tt-value');
+
+function attachTooltip(canvas, hitAreas, opts) {
+  /* push hit areas (reset happens in drawChart) */
+  if (!canvas._hitAreas) canvas._hitAreas = [];
+  canvas._hitAreas.push(...hitAreas);
+  canvas._rawValues = opts.rawValues || false;
+  if (canvas._tooltipBound) return;
+  canvas._tooltipBound = true;
+
+  canvas.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    const hit = canvas._hitAreas.find(h => mx >= h.x && mx <= h.x + h.w && my >= h.y && my <= h.y + h.h);
+    if (hit) {
+      const label = hit.dsLabel ? `${hit.label} · ${hit.dsLabel}` : hit.label;
+      const value = canvas._rawValues ? hit.value.toLocaleString() + ' assets' : fmt(hit.value);
+      ttLabel().textContent = label;
+      ttValue().textContent = value;
+      ttEl().style.borderLeft = `3px solid ${hit.color}`;
+      ttEl().style.left = (e.clientX + 14) + 'px';
+      ttEl().style.top  = (e.clientY - 28) + 'px';
+      ttEl().classList.add('visible');
+      canvas.style.cursor = 'crosshair';
+    } else {
+      ttEl().classList.remove('visible');
+      canvas.style.cursor = '';
+    }
+  });
+  canvas.addEventListener('mouseleave', () => {
+    ttEl().classList.remove('visible');
+    canvas.style.cursor = '';
+  });
 }
 
 function renderSummaryCharts() {
