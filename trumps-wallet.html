@@ -397,25 +397,83 @@ function initFilters(){
   types.forEach(t=>{const o=document.createElement('option');o.value=t;o.textContent=t;ts.appendChild(o);});
   owners.forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;os.appendChild(o);});
 }
+/* ── FUZZY SEARCH ──────────────────────────────────────────────
+   Strips punctuation/spaces from both query and haystack, then:
+   1. Exact substring match  → score 100 (highest)
+   2. All query chars appear in order (subsequence) → score 40–99
+      boosted by how compact the match is
+   3. All query words match somewhere → score 10–39
+   No match → score 0 (excluded)
+──────────────────────────────────────────────────────────────── */
+function tokenize(s){return s.toLowerCase().replace(/[\s\-.,&'"/()]/g,'');}
+
+function fuzzyScore(query,text){
+  if(!query)return 100;
+  const q=tokenize(query),t=tokenize(text);
+  if(!q||!t)return 0;
+  // 1. exact substring
+  if(t.includes(q))return 100;
+  // 2. original words all present (handles "mar a lago" → "mar-a-lago")
+  const words=query.toLowerCase().split(/\s+/).filter(Boolean);
+  const tOrig=text.toLowerCase();
+  if(words.length>1&&words.every(w=>tOrig.includes(w)))return 60;
+  // 3. subsequence match in stripped text
+  let qi=0,first=-1,last=-1;
+  for(let ti=0;ti<t.length&&qi<q.length;ti++){if(t[ti]===q[qi]){if(qi===0)first=ti;last=ti;qi++;}}
+  if(qi===q.length){
+    // score by compactness: shorter span = higher score
+    const span=last-first+1;
+    return Math.max(10,55-Math.floor(span/2));
+  }
+  return 0;
+}
+
 function applyFilters(){
-  const q=document.getElementById('search-input').value.toLowerCase().trim();
+  const raw=document.getElementById('search-input').value.trim();
+  const q=raw.toLowerCase();
   const type=document.getElementById('type-filter').value;
   const owner=document.getElementById('owner-filter').value;
   const flag=document.getElementById('flag-filter').value;
-  filtered=allData.filter(r=>{
-    if(activeYear&&r.filing_year!==activeYear)return false;
-    if(type&&r.asset_type!==type)return false;
-    if(owner&&(r.owner||'').toLowerCase()!==owner.toLowerCase())return false;
-    if(flag==='flagged'&&!r.flag_for_reporting)return false;
-    if(q){const hay=[r.asset,r.asset_type,r.owner,r.income_type,r.reported_value,r.notes].filter(Boolean).join(' ').toLowerCase();if(!hay.includes(q))return false;}
-    return true;
+
+  // Score and filter
+  const scored=[];
+  allData.forEach(r=>{
+    if(activeYear&&r.filing_year!==activeYear)return;
+    if(type&&r.asset_type!==type)return;
+    if(owner&&(r.owner||'').toLowerCase()!==owner.toLowerCase())return;
+    if(flag==='flagged'&&!r.flag_for_reporting)return;
+    if(q){
+      // Score against asset name first (weighted), then other fields
+      const nameScore=fuzzyScore(q,r.asset||'')*2;
+      const otherScore=fuzzyScore(q,[r.asset_type,r.owner,r.income_type,r.reported_value,r.notes].filter(Boolean).join(' '));
+      const best=Math.max(nameScore,otherScore);
+      if(best===0)return;
+      scored.push({r,score:best});
+    } else {
+      scored.push({r,score:0});
+    }
   });
-  filtered.sort((a,b)=>{
-    let av=a[sortCol],bv=b[sortCol];
-    if(av==null&&bv==null)return 0;if(av==null)return 1;if(bv==null)return -1;
-    if(typeof av==='number'&&typeof bv==='number')return sortDir==='asc'?av-bv:bv-av;
-    return sortDir==='asc'?String(av).localeCompare(String(bv)):String(bv).localeCompare(String(av));
-  });
+
+  // Sort: if query active, sort by fuzzy score desc first, then apply column sort as tiebreak
+  if(q){
+    scored.sort((a,b)=>{
+      if(b.score!==a.score)return b.score-a.score;
+      // tiebreak by column sort
+      let av=a.r[sortCol],bv=b.r[sortCol];
+      if(av==null&&bv==null)return 0;if(av==null)return 1;if(bv==null)return -1;
+      if(typeof av==='number'&&typeof bv==='number')return sortDir==='asc'?av-bv:bv-av;
+      return sortDir==='asc'?String(av).localeCompare(String(bv)):String(bv).localeCompare(String(av));
+    });
+  } else {
+    scored.sort((a,b)=>{
+      let av=a.r[sortCol],bv=b.r[sortCol];
+      if(av==null&&bv==null)return 0;if(av==null)return 1;if(bv==null)return -1;
+      if(typeof av==='number'&&typeof bv==='number')return sortDir==='asc'?av-bv:bv-av;
+      return sortDir==='asc'?String(av).localeCompare(String(bv)):String(bv).localeCompare(String(av));
+    });
+  }
+
+  filtered=scored.map(s=>s.r);
   currentPage=Math.min(currentPage,Math.ceil(filtered.length/PAGE_SIZE)||1);
   renderTable();renderPagination();updateCount();
 }
