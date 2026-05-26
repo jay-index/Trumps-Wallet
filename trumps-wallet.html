@@ -10,350 +10,199 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --black-olive:  #3E3E3C;
-    --dirty-white:  #E8E9C9;
-    --sea-green:    #228D57;
-    --dollar-bill:  #85BB65;
-    --rule:         rgba(62,62,60,0.13);
-    --rule-strong:  rgba(62,62,60,0.30);
-    --green-light:  rgba(34,141,87,0.07);
-    --green-mid:    rgba(34,141,87,0.16);
-    --shadow:       0 2px 12px rgba(62,62,60,0.10);
-    --radius:       4px;
-    --mono:         'Space Mono', monospace;
-    --sans:         'Ubuntu', sans-serif;
+    --black-olive:#3E3E3C;--dirty-white:#E8E9C9;--sea-green:#228D57;--dollar-bill:#85BB65;
+    --rule:rgba(62,62,60,0.13);--rule-strong:rgba(62,62,60,0.30);
+    --green-light:rgba(34,141,87,0.07);--green-mid:rgba(34,141,87,0.16);
+    --shadow:0 2px 12px rgba(62,62,60,0.10);--radius:4px;
+    --mono:'Space Mono',monospace;--sans:'Ubuntu',sans-serif;
   }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: var(--sans);
-    background: var(--dirty-white);
-    color: var(--black-olive);
-    font-size: 15px;
-    line-height: 1.6;
-    min-height: 100vh;
-  }
-  .skip-nav {
-    position: absolute; top: -100px; left: 1rem;
-    background: var(--sea-green); color: #fff;
-    padding: 0.5rem 1rem; border-radius: var(--radius);
-    font-family: var(--sans); font-size: 14px;
-    z-index: 1000; transition: top 0.2s; text-decoration: none;
-  }
-  .skip-nav:focus { top: 1rem; }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--sans);background:var(--dirty-white);color:var(--black-olive);font-size:15px;line-height:1.6;min-height:100vh;}
+  .skip-nav{position:absolute;top:-100px;left:1rem;background:var(--sea-green);color:#fff;padding:0.5rem 1rem;border-radius:var(--radius);font-family:var(--sans);font-size:14px;z-index:1000;transition:top 0.2s;text-decoration:none;}
+  .skip-nav:focus{top:1rem;}
 
-  /* ── HEADER ── */
-  header {
-    background: var(--black-olive);
-    color: var(--dirty-white);
-    padding: 2.5rem 2rem 2rem;
-    position: relative; overflow: hidden;
-  }
-  header::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(232,233,201,0.03) 60px, rgba(232,233,201,0.03) 61px);
-    pointer-events: none;
-  }
-  .header-inner { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.6rem; }
-  h1 {
-    font-family: var(--mono);
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 700; line-height: 1.05;
-    color: var(--dirty-white); letter-spacing: -0.02em;
-  }
-  h1 span { color: var(--sea-green); }
-  .header-desc {
-    font-family: var(--sans); font-size: 15px;
-    color: rgba(232,233,201,0.75); max-width: 640px; font-weight: 300;
-  }
-  .header-meta {
-    display: flex; align-items: center; gap: 1.5rem;
-    flex-wrap: wrap; margin-top: 0.25rem;
-  }
-  .header-meta a {
-    font-family: var(--mono); font-size: 12px; color: var(--dollar-bill);
-    text-decoration: none; letter-spacing: 0.05em;
-    border-bottom: 1px solid rgba(133,187,101,0.4); padding-bottom: 1px;
-    transition: color 0.15s, border-color 0.15s;
-  }
-  .header-meta a:hover, .header-meta a:focus { color: var(--dirty-white); border-color: var(--dirty-white); outline: none; }
-  .header-meta a:focus-visible { outline: 2px solid var(--sea-green); outline-offset: 3px; border-radius: 2px; }
-  .late-fee-badge {
-    font-family: var(--mono); font-size: 11px;
-    background: rgba(255,180,50,0.15); color: #e8b84b;
-    border: 1px solid rgba(232,184,75,0.3);
-    padding: 2px 8px; border-radius: var(--radius); letter-spacing: 0.06em;
-  }
+  /* HEADER */
+  header{background:var(--black-olive);color:var(--dirty-white);padding:2.5rem 2rem 2rem;position:relative;overflow:hidden;}
+  header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(232,233,201,0.03) 60px,rgba(232,233,201,0.03) 61px);pointer-events:none;}
+  .header-inner{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:0.6rem;}
+  .header-nav{display:flex;align-items:center;gap:1rem;margin-bottom:0.25rem;}
+  .header-nav a{font-family:var(--mono);font-size:11px;color:var(--dollar-bill);text-decoration:none;letter-spacing:0.06em;border-bottom:1px solid rgba(133,187,101,0.3);padding-bottom:1px;transition:color 0.15s;}
+  .header-nav a:hover{color:var(--dirty-white);}
+  .header-nav a.active{color:#fff;border-bottom-color:rgba(255,255,255,0.4);}
+  h1{font-family:var(--mono);font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;color:var(--dirty-white);letter-spacing:-0.02em;}
+  h1 span{color:var(--sea-green);}
+  .header-desc{font-family:var(--sans);font-size:15px;color:rgba(232,233,201,0.75);max-width:640px;font-weight:300;}
+  .header-meta{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;margin-top:0.25rem;}
+  .header-meta a{font-family:var(--mono);font-size:12px;color:var(--dollar-bill);text-decoration:none;letter-spacing:0.05em;border-bottom:1px solid rgba(133,187,101,0.4);padding-bottom:1px;transition:color 0.15s;}
+  .header-meta a:hover{color:var(--dirty-white);}
+  .header-meta a:focus-visible{outline:2px solid var(--sea-green);outline-offset:3px;border-radius:2px;}
+  .late-fee-badge{font-family:var(--mono);font-size:11px;background:rgba(255,180,50,0.15);color:#e8b84b;border:1px solid rgba(232,184,75,0.3);padding:2px 8px;border-radius:var(--radius);letter-spacing:0.06em;}
 
-  /* ── LAYOUT ── */
-  main { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
-  section + section { margin-top: 2.5rem; }
-  .section-label {
-    font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--sea-green);
-    margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem;
-  }
-  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule-strong); }
+  /* LAYOUT */
+  main{max-width:1200px;margin:0 auto;padding:2rem 1.5rem 4rem;}
+  section+section{margin-top:2.5rem;}
+  .section-label{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--sea-green);margin-bottom:1rem;display:flex;align-items:center;gap:0.6rem;}
+  .section-label::after{content:'';flex:1;height:1px;background:var(--rule-strong);}
 
-  /* ── FILING TIMELINE ── */
-  .timeline {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 0.85rem;
-  }
-  .filing-card {
-    background: #fff;
-    border: 2px solid var(--rule);
-    border-radius: var(--radius);
-    padding: 1.1rem 1.1rem 0.9rem;
-    cursor: pointer;
-    transition: border-color 0.15s, box-shadow 0.15s, transform 0.12s;
-    position: relative; overflow: hidden;
-    animation: fadeUp 0.35s ease both;
-  }
-  .filing-card:nth-child(1) { animation-delay: 0.05s; }
-  .filing-card:nth-child(2) { animation-delay: 0.10s; }
-  .filing-card:nth-child(3) { animation-delay: 0.15s; }
-  .filing-card:nth-child(4) { animation-delay: 0.20s; }
-  .filing-card:nth-child(5) { animation-delay: 0.25s; }
-  .filing-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0;
-    height: 3px; background: var(--rule); transition: background 0.15s;
-  }
-  .filing-card:hover { border-color: var(--dollar-bill); box-shadow: var(--shadow); transform: translateY(-1px); }
-  .filing-card:hover::before { background: var(--dollar-bill); }
-  .filing-card.active { border-color: var(--sea-green); background: var(--green-light); box-shadow: var(--shadow); }
-  .filing-card.active::before { background: var(--sea-green); }
-  .filing-card:focus-visible { outline: 2px solid var(--sea-green); outline-offset: 2px; }
+  /* FILING CARDS */
+  .timeline{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0.85rem;}
+  .filing-card{background:#fff;border:2px solid var(--rule);border-radius:var(--radius);padding:1.1rem 1.1rem 0.9rem;cursor:pointer;transition:border-color 0.15s,box-shadow 0.15s,transform 0.12s;position:relative;overflow:hidden;animation:fadeUp 0.35s ease both;}
+  .filing-card:nth-child(1){animation-delay:0.05s;}.filing-card:nth-child(2){animation-delay:0.10s;}.filing-card:nth-child(3){animation-delay:0.15s;}.filing-card:nth-child(4){animation-delay:0.20s;}.filing-card:nth-child(5){animation-delay:0.25s;}
+  .filing-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--rule);transition:background 0.15s;}
+  .filing-card:hover{border-color:var(--dollar-bill);box-shadow:var(--shadow);transform:translateY(-1px);}
+  .filing-card:hover::before{background:var(--dollar-bill);}
+  .filing-card.active{border-color:var(--sea-green);background:var(--green-light);box-shadow:var(--shadow);}
+  .filing-card.active::before{background:var(--sea-green);}
+  .filing-card:focus-visible{outline:2px solid var(--sea-green);outline-offset:2px;}
+  .card-year{font-family:var(--mono);font-size:1.4rem;font-weight:700;color:var(--black-olive);line-height:1;margin-bottom:0.2rem;}
+  .card-form{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--sea-green);margin-bottom:0.6rem;}
+  .card-period{font-family:var(--sans);font-size:12px;font-weight:500;color:var(--black-olive);margin-bottom:0.15rem;}
+  .card-filed{font-family:var(--mono);font-size:10px;color:rgba(62,62,60,0.5);margin-bottom:0.7rem;}
+  .card-divider{height:1px;background:var(--rule);margin:0.6rem 0;}
+  .card-stats{display:flex;flex-direction:column;gap:0.25rem;}
+  .card-stat{display:flex;justify-content:space-between;align-items:baseline;}
+  .card-stat-label{font-family:var(--sans);font-size:11px;color:rgba(62,62,60,0.55);font-weight:300;}
+  .card-stat-val{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--black-olive);}
+  .filter-hint{font-family:var(--mono);font-size:13px;letter-spacing:0.04em;color:rgba(62,62,60,0.5);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+  .filter-hint::before{content:'↑';color:var(--sea-green);font-size:16px;}
 
-  .card-year { font-family: var(--mono); font-size: 1.4rem; font-weight: 700; color: var(--black-olive); line-height: 1; margin-bottom: 0.2rem; }
-  .card-form { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sea-green); margin-bottom: 0.6rem; }
-  .card-period {
-    font-family: var(--sans); font-size: 12px; font-weight: 500;
-    color: var(--black-olive); margin-bottom: 0.15rem;
-  }
-  .card-filed { font-family: var(--mono); font-size: 10px; color: rgba(62,62,60,0.5); margin-bottom: 0.7rem; }
-  .card-divider { height: 1px; background: var(--rule); margin: 0.6rem 0; }
-  .card-stats { display: flex; flex-direction: column; gap: 0.25rem; }
-  .card-stat { display: flex; justify-content: space-between; align-items: baseline; }
-  .card-stat-label { font-family: var(--sans); font-size: 11px; color: rgba(62,62,60,0.55); font-weight: 300; }
-  .card-stat-val { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--black-olive); }
+  /* DATA NOTE */
+  .data-note{background:var(--green-light);border:1px solid rgba(34,141,87,0.2);border-radius:var(--radius);padding:0.9rem 1.1rem;font-size:13px;font-family:var(--sans);color:rgba(62,62,60,0.75);line-height:1.6;}
+  .data-note strong{color:var(--black-olive);font-weight:500;}
+  .data-note p+p{margin-top:0.5rem;}
+  .data-note a{color:var(--sea-green);}
 
-  .filter-hint {
-    font-family: var(--mono); font-size: 13px; letter-spacing: 0.04em;
-    color: rgba(62,62,60,0.5); margin-bottom: 1rem;
-    display: flex; align-items: center; gap: 0.5rem;
-  }
-  .filter-hint::before { content: '↑'; color: var(--sea-green); font-size: 16px; }
+  /* FILTER BAR */
+  .filter-bar{display:flex;flex-wrap:wrap;gap:0.75rem;align-items:flex-end;}
+  .filter-group{display:flex;flex-direction:column;gap:0.3rem;flex:1;min-width:150px;}
+  .filter-group label{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(62,62,60,0.55);}
+  .filter-group input,.filter-group select{font-family:var(--sans);font-size:14px;padding:0.5rem 0.75rem;border:1px solid var(--rule-strong);border-radius:var(--radius);background:#fff;color:var(--black-olive);transition:border-color 0.15s,box-shadow 0.15s;width:100%;appearance:none;-webkit-appearance:none;}
+  .filter-group input:focus,.filter-group select:focus{outline:none;border-color:var(--sea-green);box-shadow:0 0 0 2px rgba(34,141,87,0.15);}
+  .select-wrap{position:relative;}
+  .select-wrap::after{content:'▾';position:absolute;right:0.75rem;top:50%;transform:translateY(-50%);pointer-events:none;font-size:12px;color:rgba(62,62,60,0.5);}
+  .filter-group.search-group{flex:2;min-width:240px;}
+  .search-wrap{position:relative;}
+  .search-wrap input{padding-left:2rem;}
+  .search-wrap::before{content:'⌕';position:absolute;left:0.65rem;top:50%;transform:translateY(-50%);font-size:15px;color:rgba(62,62,60,0.4);pointer-events:none;}
+  .reset-btn{font-family:var(--mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;background:none;border:1px solid var(--rule-strong);border-radius:var(--radius);padding:0.5rem 1rem;color:rgba(62,62,60,0.6);cursor:pointer;white-space:nowrap;transition:all 0.15s;height:36px;}
+  .reset-btn:hover{border-color:var(--sea-green);color:var(--sea-green);}
+  .reset-btn:focus-visible{outline:2px solid var(--sea-green);outline-offset:2px;}
 
-  /* ── DATA NOTE ── */
-  .data-note {
-    background: var(--green-light); border: 1px solid rgba(34,141,87,0.2);
-    border-radius: var(--radius); padding: 0.9rem 1.1rem;
-    font-size: 13px; font-family: var(--sans); color: rgba(62,62,60,0.75); line-height: 1.6;
-  }
-  .data-note strong { color: var(--black-olive); font-weight: 500; }
-  .data-note p + p { margin-top: 0.5rem; }
+  /* ACTIVE YEAR BANNER */
+  .active-year-banner{display:none;align-items:center;justify-content:space-between;background:var(--sea-green);color:#fff;padding:0.5rem 1rem;border-radius:var(--radius);font-family:var(--mono);font-size:12px;margin-bottom:0.75rem;}
+  .active-year-banner.visible{display:flex;}
+  .banner-clear{background:none;border:1px solid rgba(255,255,255,0.4);color:#fff;border-radius:var(--radius);padding:2px 10px;font-family:var(--mono);font-size:11px;cursor:pointer;}
+  .banner-clear:hover{background:rgba(255,255,255,0.15);}
 
-  /* ── FILTER BAR ── */
-  .filter-bar { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: flex-end; }
-  .filter-group { display: flex; flex-direction: column; gap: 0.3rem; flex: 1; min-width: 160px; }
-  .filter-group label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(62,62,60,0.55); }
-  .filter-group input, .filter-group select {
-    font-family: var(--sans); font-size: 14px;
-    padding: 0.5rem 0.75rem; border: 1px solid var(--rule-strong);
-    border-radius: var(--radius); background: #fff; color: var(--black-olive);
-    transition: border-color 0.15s, box-shadow 0.15s; width: 100%;
-    appearance: none; -webkit-appearance: none;
-  }
-  .filter-group input:focus, .filter-group select:focus {
-    outline: none; border-color: var(--sea-green); box-shadow: 0 0 0 2px rgba(34,141,87,0.15);
-  }
-  .select-wrap { position: relative; }
-  .select-wrap::after {
-    content: '▾'; position: absolute; right: 0.75rem; top: 50%;
-    transform: translateY(-50%); pointer-events: none; font-size: 12px; color: rgba(62,62,60,0.5);
-  }
-  .filter-group.search-group { flex: 2; min-width: 240px; }
-  .search-wrap { position: relative; }
-  .search-wrap input { padding-left: 2rem; }
-  .search-wrap::before {
-    content: '⌕'; position: absolute; left: 0.65rem; top: 50%;
-    transform: translateY(-50%); font-size: 15px; color: rgba(62,62,60,0.4); pointer-events: none;
-  }
-  .reset-btn {
-    font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
-    background: none; border: 1px solid var(--rule-strong); border-radius: var(--radius);
-    padding: 0.5rem 1rem; color: rgba(62,62,60,0.6); cursor: pointer; white-space: nowrap;
-    transition: all 0.15s; height: 36px;
-  }
-  .reset-btn:hover { border-color: var(--sea-green); color: var(--sea-green); }
-  .reset-btn:focus-visible { outline: 2px solid var(--sea-green); outline-offset: 2px; }
+  /* RESULTS META */
+  .results-meta{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.75rem;margin-top:1rem;}
+  .results-count{font-family:var(--mono);font-size:12px;color:rgba(62,62,60,0.6);}
+  .results-count strong{color:var(--black-olive);font-weight:700;}
+  .sort-info{font-family:var(--mono);font-size:11px;color:rgba(62,62,60,0.4);}
 
-  /* ── ACTIVE YEAR BANNER ── */
-  .active-year-banner {
-    display: none; align-items: center; justify-content: space-between;
-    background: var(--sea-green); color: #fff;
-    padding: 0.5rem 1rem; border-radius: var(--radius);
-    font-family: var(--mono); font-size: 12px; margin-bottom: 0.75rem;
-  }
-  .active-year-banner.visible { display: flex; }
-  .banner-clear { background: none; border: 1px solid rgba(255,255,255,0.4); color: #fff; border-radius: var(--radius); padding: 2px 10px; font-family: var(--mono); font-size: 11px; cursor: pointer; }
-  .banner-clear:hover { background: rgba(255,255,255,0.15); }
+  /* TABLE */
+  .table-wrap{overflow-x:auto;border:1px solid var(--rule);border-radius:var(--radius);background:#fff;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  thead{background:var(--black-olive);color:var(--dirty-white);position:sticky;top:0;z-index:2;}
+  th{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;padding:0.75rem 0.85rem;text-align:left;white-space:nowrap;cursor:pointer;user-select:none;transition:background 0.1s;}
+  th:hover{background:rgba(232,233,201,0.08);}
+  th.sort-asc::after{content:' ↑';color:var(--dollar-bill);}
+  th.sort-desc::after{content:' ↓';color:var(--dollar-bill);}
+  th:focus-visible{outline:2px solid var(--dollar-bill);outline-offset:-2px;}
+  /* column widths */
+  th:nth-child(1),td:nth-child(1){width:60px;}
+  th:nth-child(2),td:nth-child(2){min-width:320px;max-width:460px;}
+  th:nth-child(3),td:nth-child(3){min-width:130px;}
+  th:nth-child(4),td:nth-child(4){min-width:90px;}
+  th:nth-child(5),td:nth-child(5){min-width:110px;}
+  th:nth-child(6),td:nth-child(6){min-width:120px;}
+  th:nth-child(7),td:nth-child(7){min-width:110px;}
+  th:nth-child(8),td:nth-child(8){min-width:110px;}
+  th:nth-child(9),td:nth-child(9){min-width:100px;}
+  tbody tr{border-bottom:1px solid var(--rule);transition:background 0.1s;cursor:pointer;}
+  tbody tr:last-child{border-bottom:none;}
+  tbody tr:hover{background:var(--green-light);}
+  tbody tr.flagged{background:rgba(232,184,75,0.05);}
+  tbody tr.flagged:hover{background:rgba(232,184,75,0.11);}
+  td{padding:0.6rem 0.85rem;vertical-align:top;line-height:1.4;}
+  td.asset-name{font-family:var(--sans);font-weight:500;font-size:13px;word-break:break-word;}
+  td.mono-val{font-family:var(--mono);font-size:12px;white-space:nowrap;font-weight:700;}
+  td.mono-sm{font-family:var(--mono);font-size:11px;color:rgba(62,62,60,0.7);white-space:nowrap;}
+  td.wrap-sm{font-family:var(--mono);font-size:11px;color:rgba(62,62,60,0.7);max-width:160px;word-break:break-word;line-height:1.35;}
+  .badge{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:0.05em;padding:2px 6px;border-radius:2px;white-space:nowrap;}
+  .badge-year{background:var(--green-mid);color:var(--sea-green);}
+  .badge-flag{background:rgba(232,184,75,0.2);color:#9a6e00;}
+  .null-val{color:rgba(62,62,60,0.28);font-family:var(--mono);font-size:12px;}
 
-  /* ── RESULTS META ── */
-  .results-meta {
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem; margin-top: 1rem;
-  }
-  .results-count { font-family: var(--mono); font-size: 12px; color: rgba(62,62,60,0.6); }
-  .results-count strong { color: var(--black-olive); font-weight: 700; }
-  .sort-info { font-family: var(--mono); font-size: 11px; color: rgba(62,62,60,0.4); }
+  /* PAGINATION */
+  .pagination{display:flex;align-items:center;justify-content:center;gap:0.4rem;margin-top:1.25rem;flex-wrap:wrap;}
+  .page-btn{font-family:var(--mono);font-size:12px;padding:0.35rem 0.65rem;border:1px solid var(--rule-strong);border-radius:var(--radius);background:#fff;color:var(--black-olive);cursor:pointer;transition:all 0.12s;min-width:36px;text-align:center;}
+  .page-btn:hover{border-color:var(--sea-green);color:var(--sea-green);}
+  .page-btn.active{background:var(--sea-green);color:#fff;border-color:var(--sea-green);}
+  .page-btn:disabled{opacity:0.35;cursor:default;}
+  .page-btn:focus-visible{outline:2px solid var(--sea-green);outline-offset:2px;}
+  .page-ellipsis{font-family:var(--mono);font-size:12px;color:rgba(62,62,60,0.4);padding:0 0.25rem;}
 
-  /* ── TABLE ── */
-  .table-wrap {
-    overflow-x: auto; border: 1px solid var(--rule);
-    border-radius: var(--radius); background: #fff;
-  }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  thead {
-    background: var(--black-olive); color: var(--dirty-white);
-    position: sticky; top: 0; z-index: 2;
-  }
-  th {
-    font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
-    text-transform: uppercase; padding: 0.75rem 1rem;
-    text-align: left; white-space: nowrap; cursor: pointer;
-    user-select: none; transition: background 0.1s;
-  }
-  th:hover { background: rgba(232,233,201,0.08); }
-  th.sort-asc::after  { content: ' ↑'; color: var(--dollar-bill); }
-  th.sort-desc::after { content: ' ↓'; color: var(--dollar-bill); }
-  th:focus-visible { outline: 2px solid var(--dollar-bill); outline-offset: -2px; }
+  /* DETAIL DRAWER */
+  .drawer-backdrop{display:none;position:fixed;inset:0;background:rgba(62,62,60,0.45);z-index:100;backdrop-filter:blur(2px);}
+  .drawer-backdrop.open{display:block;}
+  .drawer{position:fixed;top:0;right:-540px;bottom:0;width:100%;max-width:520px;background:var(--dirty-white);z-index:101;overflow-y:auto;transition:right 0.28s cubic-bezier(0.4,0,0.2,1);box-shadow:-8px 0 40px rgba(62,62,60,0.18);display:flex;flex-direction:column;}
+  .drawer.open{right:0;}
+  .drawer-header{background:var(--black-olive);color:var(--dirty-white);padding:1.25rem 1.5rem;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;position:sticky;top:0;z-index:1;}
+  .drawer-title{font-family:var(--mono);font-size:13px;font-weight:700;line-height:1.4;flex:1;}
+  .drawer-close{background:none;border:1px solid rgba(232,233,201,0.3);color:var(--dirty-white);border-radius:var(--radius);width:32px;height:32px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.15s;}
+  .drawer-close:hover{background:rgba(232,233,201,0.1);}
+  .drawer-close:focus-visible{outline:2px solid var(--sea-green);outline-offset:2px;}
+  .drawer-body{padding:1.25rem 1.5rem;flex:1;}
+  .drawer-section{margin-bottom:1.5rem;}
+  .drawer-section-title{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--sea-green);margin-bottom:0.6rem;padding-bottom:0.4rem;border-bottom:1px solid var(--rule-strong);}
+  .drawer-row{display:flex;gap:0.75rem;padding:0.4rem 0;border-bottom:1px solid var(--rule);}
+  .drawer-row:last-child{border-bottom:none;}
+  .drawer-label{font-family:var(--sans);font-size:11px;color:rgba(62,62,60,0.55);font-weight:300;min-width:130px;flex-shrink:0;padding-top:1px;}
+  .drawer-val{font-family:var(--sans);font-size:13px;color:var(--black-olive);word-break:break-word;line-height:1.5;}
+  .drawer-val.mono{font-family:var(--mono);font-size:12px;font-weight:700;}
+  .drawer-val.muted{color:rgba(62,62,60,0.35);font-family:var(--mono);font-size:12px;}
+  .drawer-flag-banner{background:rgba(232,184,75,0.15);border:1px solid rgba(232,184,75,0.35);border-radius:var(--radius);padding:0.6rem 0.85rem;font-family:var(--sans);font-size:12px;color:#7a5500;margin-bottom:1rem;display:flex;gap:0.5rem;align-items:flex-start;}
 
-  /* Asset name column — wide */
-  th:nth-child(2), td:nth-child(2) { min-width: 340px; max-width: 480px; }
+  /* LOADING / EMPTY */
+  .state-msg{text-align:center;padding:4rem 2rem;font-family:var(--mono);font-size:13px;color:rgba(62,62,60,0.45);}
+  .state-msg .icon{font-size:2rem;display:block;margin-bottom:0.75rem;}
+  .loader{display:inline-block;width:18px;height:18px;border:2px solid var(--rule);border-top-color:var(--sea-green);border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:0.5rem;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 
-  tbody tr { border-bottom: 1px solid var(--rule); transition: background 0.1s; cursor: pointer; }
-  tbody tr:last-child { border-bottom: none; }
-  tbody tr:hover { background: var(--green-light); }
-  tbody tr.flagged { background: rgba(232,184,75,0.05); }
-  tbody tr.flagged:hover { background: rgba(232,184,75,0.11); }
-  td { padding: 0.65rem 1rem; vertical-align: top; line-height: 1.4; }
-  td.asset-name { font-family: var(--sans); font-weight: 500; font-size: 13px; word-break: break-word; }
-  td.mono-val { font-family: var(--mono); font-size: 12px; white-space: nowrap; font-weight: 700; }
-  td.mono-sm  { font-family: var(--mono); font-size: 11px; color: rgba(62,62,60,0.7); white-space: nowrap; }
-  .badge { display: inline-block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; white-space: nowrap; }
-  .badge-year { background: var(--green-mid); color: var(--sea-green); }
-  .badge-type { background: rgba(62,62,60,0.07); color: rgba(62,62,60,0.65); margin-top: 3px; }
-  .badge-flag { background: rgba(232,184,75,0.2); color: #9a6e00; }
-  .null-val { color: rgba(62,62,60,0.28); font-family: var(--mono); font-size: 12px; }
+  /* FOOTER */
+  footer{background:var(--black-olive);color:rgba(232,233,201,0.6);padding:2.5rem 2rem;font-size:12px;font-family:var(--sans);font-weight:300;line-height:1.8;}
+  .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+  .footer-col-title{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--dollar-bill);margin-bottom:0.6rem;}
+  footer a{color:var(--dollar-bill);text-decoration:none;border-bottom:1px solid rgba(133,187,101,0.3);}
+  footer a:hover{color:var(--dirty-white);}
+  .footer-rule{height:1px;background:rgba(232,233,201,0.1);margin:0;grid-column:1/-1;}
+  .footer-bottom{grid-column:1/-1;color:rgba(232,233,201,0.4);font-size:11px;}
 
-  /* ── PAGINATION ── */
-  .pagination { display: flex; align-items: center; justify-content: center; gap: 0.4rem; margin-top: 1.25rem; flex-wrap: wrap; }
-  .page-btn {
-    font-family: var(--mono); font-size: 12px; padding: 0.35rem 0.65rem;
-    border: 1px solid var(--rule-strong); border-radius: var(--radius);
-    background: #fff; color: var(--black-olive); cursor: pointer;
-    transition: all 0.12s; min-width: 36px; text-align: center;
+  /* RESPONSIVE */
+  @media(max-width:700px){
+    header{padding:1.75rem 1rem 1.5rem;}
+    main{padding:1.5rem 1rem 3rem;}
+    .timeline{grid-template-columns:repeat(2,1fr);}
+    th,td{padding:0.5rem 0.55rem;}
+    th:nth-child(2),td:nth-child(2){min-width:180px;}
+    .drawer{max-width:100%;}
+    .footer-inner{grid-template-columns:1fr;}
   }
-  .page-btn:hover { border-color: var(--sea-green); color: var(--sea-green); }
-  .page-btn.active { background: var(--sea-green); color: #fff; border-color: var(--sea-green); }
-  .page-btn:disabled { opacity: 0.35; cursor: default; }
-  .page-btn:focus-visible { outline: 2px solid var(--sea-green); outline-offset: 2px; }
-  .page-ellipsis { font-family: var(--mono); font-size: 12px; color: rgba(62,62,60,0.4); padding: 0 0.25rem; }
-
-  /* ── DETAIL DRAWER ── */
-  .drawer-backdrop {
-    display: none; position: fixed; inset: 0;
-    background: rgba(62,62,60,0.45); z-index: 100;
-    backdrop-filter: blur(2px);
-  }
-  .drawer-backdrop.open { display: block; }
-  .drawer {
-    position: fixed; top: 0; right: -520px; bottom: 0;
-    width: 100%; max-width: 500px;
-    background: var(--dirty-white); z-index: 101;
-    overflow-y: auto; transition: right 0.28s cubic-bezier(0.4,0,0.2,1);
-    box-shadow: -8px 0 40px rgba(62,62,60,0.18);
-    display: flex; flex-direction: column;
-  }
-  .drawer.open { right: 0; }
-  .drawer-header {
-    background: var(--black-olive); color: var(--dirty-white);
-    padding: 1.25rem 1.5rem; display: flex;
-    justify-content: space-between; align-items: flex-start;
-    gap: 1rem; position: sticky; top: 0; z-index: 1;
-  }
-  .drawer-title { font-family: var(--mono); font-size: 13px; font-weight: 700; line-height: 1.4; flex: 1; }
-  .drawer-close {
-    background: none; border: 1px solid rgba(232,233,201,0.3); color: var(--dirty-white);
-    border-radius: var(--radius); width: 32px; height: 32px; cursor: pointer;
-    font-size: 16px; display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; transition: background 0.15s;
-  }
-  .drawer-close:hover { background: rgba(232,233,201,0.1); }
-  .drawer-close:focus-visible { outline: 2px solid var(--sea-green); outline-offset: 2px; }
-  .drawer-body { padding: 1.25rem 1.5rem; flex: 1; }
-  .drawer-section { margin-bottom: 1.5rem; }
-  .drawer-section-title {
-    font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--sea-green);
-    margin-bottom: 0.6rem; padding-bottom: 0.4rem;
-    border-bottom: 1px solid var(--rule-strong);
-  }
-  .drawer-row { display: flex; gap: 0.75rem; padding: 0.4rem 0; border-bottom: 1px solid var(--rule); }
-  .drawer-row:last-child { border-bottom: none; }
-  .drawer-label { font-family: var(--sans); font-size: 11px; color: rgba(62,62,60,0.55); font-weight: 300; min-width: 120px; flex-shrink: 0; padding-top: 1px; }
-  .drawer-val { font-family: var(--sans); font-size: 13px; color: var(--black-olive); font-weight: 400; word-break: break-word; }
-  .drawer-val.mono { font-family: var(--mono); font-size: 12px; font-weight: 700; }
-  .drawer-val.muted { color: rgba(62,62,60,0.4); font-family: var(--mono); font-size: 12px; }
-  .drawer-flag-banner {
-    background: rgba(232,184,75,0.15); border: 1px solid rgba(232,184,75,0.35);
-    border-radius: var(--radius); padding: 0.6rem 0.85rem;
-    font-family: var(--sans); font-size: 12px; color: #7a5500;
-    margin-bottom: 1rem; display: flex; gap: 0.5rem; align-items: flex-start;
-  }
-
-  /* ── LOADING / EMPTY ── */
-  .state-msg { text-align: center; padding: 4rem 2rem; font-family: var(--mono); font-size: 13px; color: rgba(62,62,60,0.45); }
-  .state-msg .icon { font-size: 2rem; display: block; margin-bottom: 0.75rem; }
-  .loader { display: inline-block; width: 18px; height: 18px; border: 2px solid var(--rule); border-top-color: var(--sea-green); border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 0.5rem; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-  /* ── FOOTER ── */
-  footer { background: var(--black-olive); color: rgba(232,233,201,0.6); padding: 2.5rem 2rem; font-size: 12px; font-family: var(--sans); font-weight: 300; line-height: 1.8; }
-  .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-  .footer-col-title { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dollar-bill); margin-bottom: 0.6rem; }
-  footer a { color: var(--dollar-bill); text-decoration: none; border-bottom: 1px solid rgba(133,187,101,0.3); }
-  footer a:hover { color: var(--dirty-white); }
-  footer a:focus-visible { outline: 2px solid var(--sea-green); outline-offset: 2px; border-radius: 1px; }
-  .footer-rule { height: 1px; background: rgba(232,233,201,0.1); margin: 1.5rem 0; grid-column: 1/-1; }
-  .footer-bottom { grid-column: 1/-1; color: rgba(232,233,201,0.4); font-size: 11px; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 700px) {
-    header { padding: 1.75rem 1rem 1.5rem; }
-    main { padding: 1.5rem 1rem 3rem; }
-    .timeline { grid-template-columns: repeat(2, 1fr); }
-    th, td { padding: 0.5rem 0.65rem; }
-    th:nth-child(2), td:nth-child(2) { min-width: 200px; }
-    .drawer { max-width: 100%; }
-    .footer-inner { grid-template-columns: 1fr; }
-  }
-  @media (max-width: 440px) {
-    .timeline { grid-template-columns: 1fr; }
-  }
+  @media(max-width:440px){.timeline{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
-
 <a href="#main-content" class="skip-nav">Skip to main content</a>
-
 <header role="banner">
   <div class="header-inner">
+    <div class="header-nav">
+      <a href="trumps-wallet.html" class="active">Asset Browser</a>
+      <span style="color:rgba(232,233,201,0.2)">·</span>
+      <a href="trumps-wallet-trends.html">Trends Over Time →</a>
+    </div>
     <h1>Trump's <span>Wallet</span></h1>
     <p class="header-desc">Tracking Donald Trump's personal finances across public OGE financial disclosure filings. Asset-level data from five filing years, 2016–2025.</p>
     <div class="header-meta">
@@ -365,89 +214,79 @@
 </header>
 
 <main id="main-content">
-
-  <!-- FILING CARDS -->
   <section aria-labelledby="filings-heading">
     <div class="section-label" id="filings-heading">Disclosure Filings</div>
     <p class="filter-hint">Click any filing card to filter the asset table below</p>
-    <div class="timeline" id="filing-grid" role="group" aria-label="Filing year cards — click to filter"></div>
+    <div class="timeline" id="filing-grid" role="group" aria-label="Filing year cards"></div>
   </section>
 
-  <!-- DATA NOTES -->
   <section aria-label="About this data">
     <div class="section-label">About This Data</div>
     <div class="data-note">
-      <p><strong>Source:</strong> All data is processed directly from Donald Trump's OGE Form 278 filings with the U.S. Office of Government Ethics and/or FEC. Original files were obtained by Hunter Index (nonprofit news organization, EIN 33-3157569) or partners. Any use of this information must be attributed directly to Hunter Index with a direct link to <a href="https://hunterindex.org" target="_blank" rel="noopener">hunterindex.org</a>.</p>
-      <p><strong>Annual forms</strong> cover the preceding calendar year. <strong>Candidate forms</strong> cover approximately 12 months prior to the filing date. The 2023 annual form was not processed due to an OGE lawsuit note. Values shown are OGE-reported ranges; medians are calculated estimates. Flagged rows indicate assets identified for editorial review.</p>
-      <p><strong>Not yet processed:</strong> 2017 annual (obtained via OpenSecrets), 2018 annual (obtained via OpenSecrets), 2021 termination report, 2026 transaction report (filed 2/26/2026). 2026 annual form expected by August 13, 2026.</p>
+      <p><strong>Source:</strong> All data processed directly from Donald Trump's OGE Form 278 filings. Original files obtained by Hunter Index (nonprofit, EIN 33-3157569) or partners. Any use must be attributed to Hunter Index with a link to <a href="https://hunterindex.org" target="_blank" rel="noopener">hunterindex.org</a>.</p>
+      <p><strong>Annual forms</strong> cover the preceding calendar year. <strong>Candidate forms</strong> cover ~12 months prior to filing. The 2023 annual form was not processed due to an OGE lawsuit note. Values are OGE-reported ranges; medians are calculated estimates. <strong>Not yet processed:</strong> 2017, 2018, 2021 termination report, 2026 transaction report (filed 2/26/2026). 2026 annual expected by August 13, 2026.</p>
     </div>
   </section>
 
-  <!-- ASSET TABLE -->
   <section aria-labelledby="assets-heading">
     <div class="section-label" id="assets-heading">Asset Browser</div>
-
     <div class="filter-bar" role="search" aria-label="Filter assets">
       <div class="filter-group search-group">
         <label for="search-input">Search assets</label>
-        <div class="search-wrap">
-          <input type="search" id="search-input" placeholder="Search by name, type, owner…" aria-label="Search assets" autocomplete="off">
-        </div>
+        <div class="search-wrap"><input type="search" id="search-input" placeholder="Search by name, type, owner…" autocomplete="off"></div>
       </div>
       <div class="filter-group">
         <label for="type-filter">Asset type</label>
-        <div class="select-wrap">
-          <select id="type-filter" aria-label="Filter by asset type"><option value="">All types</option></select>
-        </div>
+        <div class="select-wrap"><select id="type-filter"><option value="">All types</option></select></div>
       </div>
       <div class="filter-group">
         <label for="owner-filter">Owner</label>
-        <div class="select-wrap">
-          <select id="owner-filter" aria-label="Filter by owner"><option value="">All owners</option></select>
-        </div>
+        <div class="select-wrap"><select id="owner-filter"><option value="">All owners</option></select></div>
       </div>
       <div class="filter-group">
         <label for="flag-filter">Show only</label>
         <div class="select-wrap">
-          <select id="flag-filter" aria-label="Filter flagged assets">
+          <select id="flag-filter">
             <option value="">All records</option>
             <option value="flagged">Flagged for review</option>
           </select>
         </div>
       </div>
-      <button class="reset-btn" id="reset-btn" aria-label="Clear all filters">Clear all</button>
+      <button class="reset-btn" id="reset-btn">Clear all</button>
     </div>
 
-    <div class="active-year-banner" id="active-year-banner" aria-live="polite">
+    <div class="active-year-banner" id="active-year-banner">
       <span id="banner-text"></span>
       <button class="banner-clear" id="banner-clear">✕ Clear year filter</button>
     </div>
 
     <div class="results-meta">
       <div class="results-count" id="results-count" aria-live="polite" aria-atomic="true"></div>
-      <div class="sort-info">Click column headers to sort · Click any row for details</div>
+      <div class="sort-info">Click headers to sort · Click any row for full details</div>
     </div>
 
     <div class="table-wrap" role="region" aria-label="Asset data table" tabindex="0">
       <table aria-label="Trump asset disclosures">
         <thead>
           <tr>
-            <th scope="col" tabindex="0" data-col="filing_year"   aria-sort="ascending">Year</th>
-            <th scope="col" tabindex="0" data-col="asset"         aria-sort="none">Asset</th>
-            <th scope="col" tabindex="0" data-col="asset_type"    aria-sort="none">Type</th>
-            <th scope="col" tabindex="0" data-col="owner"         aria-sort="none">Owner</th>
-            <th scope="col" tabindex="0" data-col="median_value"  aria-sort="none">Est. Value</th>
-            <th scope="col" tabindex="0" data-col="median_income" aria-sort="none">Est. Income</th>
+            <th tabindex="0" data-col="filing_year" aria-sort="ascending">Year</th>
+            <th tabindex="0" data-col="asset"        aria-sort="none">Asset</th>
+            <th tabindex="0" data-col="asset_type"   aria-sort="none">Type</th>
+            <th tabindex="0" data-col="owner"        aria-sort="none">Owner</th>
+            <th tabindex="0" data-col="median_value" aria-sort="none">Est. Value</th>
+            <th tabindex="0" data-col="median_income" aria-sort="none">Est. Income</th>
+            <th tabindex="0" data-col="income_type"  aria-sort="none">Income Type</th>
+            <th tabindex="0" data-col="filed_date"   aria-sort="none">Filed Date</th>
+            <th tabindex="0" data-col="flag_for_reporting" aria-sort="none">Flagged</th>
           </tr>
         </thead>
         <tbody id="table-body">
-          <tr><td colspan="6"><div class="state-msg"><span class="loader"></span> Loading asset data…</div></td></tr>
+          <tr><td colspan="9"><div class="state-msg"><span class="loader"></span> Loading asset data…</div></td></tr>
         </tbody>
       </table>
     </div>
     <div class="pagination" id="pagination" aria-label="Table pagination"></div>
   </section>
-
 </main>
 
 <!-- DETAIL DRAWER -->
@@ -471,176 +310,134 @@
     </div>
     <div>
       <div class="footer-col-title">Data & Attribution</div>
-      Data sourced from public OGE Form 278 disclosures. Any use of this data must be attributed to Hunter Index with a link to hunterindex.org.<br>
+      Data sourced from public OGE Form 278 disclosures. Any use must be attributed to Hunter Index with a link to hunterindex.org.<br>
       Questions: <a href="mailto:jay@hunterindex.org">jay@hunterindex.org</a> · 202-240-2414
     </div>
     <div class="footer-rule"></div>
-    <div class="footer-bottom">
-      Data covers May 2015 – June 13, 2025. Updated as new filings are processed. Not legal or financial advice.
-    </div>
+    <div class="footer-bottom">Data covers May 2015 – June 13, 2025. Updated as new filings are processed. Not legal or financial advice.</div>
   </div>
 </footer>
 
 <script>
-/* ── FILING METADATA ─────────────────────────────── */
-const FILINGS = [
-  { year:'2016', label:'2016 Candidate',  formType:'Candidate (278)',  filed:'May 16, 2016',   period:'Jan. 2015 – May 16, 2016',   netWorth:1339963645,  totalAssets:1748013651, totalIncome:669524867,  numAssets:509,  note:null },
-  { year:'2020', label:'2020 Annual',     formType:'Annual (278)',     filed:'Jul. 31, 2020',  period:'Jan. 1 – Dec. 31, 2019',     netWorth:1325878071,  totalAssets:1733378076, totalIncome:466703975,  numAssets:221,  note:null },
-  { year:'2022', label:'2022 Candidate',  formType:'Candidate (278)',  filed:'Apr. 14, 2023',  period:'Jan. 2022 – Apr. 14, 2023',  netWorth:1037193200,  totalAssets:1567193204, totalIncome:1287625989, numAssets:2319, note:'4 outside positions: CIC Digital LLC, CIC Ventures LLC, Mar-A-Lago Club, Trump Media & Technology Group' },
-  { year:'2024', label:'2024 Candidate',  formType:'Candidate (278)',  filed:'Aug. 13, 2024',  period:'Jan. 2023 – Aug. 13, 2024',  netWorth:1674070796,  totalAssets:2074570801, totalIncome:796287858,  numAssets:4531, note:null },
-  { year:'2025', label:'2025 Annual',     formType:'Annual (278)',     filed:'Jun. 13, 2025',  period:'Jan. 1 – Dec. 31, 2024',     netWorth:2446544516,  totalAssets:2759577024, totalIncome:615998373,  numAssets:3573, note:'Filed late — fee paid May 13, 2026' },
+const FILINGS=[
+  {year:'2016',label:'2016 Candidate',formType:'Candidate (278)',filed:'May 16, 2016',period:'Jan. 2015 – May 16, 2016',netWorth:1339963645,totalAssets:1748013651,totalIncome:669524867,numAssets:509,note:null},
+  {year:'2020',label:'2020 Annual',formType:'Annual (278)',filed:'Jul. 31, 2020',period:'Jan. 1 – Dec. 31, 2019',netWorth:1325878071,totalAssets:1733378076,totalIncome:466703975,numAssets:221,note:null},
+  {year:'2022',label:'2022 Candidate',formType:'Candidate (278)',filed:'Apr. 14, 2023',period:'Jan. 2022 – Apr. 14, 2023',netWorth:1037193200,totalAssets:1567193204,totalIncome:1287625989,numAssets:2319,note:'4 outside positions: CIC Digital LLC, CIC Ventures LLC, Mar-A-Lago Club, Trump Media & Technology Group'},
+  {year:'2024',label:'2024 Candidate',formType:'Candidate (278)',filed:'Aug. 13, 2024',period:'Jan. 2023 – Aug. 13, 2024',netWorth:1674070796,totalAssets:2074570801,totalIncome:796287858,numAssets:4531,note:null},
+  {year:'2025',label:'2025 Annual',formType:'Annual (278)',filed:'Jun. 13, 2025',period:'Jan. 1 – Dec. 31, 2024',netWorth:2446544516,totalAssets:2759577024,totalIncome:615998373,numAssets:3573,note:'Filed late — fee paid May 13, 2026'},
 ];
 
-/* ── NUMBER FORMAT (Hunter Index style) ─────────── */
-function fmt(n) {
-  if (n == null || n === '') return null;
-  const v = Number(n);
-  if (isNaN(v)) return null;
-  const neg = v < 0, abs = Math.abs(v);
+function fmt(n){
+  if(n==null||n==='')return null;
+  const v=Number(n);if(isNaN(v))return null;
+  const neg=v<0,abs=Math.abs(v);
   let s;
-  if (abs >= 1e9)      s = '$' + (Math.trunc(abs / 1e7) / 100) + ' billion';
-  else if (abs >= 1e6) s = '$' + (Math.trunc(abs / 1e4) / 100) + ' million';
-  else if (abs >= 1e3) s = '$' + Math.trunc(abs / 1e3) + 'k';
-  else                 s = '$' + abs.toLocaleString();
-  return neg ? '-' + s : s;
+  if(abs>=1e9)s='$'+(Math.trunc(abs/1e7)/100)+' billion';
+  else if(abs>=1e6)s='$'+(Math.trunc(abs/1e4)/100)+' million';
+  else if(abs>=1e3)s='$'+Math.trunc(abs/1e3)+'k';
+  else s='$'+abs.toLocaleString();
+  return neg?'-'+s:s;
 }
-function fmtCell(n) { const r = fmt(n); return r ? `<strong>${r}</strong>` : '<span class="null-val">—</span>'; }
+function fmtCell(n){const r=fmt(n);return r?`<strong>${r}</strong>`:'<span class="null-val">—</span>';}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 
-/* ── RENDER FILING CARDS ─────────────────────────── */
-let activeYear = null;
-
-function renderCards() {
-  const grid = document.getElementById('filing-grid');
-  grid.innerHTML = '';
-  FILINGS.forEach(f => {
-    const isActive = activeYear === f.year;
-    const card = document.createElement('div');
-    card.className = 'filing-card' + (isActive ? ' active' : '');
-    card.setAttribute('role', 'button');
-    card.setAttribute('tabindex', '0');
-    card.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-    card.setAttribute('aria-label', `${f.label}, ${f.period}. Net worth ${fmt(f.netWorth)}. Click to filter table.`);
-    card.innerHTML = `
+let activeYear=null;
+function renderCards(){
+  const grid=document.getElementById('filing-grid');grid.innerHTML='';
+  FILINGS.forEach(f=>{
+    const isActive=activeYear===f.year;
+    const card=document.createElement('div');
+    card.className='filing-card'+(isActive?' active':'');
+    card.setAttribute('role','button');card.setAttribute('tabindex','0');
+    card.setAttribute('aria-pressed',isActive?'true':'false');
+    card.innerHTML=`
       <div class="card-year">${f.year}</div>
       <div class="card-form">${f.formType}</div>
       <div class="card-period">${f.period}</div>
       <div class="card-filed">Filed ${f.filed}</div>
-      ${f.note ? `<div style="font-size:11px;color:rgba(62,62,60,0.55);margin-bottom:0.5rem;font-family:var(--sans);line-height:1.4">${f.note}</div>` : ''}
+      ${f.note?`<div style="font-size:11px;color:rgba(62,62,60,0.55);margin-bottom:0.5rem;font-family:var(--sans);line-height:1.4">${f.note}</div>`:''}
       <div class="card-divider"></div>
       <div class="card-stats">
-        <div class="card-stat"><span class="card-stat-label">Net worth</span><span class="card-stat-val">${fmt(f.netWorth) ?? '—'}</span></div>
-        <div class="card-stat"><span class="card-stat-label">Total assets</span><span class="card-stat-val">${fmt(f.totalAssets) ?? '—'}</span></div>
-        <div class="card-stat"><span class="card-stat-label">Total income</span><span class="card-stat-val">${fmt(f.totalIncome) ?? '—'}</span></div>
+        <div class="card-stat"><span class="card-stat-label">Net worth</span><span class="card-stat-val">${fmt(f.netWorth)??'—'}</span></div>
+        <div class="card-stat"><span class="card-stat-label">Total assets</span><span class="card-stat-val">${fmt(f.totalAssets)??'—'}</span></div>
+        <div class="card-stat"><span class="card-stat-label">Total income</span><span class="card-stat-val">${fmt(f.totalIncome)??'—'}</span></div>
         <div class="card-stat"><span class="card-stat-label">Asset count</span><span class="card-stat-val">${f.numAssets.toLocaleString()}</span></div>
       </div>`;
-    card.addEventListener('click', () => toggleYear(f.year));
-    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleYear(f.year); } });
+    card.addEventListener('click',()=>toggleYear(f.year));
+    card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleYear(f.year);}});
     grid.appendChild(card);
   });
 }
-
-function toggleYear(year) {
-  activeYear = activeYear === year ? null : year;
-  renderCards();
-  updateBanner();
-  currentPage = 1;
-  applyFilters();
+function toggleYear(year){activeYear=activeYear===year?null:year;renderCards();updateBanner();currentPage=1;applyFilters();}
+function updateBanner(){
+  const banner=document.getElementById('active-year-banner'),text=document.getElementById('banner-text');
+  if(activeYear){const f=FILINGS.find(f=>f.year===activeYear);text.textContent=`Showing: ${f.label} · ${f.period}`;banner.classList.add('visible');}
+  else banner.classList.remove('visible');
 }
+document.getElementById('banner-clear').addEventListener('click',()=>{activeYear=null;renderCards();updateBanner();currentPage=1;applyFilters();});
 
-function updateBanner() {
-  const banner = document.getElementById('active-year-banner');
-  const text   = document.getElementById('banner-text');
-  if (activeYear) {
-    const f = FILINGS.find(f => f.year === activeYear);
-    text.textContent = `Showing: ${f.label} · ${f.period}`;
-    banner.classList.add('visible');
-  } else {
-    banner.classList.remove('visible');
+let allData=[],filtered=[],currentPage=1;
+const PAGE_SIZE=50;
+let sortCol='filing_year',sortDir='asc';
+
+async function loadData(){
+  try{
+    const res=await fetch('trump_assets.json');
+    if(!res.ok)throw new Error(`HTTP ${res.status}`);
+    allData=await res.json();
+    initFilters();applyFilters();
+  }catch(e){
+    document.getElementById('table-body').innerHTML=`<tr><td colspan="9"><div class="state-msg"><span class="icon">⚠</span>Could not load asset data. Ensure <code>trump_assets.json</code> is in the same directory.<br><small style="opacity:0.6">${e.message}</small></div></td></tr>`;
   }
 }
-
-document.getElementById('banner-clear').addEventListener('click', () => {
-  activeYear = null; renderCards(); updateBanner(); currentPage = 1; applyFilters();
-});
-
-/* ── STATE ───────────────────────────────────────── */
-let allData = [], filtered = [], currentPage = 1;
-const PAGE_SIZE = 50;
-let sortCol = 'filing_year', sortDir = 'asc';
-
-/* ── LOAD DATA ───────────────────────────────────── */
-async function loadData() {
-  try {
-    const res = await fetch('trump_assets.json');
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    allData = await res.json();
-    initFilters();
-    applyFilters();
-  } catch(e) {
-    document.getElementById('table-body').innerHTML =
-      `<tr><td colspan="6"><div class="state-msg">
-        <span class="icon">⚠</span>
-        Could not load asset data. Ensure <code>trump_assets.json</code> is in the same directory.<br>
-        <small style="opacity:0.6">${e.message}</small>
-      </div></td></tr>`;
-  }
+function initFilters(){
+  const types=[...new Set(allData.map(r=>r.asset_type).filter(Boolean))].sort();
+  const owners=[...new Set(allData.map(r=>r.owner).filter(Boolean))].sort();
+  const ts=document.getElementById('type-filter'),os=document.getElementById('owner-filter');
+  types.forEach(t=>{const o=document.createElement('option');o.value=t;o.textContent=t;ts.appendChild(o);});
+  owners.forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;os.appendChild(o);});
 }
-
-/* ── DROPDOWNS ───────────────────────────────────── */
-function initFilters() {
-  const types  = [...new Set(allData.map(r => r.asset_type).filter(Boolean))].sort();
-  const owners = [...new Set(allData.map(r => r.owner    ).filter(Boolean))].sort();
-  const ts = document.getElementById('type-filter');
-  const os = document.getElementById('owner-filter');
-  types.forEach(t  => { const o = document.createElement('option'); o.value = t; o.textContent = t; ts.appendChild(o); });
-  owners.forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v; os.appendChild(o); });
-}
-
-/* ── FILTER + SORT ───────────────────────────────── */
-function applyFilters() {
-  const q     = document.getElementById('search-input').value.toLowerCase().trim();
-  const type  = document.getElementById('type-filter').value;
-  const owner = document.getElementById('owner-filter').value;
-  const flag  = document.getElementById('flag-filter').value;
-
-  filtered = allData.filter(r => {
-    if (activeYear && r.filing_year !== activeYear) return false;
-    if (type  && r.asset_type !== type) return false;
-    if (owner && (r.owner||'').toLowerCase() !== owner.toLowerCase()) return false;
-    if (flag === 'flagged' && !r.flag_for_reporting) return false;
-    if (q) {
-      const hay = [r.asset,r.asset_type,r.owner,r.income_type,r.reported_value,r.notes].filter(Boolean).join(' ').toLowerCase();
-      if (!hay.includes(q)) return false;
-    }
+function applyFilters(){
+  const q=document.getElementById('search-input').value.toLowerCase().trim();
+  const type=document.getElementById('type-filter').value;
+  const owner=document.getElementById('owner-filter').value;
+  const flag=document.getElementById('flag-filter').value;
+  filtered=allData.filter(r=>{
+    if(activeYear&&r.filing_year!==activeYear)return false;
+    if(type&&r.asset_type!==type)return false;
+    if(owner&&(r.owner||'').toLowerCase()!==owner.toLowerCase())return false;
+    if(flag==='flagged'&&!r.flag_for_reporting)return false;
+    if(q){const hay=[r.asset,r.asset_type,r.owner,r.income_type,r.reported_value,r.notes].filter(Boolean).join(' ').toLowerCase();if(!hay.includes(q))return false;}
     return true;
   });
-
-  filtered.sort((a, b) => {
-    let av = a[sortCol], bv = b[sortCol];
-    if (av == null && bv == null) return 0;
-    if (av == null) return 1;
-    if (bv == null) return -1;
-    if (typeof av === 'number' && typeof bv === 'number') return sortDir === 'asc' ? av - bv : bv - av;
-    return sortDir === 'asc' ? String(av).localeCompare(String(bv)) : String(bv).localeCompare(String(av));
+  filtered.sort((a,b)=>{
+    let av=a[sortCol],bv=b[sortCol];
+    if(av==null&&bv==null)return 0;if(av==null)return 1;if(bv==null)return -1;
+    if(typeof av==='number'&&typeof bv==='number')return sortDir==='asc'?av-bv:bv-av;
+    return sortDir==='asc'?String(av).localeCompare(String(bv)):String(bv).localeCompare(String(av));
   });
-
-  currentPage = Math.min(currentPage, Math.ceil(filtered.length / PAGE_SIZE) || 1);
-  renderTable();
-  renderPagination();
-  updateCount();
+  currentPage=Math.min(currentPage,Math.ceil(filtered.length/PAGE_SIZE)||1);
+  renderTable();renderPagination();updateCount();
 }
 
-/* ── RENDER TABLE ────────────────────────────────── */
-function renderTable() {
-  const tbody = document.getElementById('table-body');
-  const page  = filtered.slice((currentPage-1)*PAGE_SIZE, currentPage*PAGE_SIZE);
-  if (!page.length) {
-    tbody.innerHTML = `<tr><td colspan="6"><div class="state-msg"><span class="icon">🔍</span>No assets match your filters.</div></td></tr>`;
-    return;
-  }
-  tbody.innerHTML = page.map((r, i) => {
-    const idx = (currentPage-1)*PAGE_SIZE + i;
-    const flagBadge = r.flag_for_reporting ? ' <span class="badge badge-flag" title="Flagged for editorial review">⚑</span>' : '';
+function getAssetId(r){
+  // Return the most relevant asset ID for the filing year
+  if(r.filing_year==='2016')return r['2016_asset_ID'];
+  if(r.filing_year==='2020')return r['2020_asset_ID'];
+  if(r.filing_year==='2022')return r['2022_asset_ID'];
+  if(r.filing_year==='2024')return r['2024_asset_ID'];
+  if(r.filing_year==='2025')return r['2025_asset_ID'];
+  return null;
+}
+
+function renderTable(){
+  const tbody=document.getElementById('table-body');
+  const page=filtered.slice((currentPage-1)*PAGE_SIZE,currentPage*PAGE_SIZE);
+  if(!page.length){tbody.innerHTML=`<tr><td colspan="9"><div class="state-msg"><span class="icon">🔍</span>No assets match your filters.</div></td></tr>`;return;}
+  tbody.innerHTML=page.map((r,i)=>{
+    const idx=(currentPage-1)*PAGE_SIZE+i;
+    const flagBadge=r.flag_for_reporting?' <span class="badge badge-flag" title="Flagged for editorial review">⚑</span>':'';
+    const assetId=getAssetId(r);
     return `<tr class="${r.flag_for_reporting?'flagged':''}" data-idx="${idx}" tabindex="0" aria-label="View details for ${esc(r.asset||'asset')}">
       <td class="mono-sm"><span class="badge badge-year">${r.filing_year}</span></td>
       <td class="asset-name">${esc(r.asset||'—')}${flagBadge}</td>
@@ -648,169 +445,142 @@ function renderTable() {
       <td class="mono-sm">${esc(r.owner||'—')}</td>
       <td class="mono-val">${fmtCell(r.median_value)}</td>
       <td class="mono-val">${fmtCell(r.median_income)}</td>
+      <td class="wrap-sm">${esc(r.income_type||'—')}</td>
+      <td class="mono-sm">${r.filed_date?esc(r.filed_date):'<span class="null-val">—</span>'}</td>
+      <td class="mono-sm">${r.flag_for_reporting?'<span class="badge badge-flag">⚑ Yes</span>':'<span class="null-val">—</span>'}</td>
     </tr>`;
   }).join('');
-
-  tbody.querySelectorAll('tr[data-idx]').forEach(row => {
-    row.addEventListener('click',    () => openDrawer(filtered[+row.dataset.idx]));
-    row.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') { e.preventDefault(); openDrawer(filtered[+row.dataset.idx]); } });
+  tbody.querySelectorAll('tr[data-idx]').forEach(row=>{
+    row.addEventListener('click',()=>openDrawer(filtered[+row.dataset.idx]));
+    row.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openDrawer(filtered[+row.dataset.idx]);}});
   });
 }
 
-function esc(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-}
-
-/* ── DETAIL DRAWER ───────────────────────────────── */
-let lastFocusedRow = null;
-
-function openDrawer(r) {
-  lastFocusedRow = document.activeElement;
-  const filing = FILINGS.find(f => f.year === r.filing_year);
-
-  function row(label, val, mono=false) {
-    const display = (val != null && val !== '') ? (mono ? `<span class="mono">${esc(String(val))}</span>` : esc(String(val))) : '<span class="muted">—</span>';
-    return `<div class="drawer-row"><span class="drawer-label">${label}</span><span class="drawer-val ${mono?'mono':''}">${display}</span></div>`;
+let lastFocused=null;
+function openDrawer(r){
+  lastFocused=document.activeElement;
+  const filing=FILINGS.find(f=>f.year===r.filing_year);
+  function drow(label,val,mono=false){
+    const v=(val!=null&&val!=='');
+    const display=v?(mono?`<span class="mono">${esc(String(val))}</span>`:esc(String(val))):'<span class="muted">—</span>';
+    return `<div class="drawer-row"><span class="drawer-label">${label}</span><span class="drawer-val">${display}</span></div>`;
   }
-  function fmtRow(label, n) {
-    const v = fmt(n);
-    return `<div class="drawer-row"><span class="drawer-label">${label}</span><span class="drawer-val mono">${v ? `<strong>${v}</strong>` : '<span class="muted">—</span>'}</span></div>`;
+  function dfmt(label,n){
+    const v=fmt(n);
+    return `<div class="drawer-row"><span class="drawer-label">${label}</span><span class="drawer-val mono">${v?`<strong>${v}</strong>`:'<span class="muted">—</span>'}</span></div>`;
   }
+  const flagHtml=r.flag_for_reporting
+    ?`<div class="drawer-flag-banner">⚑ <span><strong>Flagged for editorial review.</strong>${r.reporting_notes?' '+esc(r.reporting_notes):''}</span></div>`:'';
 
-  const flagHtml = r.flag_for_reporting
-    ? `<div class="drawer-flag-banner">⚑ <span><strong>Flagged for editorial review.</strong>${r.reporting_notes ? ' ' + esc(r.reporting_notes) : ''}</span></div>`
-    : '';
-
-  document.getElementById('drawer-title').textContent = r.asset || 'Asset Detail';
-  document.getElementById('drawer-body').innerHTML = `
+  document.getElementById('drawer-title').textContent=r.asset||'Asset Detail';
+  document.getElementById('drawer-body').innerHTML=`
     ${flagHtml}
     <div class="drawer-section">
       <div class="drawer-section-title">Filing</div>
-      ${row('Filing year', r.filing_year)}
-      ${row('Form type', filing ? filing.formType : null)}
-      ${row('Period covered', filing ? filing.period : null)}
-      ${row('Filed date', r.filed_date)}
-      ${row('Owner', r.owner)}
+      ${drow('Filing year',r.filing_year)}
+      ${drow('Form type',filing?filing.formType:null)}
+      ${drow('Period covered',filing?filing.period:null)}
+      ${drow('Filed date',r.filed_date)}
+      ${drow('Owner',r.owner)}
     </div>
     <div class="drawer-section">
       <div class="drawer-section-title">Asset</div>
-      ${row('Full name', r.asset)}
-      ${row('Asset type', r.asset_type)}
-      ${row('Reported value', r.reported_value)}
-      ${fmtRow('Calc. min value', r.calc_min_value)}
-      ${fmtRow('Calc. max value', r.calc_max_value)}
-      ${fmtRow('Median value', r.median_value)}
+      ${drow('Full name',r.asset)}
+      ${drow('Asset type',r.asset_type)}
+      ${drow('Reported value',r.reported_value)}
+      ${dfmt('Calc. min value',r.calc_min_value)}
+      ${dfmt('Calc. max value',r.calc_max_value)}
+      ${dfmt('Median value',r.median_value)}
     </div>
     <div class="drawer-section">
       <div class="drawer-section-title">Income</div>
-      ${row('Income type', r.income_type)}
-      ${row('Reported income', r.income)}
-      ${fmtRow('Calc. min income', r.calc_min_income)}
-      ${fmtRow('Calc. max income', r.calc_max_income)}
-      ${fmtRow('Median income', r.median_income)}
+      ${drow('Income type',r.income_type)}
+      ${drow('Reported income',r.income)}
+      ${dfmt('Calc. min income',r.calc_min_income)}
+      ${dfmt('Calc. max income',r.calc_max_income)}
+      ${dfmt('Median income',r.median_income)}
     </div>
     <div class="drawer-section">
       <div class="drawer-section-title">Cross-references</div>
-      ${row('PID', r.PID, true)}
-      ${row('2016 asset ID', r['2016_asset_ID'], true)}
-      ${row('2020 asset ID', r['2020_asset_ID'], true)}
-      ${row('2022 asset ID', r['2022_asset_ID'], true)}
-      ${row('2024 asset ID', r['2024_asset_ID'], true)}
-      ${row('2025 asset ID', r['2025_asset_ID'], true)}
+      ${drow('PID',r.PID,true)}
+      ${drow('2016 asset ID',r['2016_asset_ID'],true)}
+      ${drow('2020 asset ID',r['2020_asset_ID'],true)}
+      ${drow('2022 asset ID',r['2022_asset_ID'],true)}
+      ${drow('2024 asset ID',r['2024_asset_ID'],true)}
+      ${drow('2025 asset ID',r['2025_asset_ID'],true)}
     </div>
-    ${r.notes ? `<div class="drawer-section"><div class="drawer-section-title">Notes</div><div style="font-family:var(--sans);font-size:13px;line-height:1.6;color:var(--black-olive)">${esc(r.notes)}</div></div>` : ''}
+    ${r.notes?`<div class="drawer-section"><div class="drawer-section-title">Notes</div><div style="font-family:var(--sans);font-size:13px;line-height:1.6;color:var(--black-olive)">${esc(r.notes)}</div></div>`:''}
+    ${r.reporting_notes&&!r.flag_for_reporting?`<div class="drawer-section"><div class="drawer-section-title">Reporting Notes</div><div style="font-family:var(--sans);font-size:13px;line-height:1.6;color:var(--black-olive)">${esc(r.reporting_notes)}</div></div>`:''}
   `;
-
   document.getElementById('detail-drawer').classList.add('open');
   document.getElementById('detail-drawer').setAttribute('aria-hidden','false');
   document.getElementById('drawer-backdrop').classList.add('open');
-  document.getElementById('drawer-backdrop').setAttribute('aria-hidden','false');
   document.getElementById('drawer-close').focus();
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
 }
-
-function closeDrawer() {
+function closeDrawer(){
   document.getElementById('detail-drawer').classList.remove('open');
   document.getElementById('detail-drawer').setAttribute('aria-hidden','true');
   document.getElementById('drawer-backdrop').classList.remove('open');
-  document.getElementById('drawer-backdrop').setAttribute('aria-hidden','true');
-  document.body.style.overflow = '';
-  if (lastFocusedRow) lastFocusedRow.focus();
+  document.body.style.overflow='';
+  if(lastFocused)lastFocused.focus();
 }
+document.getElementById('drawer-close').addEventListener('click',closeDrawer);
+document.getElementById('drawer-backdrop').addEventListener('click',closeDrawer);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer();});
 
-document.getElementById('drawer-close').addEventListener('click', closeDrawer);
-document.getElementById('drawer-backdrop').addEventListener('click', closeDrawer);
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
-
-/* ── PAGINATION ──────────────────────────────────── */
-function renderPagination() {
-  const total = Math.ceil(filtered.length / PAGE_SIZE);
-  const pag = document.getElementById('pagination');
-  if (total <= 1) { pag.innerHTML = ''; return; }
-  const pages = [];
-  pages.push({ label:'‹ Prev', page:currentPage-1, disabled:currentPage===1 });
-  pageRange(currentPage, total).forEach(p => {
-    if (p==='…') pages.push({ ellipsis:true });
-    else pages.push({ label:String(p), page:p, active:p===currentPage });
-  });
-  pages.push({ label:'Next ›', page:currentPage+1, disabled:currentPage===total });
-  pag.innerHTML = pages.map(p => {
-    if (p.ellipsis) return `<span class="page-ellipsis">…</span>`;
-    return `<button class="page-btn${p.active?' active':''}${p.disabled?' disabled':''}" ${p.disabled?'disabled':''} data-page="${p.page}" ${p.active?'aria-current="page"':''}>${p.label}</button>`;
+function renderPagination(){
+  const total=Math.ceil(filtered.length/PAGE_SIZE);
+  const pag=document.getElementById('pagination');
+  if(total<=1){pag.innerHTML='';return;}
+  const pages=[];
+  pages.push({label:'‹ Prev',page:currentPage-1,disabled:currentPage===1});
+  pageRange(currentPage,total).forEach(p=>{if(p==='…')pages.push({ellipsis:true});else pages.push({label:String(p),page:p,active:p===currentPage});});
+  pages.push({label:'Next ›',page:currentPage+1,disabled:currentPage===total});
+  pag.innerHTML=pages.map(p=>{
+    if(p.ellipsis)return`<span class="page-ellipsis">…</span>`;
+    return`<button class="page-btn${p.active?' active':''}${p.disabled?' disabled':''}" ${p.disabled?'disabled':''} data-page="${p.page}" ${p.active?'aria-current="page"':''}>${p.label}</button>`;
   }).join('');
-  pag.querySelectorAll('.page-btn:not(.disabled)').forEach(btn => {
-    btn.addEventListener('click', () => {
-      currentPage = Number(btn.dataset.page);
-      renderTable(); renderPagination();
-      document.querySelector('.table-wrap').scrollIntoView({behavior:'smooth',block:'start'});
-    });
+  pag.querySelectorAll('.page-btn:not(.disabled)').forEach(btn=>{
+    btn.addEventListener('click',()=>{currentPage=Number(btn.dataset.page);renderTable();renderPagination();document.querySelector('.table-wrap').scrollIntoView({behavior:'smooth',block:'start'});});
   });
 }
-
-function pageRange(cur, total) {
-  if (total <= 7) return Array.from({length:total},(_,i)=>i+1);
-  if (cur <= 4)   return [1,2,3,4,5,'…',total];
-  if (cur >= total-3) return [1,'…',total-4,total-3,total-2,total-1,total];
-  return [1,'…',cur-1,cur,cur+1,'…',total];
+function pageRange(cur,total){
+  if(total<=7)return Array.from({length:total},(_,i)=>i+1);
+  if(cur<=4)return[1,2,3,4,5,'…',total];
+  if(cur>=total-3)return[1,'…',total-4,total-3,total-2,total-1,total];
+  return[1,'…',cur-1,cur,cur+1,'…',total];
+}
+function updateCount(){
+  const el=document.getElementById('results-count');
+  const start=(currentPage-1)*PAGE_SIZE+1,end=Math.min(currentPage*PAGE_SIZE,filtered.length);
+  el.innerHTML=filtered.length===0?'No results':`Showing <strong>${start.toLocaleString()}–${end.toLocaleString()}</strong> of <strong>${filtered.length.toLocaleString()}</strong> assets`;
 }
 
-function updateCount() {
-  const el = document.getElementById('results-count');
-  const start = (currentPage-1)*PAGE_SIZE+1;
-  const end   = Math.min(currentPage*PAGE_SIZE, filtered.length);
-  el.innerHTML = filtered.length===0
-    ? 'No results'
-    : `Showing <strong>${start.toLocaleString()}–${end.toLocaleString()}</strong> of <strong>${filtered.length.toLocaleString()}</strong> assets`;
-}
-
-/* ── SORT ────────────────────────────────────────── */
-document.querySelectorAll('th[data-col]').forEach(th => {
-  th.addEventListener('click', () => {
-    const col = th.dataset.col;
-    sortDir = sortCol===col ? (sortDir==='asc'?'desc':'asc') : 'asc';
-    sortCol = col;
-    document.querySelectorAll('th[data-col]').forEach(h => { h.classList.remove('sort-asc','sort-desc'); h.setAttribute('aria-sort','none'); });
+document.querySelectorAll('th[data-col]').forEach(th=>{
+  th.addEventListener('click',()=>{
+    const col=th.dataset.col;
+    sortDir=sortCol===col?(sortDir==='asc'?'desc':'asc'):'asc';sortCol=col;
+    document.querySelectorAll('th[data-col]').forEach(h=>{h.classList.remove('sort-asc','sort-desc');h.setAttribute('aria-sort','none');});
     th.classList.add(sortDir==='asc'?'sort-asc':'sort-desc');
-    th.setAttribute('aria-sort', sortDir==='asc'?'ascending':'descending');
-    currentPage = 1; applyFilters();
+    th.setAttribute('aria-sort',sortDir==='asc'?'ascending':'descending');
+    currentPage=1;applyFilters();
   });
-  th.addEventListener('keydown', e => { if (e.key==='Enter') { e.preventDefault(); th.click(); } });
+  th.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();th.click();}});
 });
 
-/* ── FILTER LISTENERS ────────────────────────────── */
-document.getElementById('search-input').addEventListener('input', () => { currentPage=1; applyFilters(); });
-document.getElementById('type-filter').addEventListener('change', () => { currentPage=1; applyFilters(); });
-document.getElementById('owner-filter').addEventListener('change', () => { currentPage=1; applyFilters(); });
-document.getElementById('flag-filter').addEventListener('change', () => { currentPage=1; applyFilters(); });
-document.getElementById('reset-btn').addEventListener('click', () => {
-  document.getElementById('search-input').value = '';
-  document.getElementById('type-filter').value  = '';
-  document.getElementById('owner-filter').value = '';
-  document.getElementById('flag-filter').value  = '';
-  activeYear = null; renderCards(); updateBanner(); currentPage=1; applyFilters();
+document.getElementById('search-input').addEventListener('input',()=>{currentPage=1;applyFilters();});
+document.getElementById('type-filter').addEventListener('change',()=>{currentPage=1;applyFilters();});
+document.getElementById('owner-filter').addEventListener('change',()=>{currentPage=1;applyFilters();});
+document.getElementById('flag-filter').addEventListener('change',()=>{currentPage=1;applyFilters();});
+document.getElementById('reset-btn').addEventListener('click',()=>{
+  document.getElementById('search-input').value='';
+  document.getElementById('type-filter').value='';
+  document.getElementById('owner-filter').value='';
+  document.getElementById('flag-filter').value='';
+  activeYear=null;renderCards();updateBanner();currentPage=1;applyFilters();
 });
 
-/* ── INIT ────────────────────────────────────────── */
 renderCards();
 loadData();
 </script>
