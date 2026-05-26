@@ -263,13 +263,17 @@ function drawChart(canvasId, datasets, opts = {}) {
   const rawMax = Math.max(...allVals);
   const rawMin = isBar ? 0 : Math.min(...allVals) * 0.88;
   /* nice tick spacing in millions */
-  const rangeMil = (rawMax - rawMin) / 1e6;
-  const steps = [1,2,5,10,20,50,100,200,500,1000,2000,5000];
-  const tickSizeMil = steps.find(s => rangeMil / s <= 5) || steps[steps.length - 1];
-  const tickSize = tickSizeMil * 1e6;
+  const isRaw = opts.rawValues;
+  const range = rawMax - rawMin;
+  const stepsRaw = isRaw
+    ? [1,5,10,50,100,250,500,1000,2000,5000]
+    : [1,2,5,10,20,50,100,200,500,1000,2000,5000];
+  const tickSize = isRaw
+    ? (stepsRaw.find(s => (range / s) <= 5) || stepsRaw[stepsRaw.length-1])
+    : (stepsRaw.find(s => ((rawMax-rawMin)/1e6) / s <= 5) || stepsRaw[stepsRaw.length-1]) * 1e6;
   const minTick = Math.floor(rawMin / tickSize) * tickSize;
   const maxTick = Math.ceil(rawMax  / tickSize) * tickSize;
-  const tickCount = Math.round((maxTick - minTick) / tickSize);
+  const tickCount = Math.min(Math.round((maxTick - minTick) / tickSize), 8);
 
   const toX = i => PAD.left + (n === 1 ? cW / 2 : (i / (n - 1)) * cW);
   const toY = v => PAD.top + cH - ((v - minTick) / (maxTick - minTick)) * cH;
@@ -284,7 +288,7 @@ function drawChart(canvasId, datasets, opts = {}) {
     ctx.lineWidth   = 1;
     ctx.beginPath(); ctx.moveTo(PAD.left, y); ctx.lineTo(PAD.left + cW, y); ctx.stroke();
     ctx.fillStyle   = 'rgba(62,62,60,0.45)';
-    ctx.fillText(fmtM(val), PAD.left - 5, y + 3.5);
+    ctx.fillText(opts.rawValues ? val.toLocaleString() : fmtM(val), PAD.left - 5, y + 3.5);
   }
 
   /* x-axis labels */
@@ -359,7 +363,7 @@ function renderSummaryCharts() {
     values: FILINGS.map(f => f.count),
     color: '#5b8fd4',
     colors: FILINGS.map(f => YR_COLORS[f.year]),
-  }], { type: 'bar', labels: FILINGS.map(f => f.year) });
+  }], { type: 'bar', rawValues: true, labels: FILINGS.map(f => f.year) });
 }
 
 /* ── ASSET DATA + NAME-BASED LOOKUP ── */
