@@ -94,6 +94,26 @@
   .lookup-placeholder{font-family:var(--mono);font-size:12px;color:rgba(62,62,60,.38);text-align:center;padding:2.5rem;border:1px dashed var(--rule-strong);border-radius:var(--radius);margin-top:1rem;}
   .loader{display:inline-block;width:16px;height:16px;border:2px solid var(--rule);border-top-color:var(--sea-green);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:.5rem;}
 
+  /* ── COVERAGE TIMELINE ── */
+  .coverage-wrap { background:#fff; border:1px solid var(--rule); border-radius:var(--radius); padding:1.5rem 1.5rem 1rem; overflow-x:auto; }
+  .cov-axis { display:flex; border-bottom:2px solid var(--rule-strong); margin-bottom:0.75rem; margin-left:120px; position:relative; }
+  .cov-axis-label { font-family:var(--mono); font-size:10px; color:rgba(62,62,60,0.45); position:absolute; transform:translateX(-50%); top:4px; }
+  .cov-row { display:flex; align-items:center; margin-bottom:0.6rem; }
+  .cov-row:last-child { margin-bottom:0; }
+  .cov-label { font-family:var(--mono); font-size:11px; color:var(--black-olive); width:120px; flex-shrink:0; line-height:1.3; }
+  .cov-label span { display:block; font-family:var(--sans); font-size:10px; color:rgba(62,62,60,0.45); font-weight:300; }
+  .cov-bar-wrap { flex:1; position:relative; height:28px; min-width:500px; }
+  .cov-segment { position:absolute; height:20px; top:4px; border-radius:2px; display:flex; align-items:center; justify-content:center; overflow:hidden; transition:opacity 0.15s; }
+  .cov-segment:hover { opacity:0.85; }
+  .cov-segment-label { font-family:var(--mono); font-size:9px; color:#fff; white-space:nowrap; padding:0 6px; letter-spacing:0.04em; overflow:hidden; text-overflow:ellipsis; }
+  .cov-gap { position:absolute; height:20px; top:4px; background:rgba(62,62,60,0.07); border-radius:2px; border:1px dashed rgba(62,62,60,0.15); }
+  .cov-gap-label { font-family:var(--mono); font-size:9px; color:rgba(62,62,60,0.35); white-space:nowrap; padding:0 4px; display:flex; align-items:center; height:100%; }
+  .cov-note { font-family:var(--sans); font-size:11px; color:rgba(62,62,60,0.5); margin-top:0.75rem; padding-top:0.75rem; border-top:1px solid var(--rule); line-height:1.5; }
+  .cov-note strong { color:var(--black-olive); }
+  .coverage-legend { display:flex; gap:1.5rem; flex-wrap:wrap; margin-top:0.75rem; }
+  .cov-leg-item { font-family:var(--sans); font-size:12px; color:rgba(62,62,60,0.65); display:flex; align-items:center; gap:0.4rem; }
+  .cov-leg-dot { width:12px; height:12px; border-radius:2px; flex-shrink:0; }
+
   /* ── TOOLTIP ── */
   .chart-tooltip{
     position:fixed;pointer-events:none;z-index:200;
@@ -177,6 +197,18 @@
     </div>
   </section>
 
+  <!-- COVERAGE TIMELINE -->
+  <section aria-labelledby="coverage-heading">
+    <div class="section-label" id="coverage-heading">What Time Periods Are Covered</div>
+    <p class="section-desc">Each OGE filing covers a different window of time. This shows exactly what months are represented in the database — useful when searching for a specific asset or income stream.</p>
+    <div class="coverage-wrap" id="coverage-timeline" aria-label="Data coverage timeline"></div>
+    <div class="coverage-legend">
+      <span class="cov-leg-item"><span class="cov-leg-dot" style="background:var(--sea-green)"></span>Annual form (covers prior calendar year)</span>
+      <span class="cov-leg-item"><span class="cov-leg-dot" style="background:var(--dollar-bill)"></span>Candidate form (covers ~12 months before filing)</span>
+      <span class="cov-leg-item"><span class="cov-leg-dot" style="background:rgba(62,62,60,0.15)"></span>Coming soon</span>
+    </div>
+  </section>
+
   <!-- ASSET LOOKUP -->
   <section aria-labelledby="lookup-heading">
     <div class="section-label" id="lookup-heading">Individual Asset Tracker</div>
@@ -195,7 +227,8 @@
   <div class="footer-inner">
     <div>
       <div class="footer-col-title">Hunter Index</div>
-      A nonprofit accountability publication tracking U.S. politicians' personal finances.<br>
+      Hunter Index covers the personal finances of politicians.<br>
+      We explain how government officials' personal finances &amp; policy decisions impact the public.<br>
       EIN: 33-3157569<br>
       <a href="https://hunterindex.org" target="_blank" rel="noopener">hunterindex.org</a> ·
       <a href="https://huntrjay.substack.com" target="_blank" rel="noopener">Substack</a>
@@ -219,7 +252,7 @@ const FILINGS = [
   { year:'2024', label:'Aug. 2024',  netWorth:1674070796,  assets:2074570801, income:796287858,  liabilities:400500005,  count:4531 },
   { year:'2025', label:'Dec. 2024',  netWorth:2446544516,  assets:2759577024, income:615998373,  liabilities:313032508,  count:3573 },
 ];
-const YR_COLORS = { '2016':'#228D57','2020':'#85BB65','2022':'#e8b84b','2024':'#e07b4a','2025':'#5b8fd4' };
+const YR_COLORS = { '2016':'#228D57','2020':'#85BB65','2022':'#3E3E3C','2024':'#228D57','2025':'#85BB65' };
 
 /* ── NUMBER FORMAT ── */
 function fmt(n) {
@@ -418,11 +451,11 @@ function renderSummaryCharts() {
     { values: FILINGS.map(f => f.assets),  color: '#228D57', label: 'Total Assets' },
     { values: FILINGS.map(f => f.income),  color: '#e8b84b', label: 'Total Income' },
   ]);
-  drawChart('c-liabilities', [{ values: FILINGS.map(f => f.liabilities), color: '#e07b4a' }]);
+  drawChart('c-liabilities', [{ values: FILINGS.map(f => f.liabilities), color: '#3E3E3C' }]);
   drawChart('c-count', [{
     values: FILINGS.map(f => f.count),
-    color: '#5b8fd4',
-    colors: FILINGS.map(f => YR_COLORS[f.year]),
+    color: '#85BB65',
+    colors: ['#228D57','#85BB65','#3E3E3C','#228D57','#85BB65'],
   }], { type: 'bar', rawValues: true, labels: FILINGS.map(f => f.year) });
 }
 
@@ -601,9 +634,148 @@ function renderAsset(key) {
   }
 }
 
+/* ── COVERAGE TIMELINE ── */
+/*
+  Each entry: { id, label, formType, start, end, color, note }
+  start/end: [year, month] where month is 1-based
+  Add new rows here as new filings are processed.
+  ─────────────────────────────────────────────── */
+const COVERAGE = [
+  {
+    id: '2016', label: '2016 Candidate', formType: 'candidate',
+    start: [2015, 1], end: [2016, 5],
+    filed: 'Filed May 16, 2016',
+    note: null,
+  },
+  {
+    id: '2020', label: '2020 Annual', formType: 'annual',
+    start: [2019, 1], end: [2019, 12],
+    filed: 'Filed Jul. 31, 2020',
+    note: null,
+  },
+  {
+    id: '2022', label: '2022 Candidate', formType: 'candidate',
+    start: [2022, 1], end: [2023, 4],
+    filed: 'Filed Apr. 14, 2023',
+    note: '4 outside positions disclosed',
+  },
+  {
+    id: '2024', label: '2024 Candidate', formType: 'candidate',
+    start: [2023, 1], end: [2024, 8],
+    filed: 'Filed Aug. 13, 2024',
+    note: null,
+  },
+  {
+    id: '2025', label: '2025 Annual', formType: 'annual',
+    start: [2024, 1], end: [2024, 12],
+    filed: 'Filed Jun. 13, 2025',
+    note: 'Filed late',
+  },
+  /* ── NOT YET PROCESSED ── */
+  {
+    id: '2017', label: '2017 Annual', formType: 'gap',
+    start: [2016, 1], end: [2016, 12],
+    filed: 'Coming soon',
+    note: null,
+  },
+  {
+    id: '2018', label: '2018 Annual', formType: 'gap',
+    start: [2017, 1], end: [2017, 12],
+    filed: 'Coming soon',
+    note: null,
+  },
+  {
+    id: '2021t', label: '2021 Termination', formType: 'gap',
+    start: [2020, 1], end: [2021, 1],
+    filed: 'Coming soon',
+    note: null,
+  },
+];
+
+const COLORS = { candidate: '#228D57', annual: '#85BB65', gap: 'rgba(62,62,60,0.12)' };
+
+function renderCoverageTimeline() {
+  const wrap = document.getElementById('coverage-timeline');
+  if (!wrap) return;
+
+  /* time bounds across all entries */
+  const allStarts = COVERAGE.map(c => c.start[0] * 12 + c.start[1]);
+  const allEnds   = COVERAGE.map(c => c.end[0]   * 12 + c.end[1]);
+  const tMin = Math.min(...allStarts) - 1;
+  const tMax = Math.max(...allEnds)   + 1;
+  const tRange = tMax - tMin;
+
+  function toPos(year, month) { return ((year * 12 + month) - tMin) / tRange * 100; }
+
+  /* axis year labels */
+  const years = [];
+  for (let y = Math.floor(tMin / 12); y <= Math.ceil(tMax / 12); y++) years.push(y);
+
+  let html = `<div class="cov-axis" style="height:20px;">`;
+  years.forEach(y => {
+    const pct = toPos(y, 0);
+    if (pct < 0 || pct > 100) return;
+    html += `<span class="cov-axis-label" style="left:${pct}%">${y}</span>`;
+  });
+  html += `</div>`;
+
+  /* rows */
+  const processed = COVERAGE.filter(c => c.formType !== 'gap');
+  const gaps      = COVERAGE.filter(c => c.formType === 'gap');
+
+  /* processed filings first */
+  processed.forEach(c => {
+    const left  = toPos(c.start[0], c.start[1]);
+    const right = toPos(c.end[0],   c.end[1]);
+    const width = right - left;
+    const color = COLORS[c.formType];
+    html += `<div class="cov-row">
+      <div class="cov-label">${c.label}<span>${c.filed}</span></div>
+      <div class="cov-bar-wrap">
+        <div class="cov-segment" style="left:${left}%;width:${width}%;background:${color};" title="${c.label}: ${monthLabel(c.start)} – ${monthLabel(c.end)}${c.note ? ' · ' + c.note : ''}">
+          <span class="cov-segment-label">${monthLabel(c.start)} – ${monthLabel(c.end)}${c.note ? ' · ' + c.note : ''}</span>
+        </div>
+      </div>
+    </div>`;
+  });
+
+  /* gap rows */
+  if (gaps.length) {
+    html += `<div style="height:0.5rem"></div>`;
+    gaps.forEach(c => {
+      const left  = toPos(c.start[0], c.start[1]);
+      const right = toPos(c.end[0],   c.end[1]);
+      const width = right - left;
+      html += `<div class="cov-row">
+        <div class="cov-label" style="color:rgba(62,62,60,0.4)">${c.label}<span>${c.filed}</span></div>
+        <div class="cov-bar-wrap">
+          <div class="cov-gap" style="left:${left}%;width:${width}%;">
+            <span class="cov-gap-label">Coming soon</span>
+          </div>
+        </div>
+      </div>`;
+    });
+  }
+
+  html += `<div class="cov-note">
+    <strong>How to read this:</strong> Each bar shows the time period whose financial activity is captured in that filing.
+    Annual forms cover the full preceding calendar year. Candidate forms cover roughly 12 months before the filing date.
+    Gaps show forms that are coming soon to the database.
+    The 2023 annual form was not processed due to an OGE lawsuit note.
+  </div>`;
+
+  wrap.innerHTML = html;
+}
+
+function monthLabel([year, month]) {
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return `${months[month - 1]} ${year}`;
+}
+
 /* ── INIT ── */
 window.addEventListener('load', () => {
   renderSummaryCharts();
+  renderCoverageTimeline();
   loadData();
   window.addEventListener('resize', () => {
     renderSummaryCharts();
