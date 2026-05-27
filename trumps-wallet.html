@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trump's Wallet — Hunter Index</title>
-<meta name="description" content="Tracking Donald Trump's personal finances across OGE financial disclosure filings. A Hunter Index accountability project.">
+<meta name="description" content="Trump's Wallet — tracking Donald Trump's personal finances across OGE financial disclosure filings. A Hunter Index accountability project.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -269,7 +269,7 @@
       <table aria-label="Trump asset disclosures">
         <thead>
           <tr>
-            <th tabindex="0" data-col="filing_year" aria-sort="ascending">Year</th>
+            <th tabindex="0" data-col="filing_year" aria-sort="descending">Year</th>
             <th tabindex="0" data-col="asset"        aria-sort="none">Asset</th>
             <th tabindex="0" data-col="asset_type"   aria-sort="none">Type</th>
             <th tabindex="0" data-col="owner"        aria-sort="none">Owner</th>
@@ -320,11 +320,11 @@
 
 <script>
 const FILINGS=[
-  {year:'2016',label:'2016 Candidate',formType:'Candidate (278)',filed:'May 16, 2016',period:'Jan. 2015 – May 16, 2016',netWorth:1339963645,totalAssets:1748013651,totalIncome:669524867,numAssets:509,note:null},
-  {year:'2020',label:'2020 Annual',formType:'Annual (278)',filed:'Jul. 31, 2020',period:'Jan. 1 – Dec. 31, 2019',netWorth:1325878071,totalAssets:1733378076,totalIncome:466703975,numAssets:221,note:null},
-  {year:'2022',label:'2022 Candidate',formType:'Candidate (278)',filed:'Apr. 14, 2023',period:'Jan. 2022 – Apr. 14, 2023',netWorth:1037193200,totalAssets:1567193204,totalIncome:1287625989,numAssets:2319,note:'4 outside positions: CIC Digital LLC, CIC Ventures LLC, Mar-A-Lago Club, Trump Media & Technology Group'},
-  {year:'2024',label:'2024 Candidate',formType:'Candidate (278)',filed:'Aug. 13, 2024',period:'Jan. 2023 – Aug. 13, 2024',netWorth:1674070796,totalAssets:2074570801,totalIncome:796287858,numAssets:4531,note:null},
   {year:'2025',label:'2025 Annual',formType:'Annual (278)',filed:'Jun. 13, 2025',period:'Jan. 1 – Dec. 31, 2024',netWorth:2446544516,totalAssets:2759577024,totalIncome:615998373,numAssets:3573,note:'Filed late — fee paid May 13, 2026'},
+  {year:'2024',label:'2024 Candidate',formType:'Candidate (278)',filed:'Aug. 13, 2024',period:'Jan. 2023 – Aug. 13, 2024',netWorth:1674070796,totalAssets:2074570801,totalIncome:796287858,numAssets:4531,note:null},
+  {year:'2022',label:'2022 Candidate',formType:'Candidate (278)',filed:'Apr. 14, 2023',period:'Jan. 2022 – Apr. 14, 2023',netWorth:1037193200,totalAssets:1567193204,totalIncome:1287625989,numAssets:2319,note:'4 outside positions: CIC Digital LLC, CIC Ventures LLC, Mar-A-Lago Club, Trump Media & Technology Group'},
+  {year:'2020',label:'2020 Annual',formType:'Annual (278)',filed:'Jul. 31, 2020',period:'Jan. 1 – Dec. 31, 2019',netWorth:1325878071,totalAssets:1733378076,totalIncome:466703975,numAssets:221,note:null},
+  {year:'2016',label:'2016 Candidate',formType:'Candidate (278)',filed:'May 16, 2016',period:'Jan. 2015 – May 16, 2016',netWorth:1339963645,totalAssets:1748013651,totalIncome:669524867,numAssets:509,note:null},
 ];
 
 function fmt(n){
@@ -378,7 +378,7 @@ document.getElementById('banner-clear').addEventListener('click',()=>{activeYear
 
 let allData=[],filtered=[],currentPage=1;
 const PAGE_SIZE=50;
-let sortCol='filing_year',sortDir='asc';
+let sortCol='filing_year',sortDir='desc';
 
 async function loadData(){
   try{
