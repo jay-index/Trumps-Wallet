@@ -20,7 +20,6 @@
   body{font-family:var(--sans);background:var(--dirty-white);color:var(--black-olive);font-size:15px;line-height:1.6;min-height:100vh;}
   .skip-nav{position:absolute;top:-100px;left:1rem;background:var(--sea-green);color:#fff;padding:.5rem 1rem;border-radius:var(--radius);font-family:var(--sans);font-size:14px;z-index:1000;transition:top .2s;text-decoration:none;}
   .skip-nav:focus{top:1rem;}
-
   header{background:var(--black-olive);color:var(--dirty-white);padding:2.5rem 2rem 2rem;position:relative;overflow:hidden;}
   header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(232,233,201,.03) 60px,rgba(232,233,201,.03) 61px);pointer-events:none;}
   .header-inner{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:.6rem;}
@@ -33,24 +32,36 @@
   .header-meta{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;margin-top:.25rem;}
   .header-meta a{font-family:var(--mono);font-size:12px;color:var(--dollar-bill);text-decoration:none;letter-spacing:.05em;border-bottom:1px solid rgba(133,187,101,.4);padding-bottom:1px;}
   .header-meta a:hover{color:var(--dirty-white);}
-
   main{max-width:1200px;margin:0 auto;padding:2rem 1.5rem 4rem;}
   section+section{margin-top:3rem;}
   .section-label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--sea-green);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem;}
   .section-label::after{content:'';flex:1;height:1px;background:var(--rule-strong);}
   .section-desc{font-family:var(--sans);font-size:13px;color:rgba(62,62,60,.6);margin-bottom:1.25rem;font-weight:300;}
-
   .charts-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;}
   .chart-card{background:#fff;border:1px solid var(--rule);border-radius:var(--radius);padding:1.25rem 1.25rem 1rem;animation:fadeUp .4s ease both;}
   .chart-card:nth-child(1){animation-delay:.05s;}.chart-card:nth-child(2){animation-delay:.10s;}.chart-card:nth-child(3){animation-delay:.15s;}.chart-card:nth-child(4){animation-delay:.20s;}.chart-card:nth-child(5){animation-delay:.25s;}.chart-card:nth-child(6){animation-delay:.30s;}
+  .chart-card.full-width{grid-column:1/-1;}
   .chart-title{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--black-olive);margin-bottom:.15rem;font-weight:700;}
   .chart-subtitle{font-family:var(--sans);font-size:11px;color:rgba(62,62,60,.45);margin-bottom:.9rem;font-weight:300;}
   .chart-canvas-wrap{position:relative;width:100%;height:200px;}
+  .chart-canvas-wrap.tall{height:260px;}
   canvas{display:block;}
-  .chart-legend{display:flex;gap:1rem;flex-wrap:wrap;margin-top:.5rem;}
+  .chart-legend{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.6rem;}
   .chart-legend-item{font-family:var(--sans);font-size:11px;color:rgba(62,62,60,.6);display:flex;align-items:center;gap:.35rem;}
   .chart-legend-swatch{width:12px;height:10px;border-radius:2px;flex-shrink:0;}
 
+  /* MOVERS TABLE */
+  .movers-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:.5rem;}
+  .movers-table th{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:.5rem .75rem;text-align:left;background:var(--black-olive);color:var(--dirty-white);}
+  .movers-table th:last-child,.movers-table td:last-child{text-align:right;}
+  .movers-table td{padding:.5rem .75rem;border-bottom:1px solid var(--rule);font-family:var(--mono);font-size:11px;vertical-align:middle;}
+  .movers-table tr:last-child td{border-bottom:none;}
+  .movers-table tr:hover td{background:var(--green-light);}
+  .change-pos{color:var(--sea-green);font-weight:700;}
+  .change-neg{color:#c0392b;font-weight:700;}
+  .year-pair{font-family:var(--mono);font-size:10px;color:rgba(62,62,60,.4);margin-bottom:.25rem;}
+
+  /* LOOKUP */
   .lookup-input-wrap{position:relative;max-width:580px;}
   .lookup-input-wrap input{font-family:var(--sans);font-size:14px;padding:.6rem .9rem .6rem 2.25rem;border:1px solid var(--rule-strong);border-radius:var(--radius);background:#fff;color:var(--black-olive);width:100%;transition:border-color .15s,box-shadow .15s;}
   .lookup-input-wrap input:focus{outline:none;border-color:var(--sea-green);box-shadow:0 0 0 2px rgba(34,141,87,.15);}
@@ -61,7 +72,6 @@
   .suggestion-item:last-child{border-bottom:none;}
   .suggestion-item:hover,.suggestion-item.focused{background:var(--green-light);}
   .suggestion-years{font-family:var(--mono);font-size:10px;color:rgba(62,62,60,.4);margin-top:2px;}
-
   .asset-panel{display:none;margin-top:1.5rem;background:#fff;border:1px solid var(--rule);border-radius:var(--radius);overflow:hidden;}
   .asset-panel.visible{display:block;}
   .asset-panel-header{background:var(--black-olive);color:var(--dirty-white);padding:1rem 1.25rem;}
@@ -79,9 +89,7 @@
   .asset-table .absent{color:rgba(62,62,60,.25);font-style:italic;font-family:var(--sans);font-size:11px;}
   .yr-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle;}
 
-  .lookup-placeholder{font-family:var(--mono);font-size:12px;color:rgba(62,62,60,.38);text-align:center;padding:2.5rem;border:1px dashed var(--rule-strong);border-radius:var(--radius);margin-top:1rem;}
-  .loader{display:inline-block;width:16px;height:16px;border:2px solid var(--rule);border-top-color:var(--sea-green);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:.5rem;}
-
+  /* COVERAGE */
   .coverage-wrap{background:#fff;border:1px solid var(--rule);border-radius:var(--radius);padding:1.5rem 1.5rem 1rem;overflow-x:auto;}
   .cov-axis{display:flex;border-bottom:2px solid var(--rule-strong);margin-bottom:0.75rem;margin-left:120px;position:relative;}
   .cov-axis-label{font-family:var(--mono);font-size:10px;color:rgba(62,62,60,0.45);position:absolute;transform:translateX(-50%);top:4px;}
@@ -100,10 +108,11 @@
   .cov-leg-item{font-family:var(--sans);font-size:12px;color:rgba(62,62,60,0.65);display:flex;align-items:center;gap:0.4rem;}
   .cov-leg-dot{width:12px;height:12px;border-radius:2px;flex-shrink:0;}
 
+  .lookup-placeholder{font-family:var(--mono);font-size:12px;color:rgba(62,62,60,.38);text-align:center;padding:2.5rem;border:1px dashed var(--rule-strong);border-radius:var(--radius);margin-top:1rem;}
+  .loader{display:inline-block;width:16px;height:16px;border:2px solid var(--rule);border-top-color:var(--sea-green);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:.5rem;}
   .chart-tooltip{position:fixed;pointer-events:none;z-index:200;background:var(--black-olive);color:var(--dirty-white);font-family:var(--mono);font-size:11px;font-weight:700;padding:5px 10px;border-radius:var(--radius);white-space:nowrap;opacity:0;transition:opacity .1s;box-shadow:0 2px 8px rgba(62,62,60,0.25);}
   .chart-tooltip.visible{opacity:1;}
   .chart-tooltip .tt-label{font-family:var(--sans);font-size:10px;font-weight:300;color:rgba(232,233,201,.6);display:block;margin-bottom:1px;}
-
   footer{background:var(--black-olive);color:rgba(232,233,201,.6);padding:2.5rem 2rem;font-size:12px;font-family:var(--sans);font-weight:300;line-height:1.8;}
   .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
   .footer-col-title{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dollar-bill);margin-bottom:.6rem;}
@@ -111,10 +120,8 @@
   footer a:hover{color:var(--dirty-white);}
   .footer-rule{height:1px;background:rgba(232,233,201,.1);grid-column:1/-1;}
   .footer-bottom{grid-column:1/-1;color:rgba(232,233,201,.35);font-size:11px;}
-
   @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
   @keyframes spin{to{transform:rotate(360deg);}}
-
   @media(max-width:800px){
     .charts-grid{grid-template-columns:1fr;}
     .asset-panel-body{grid-template-columns:1fr;}
@@ -148,10 +155,11 @@
 
 <main id="main-content">
 
+  <!-- PORTFOLIO-WIDE TRENDS -->
   <section aria-labelledby="trends-heading">
     <div class="section-label" id="trends-heading">Portfolio-Wide Trends</div>
-    <p class="section-desc">Median estimates from OGE-reported ranges across all five filings. Note: filing years cover different time periods — see the Asset Browser for coverage details.</p>
-    <div class="charts-grid" id="charts-grid">
+    <p class="section-desc">Median estimates from OGE-reported ranges across all five filings. Note: filing years cover different time periods — see coverage timeline below.</p>
+    <div class="charts-grid">
       <div class="chart-card">
         <div class="chart-title">Net Worth</div>
         <div class="chart-subtitle">Calculated median estimate (assets minus liabilities)</div>
@@ -169,7 +177,7 @@
       </div>
       <div class="chart-card">
         <div class="chart-title">Liability Breakdown by Type</div>
-        <div class="chart-subtitle">Mortgage/loan debt vs. litigation liabilities — median estimates across five filings</div>
+        <div class="chart-subtitle">Mortgage/loan debt vs. litigation liabilities — median estimates</div>
         <div class="chart-canvas-wrap"><canvas id="c-liab-type" role="img" aria-label="Liability breakdown by type"></canvas></div>
         <div class="chart-legend">
           <span class="chart-legend-item"><span class="chart-legend-swatch" style="background:#228D57"></span>Mortgage / Loan</span>
@@ -195,9 +203,62 @@
     </div>
   </section>
 
+  <!-- INCOME BENCHMARKING -->
+  <section aria-labelledby="income-heading">
+    <div class="section-label" id="income-heading">Income Benchmarking</div>
+    <p class="section-desc">Each filing covers a different number of months, making raw income totals hard to compare. The annualized view normalizes to a 12-month equivalent.</p>
+    <div class="charts-grid">
+      <div class="chart-card">
+        <div class="chart-title">Raw Disclosed Income</div>
+        <div class="chart-subtitle">Total reported income per filing — not adjusted for coverage period</div>
+        <div class="chart-canvas-wrap"><canvas id="c-income-raw" role="img" aria-label="Raw income by filing"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Annualized Income Estimate</div>
+        <div class="chart-subtitle">Income normalized to 12-month equivalent based on months covered</div>
+        <div class="chart-canvas-wrap"><canvas id="c-income-annualized" role="img" aria-label="Annualized income by filing"></canvas></div>
+      </div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--rule);border-radius:var(--radius);padding:.75rem 1rem;margin-top:.75rem;font-family:var(--mono);font-size:10px;color:rgba(62,62,60,.5);display:flex;gap:2rem;flex-wrap:wrap;">
+      <span>2016: 17 months (Jan 2015 – May 2016)</span>
+      <span>2020: 12 months (Jan–Dec 2019)</span>
+      <span>2022: 16 months (Jan 2022 – Apr 2023)</span>
+      <span>2024: 20 months (Jan 2023 – Aug 2024)</span>
+      <span>2025: 12 months (Jan–Dec 2024)</span>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO MIX -->
+  <section aria-labelledby="mix-heading">
+    <div class="section-label" id="mix-heading">Portfolio Mix by Asset Type</div>
+    <p class="section-desc">How the composition of Trump's disclosed portfolio has shifted across five filings — both by asset value and by income generation.</p>
+    <div class="charts-grid">
+      <div class="chart-card full-width">
+        <div class="chart-title">Asset Value Mix Over Time</div>
+        <div class="chart-subtitle">Share of total disclosed asset value by category — stacked to 100%</div>
+        <div class="chart-canvas-wrap tall"><canvas id="c-mix-val" role="img" aria-label="Asset value mix by type over time"></canvas></div>
+        <div class="chart-legend" id="mix-legend-val"></div>
+      </div>
+      <div class="chart-card full-width">
+        <div class="chart-title">Income Mix Over Time</div>
+        <div class="chart-subtitle">Share of total disclosed income by category — stacked to 100%</div>
+        <div class="chart-canvas-wrap tall"><canvas id="c-mix-inc" role="img" aria-label="Income mix by type over time"></canvas></div>
+        <div class="chart-legend" id="mix-legend-inc"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOP MOVERS -->
+  <section aria-labelledby="movers-heading">
+    <div class="section-label" id="movers-heading">Biggest Portfolio Shifts</div>
+    <p class="section-desc">Asset types with the largest changes in share of total value or income between consecutive filings.</p>
+    <div id="movers-container" style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;"></div>
+  </section>
+
+  <!-- COVERAGE TIMELINE -->
   <section aria-labelledby="coverage-heading">
     <div class="section-label" id="coverage-heading">What Time Periods Are Covered</div>
-    <p class="section-desc">Each OGE filing covers a different window of time. This shows exactly what months are represented in the database — useful when searching for a specific asset or income stream.</p>
+    <p class="section-desc">Each OGE filing covers a different window of time. This shows exactly what months are represented in the database.</p>
     <div class="coverage-wrap" id="coverage-timeline" aria-label="Data coverage timeline"></div>
     <div class="coverage-legend">
       <span class="cov-leg-item"><span class="cov-leg-dot" style="background:var(--sea-green)"></span>Annual form (covers prior calendar year)</span>
@@ -206,11 +267,12 @@
     </div>
   </section>
 
+  <!-- ASSET LOOKUP -->
   <section aria-labelledby="lookup-heading">
     <div class="section-label" id="lookup-heading">Individual Asset Tracker</div>
-    <p class="section-desc">Search for a specific asset to see how its value and income have changed across filing years. Assets are matched by name. Note: asset IDs will be manually linked in a future update — name matching may surface near-duplicates.</p>
+    <p class="section-desc">Search for a specific asset to see how its value and income have changed across filing years.</p>
     <div class="lookup-input-wrap">
-      <input type="search" id="asset-search" placeholder="e.g. Mar-a-Lago, Trump Tower, 40 Wall Street…" autocomplete="off" aria-label="Search for an asset" aria-autocomplete="list" aria-controls="suggestions-box">
+      <input type="search" id="asset-search" placeholder="e.g. Mar-a-Lago, Trump Tower, 40 Wall Street…" autocomplete="off" aria-label="Search for an asset">
       <div class="suggestions" id="suggestions-box" role="listbox"></div>
     </div>
     <div class="lookup-placeholder" id="lookup-placeholder">Search for an asset above to see how its value and income have changed over time.</div>
@@ -240,175 +302,175 @@
 </footer>
 
 <script>
-/* ── CONFIG: filing display labels only ── */
-const FILING_META = {
-  '2016': { label:'May 2016'  },
-  '2020': { label:'Dec. 2019' },
-  '2022': { label:'Apr. 2023' },
-  '2024': { label:'Aug. 2024' },
-  '2025': { label:'Dec. 2024' },
-};
 const YEARS = ['2016','2020','2022','2024','2025'];
-const YR_COLORS = { '2016':'#228D57','2020':'#85BB65','2022':'#3E3E3C','2024':'#228D57','2025':'#85BB65' };
+const YR_COLORS = {'2016':'#228D57','2020':'#85BB65','2022':'#3E3E3C','2024':'#228D57','2025':'#85BB65'};
 
-/* ── LIABILITY BREAKDOWN — computed from trump_liabilities.json ── */
-let LIAB_TYPE = { mortgageLoan: [], litigation: [] };
+/* ── FILING METADATA ── */
+const FILING_META = {
+  '2016':{ label:'May 2016',  months:17 },
+  '2020':{ label:'Dec. 2019', months:12 },
+  '2022':{ label:'Apr. 2023', months:16 },
+  '2024':{ label:'Aug. 2024', months:20 },
+  '2025':{ label:'Dec. 2024', months:12 },
+};
+
+/* ── LIABILITY DATA (from trump_liabilities.json) ── */
+let LIAB_TYPE = { mortgageLoan:[], litigation:[] };
 let LIAB_CREDITOR = [
-  { label:'Deutsche Bank',  color:'#228D57', values:[] },
-  { label:'Ladder Capital', color:'#85BB65', values:[] },
-  { label:'Axos Bank',      color:'#e8b84b', values:[] },
-  { label:'Other',          color:'#3E3E3C', values:[] },
+  {label:'Deutsche Bank', color:'#228D57', values:[]},
+  {label:'Ladder Capital', color:'#85BB65', values:[]},
+  {label:'Axos Bank',      color:'#e8b84b', values:[]},
+  {label:'Other',          color:'#3E3E3C', values:[]},
 ];
-
-function computeLiabBreakdown(liabData) {
-  const YEARS_LOCAL = ['2016','2020','2022','2024','2025'];
-  LIAB_TYPE.mortgageLoan = YEARS_LOCAL.map(y => {
-    return liabData.filter(r => r.filing_year===y && !r.type.toLowerCase().includes('litigation'))
-      .reduce((s,r)=>s+(r.median_value||0),0);
-  });
-  LIAB_TYPE.litigation = YEARS_LOCAL.map(y => {
-    return liabData.filter(r => r.filing_year===y && r.type.toLowerCase().includes('litigation'))
-      .reduce((s,r)=>s+(r.median_value||0),0);
-  });
-  const creditorGroups = {
-    'Deutsche Bank':  r => r.creditor.toLowerCase().includes('deutsche'),
-    'Ladder Capital': r => r.creditor.toLowerCase().includes('ladder'),
-    'Axos Bank':      r => r.creditor.toLowerCase().includes('axos'),
+function computeLiabBreakdown(liabData){
+  LIAB_TYPE.mortgageLoan = YEARS.map(y => liabData.filter(r=>r.filing_year===y&&!r.type.toLowerCase().includes('litigation')).reduce((s,r)=>s+(r.median_value||0),0));
+  LIAB_TYPE.litigation   = YEARS.map(y => liabData.filter(r=>r.filing_year===y&&r.type.toLowerCase().includes('litigation')).reduce((s,r)=>s+(r.median_value||0),0));
+  const credFns = {
+    'Deutsche Bank': r=>r.creditor.toLowerCase().includes('deutsche'),
+    'Ladder Capital':r=>r.creditor.toLowerCase().includes('ladder'),
+    'Axos Bank':     r=>r.creditor.toLowerCase().includes('axos'),
   };
-  LIAB_CREDITOR.forEach(group => {
-    const matchFn = creditorGroups[group.label];
-    group.values = YEARS_LOCAL.map(y => {
-      const yearRows = liabData.filter(r => r.filing_year===y);
-      if (matchFn) return yearRows.filter(matchFn).reduce((s,r)=>s+(r.median_value||0),0);
-      // Other = everything not matched by the named groups
-      return yearRows.filter(r =>
-        !r.creditor.toLowerCase().includes('deutsche') &&
-        !r.creditor.toLowerCase().includes('ladder') &&
-        !r.creditor.toLowerCase().includes('axos')
-      ).reduce((s,r)=>s+(r.median_value||0),0);
+  LIAB_CREDITOR.forEach(g=>{
+    const fn=credFns[g.label];
+    g.values=YEARS.map(y=>{
+      const yr=liabData.filter(r=>r.filing_year===y);
+      if(fn) return yr.filter(fn).reduce((s,r)=>s+(r.median_value||0),0);
+      return yr.filter(r=>!r.creditor.toLowerCase().includes('deutsche')&&!r.creditor.toLowerCase().includes('ladder')&&!r.creditor.toLowerCase().includes('axos')).reduce((s,r)=>s+(r.median_value||0),0);
     });
   });
 }
 
+/* ── PORTFOLIO MIX COLORS ── */
+const TYPE_GROUPS = ['Real Estate','Golf Club','Mar-a-Lago','Securities','Ownership Interests','Crypto & NFTs','Other'];
+const TYPE_COLORS = {
+  'Real Estate':         '#228D57',
+  'Golf Club':           '#85BB65',
+  'Mar-a-Lago':          '#e8b84b',
+  'Securities':          '#5b8fd4',
+  'Ownership Interests': '#e07b4a',
+  'Crypto & NFTs':       '#9b59b6',
+  'Other':               'rgba(62,62,60,0.35)',
+};
+function getGroup(t){
+  t = String(t||'').trim();
+  if(['Real Estate','Real Property'].includes(t)) return 'Real Estate';
+  if(t==='Golf Club') return 'Golf Club';
+  if(t==='Mar-A-Lago') return 'Mar-a-Lago';
+  if(['Stock','Brokerage','Corporate Securities','Government Securities and Agency Debt'].includes(t)) return 'Securities';
+  if(['Ownership Interest (Engaged in a Trade or Business)','Trump Corporation'].includes(t)) return 'Ownership Interests';
+  if(['Cryptocurrency','NFTs'].includes(t)) return 'Crypto & NFTs';
+  return 'Other';
+}
+
 /* ── NUMBER FORMAT ── */
-function fmt(n) {
-  if (n == null) return '—';
-  const v = Number(n); if (isNaN(v)) return '—';
-  const neg = v < 0, abs = Math.abs(v);
+function fmt(n){
+  if(n==null)return'—';
+  const v=Number(n);if(isNaN(v))return'—';
+  const neg=v<0,abs=Math.abs(v);
   let s;
-  if (abs >= 1e9)      s = '$' + (Math.trunc(abs/1e7)/100) + ' billion';
-  else if (abs >= 1e6) s = '$' + (Math.trunc(abs/1e4)/100) + ' million';
-  else if (abs >= 1e3) s = '$' + Math.trunc(abs/1e3) + 'k';
-  else                 s = '$' + abs.toLocaleString();
-  return neg ? '-' + s : s;
+  if(abs>=1e9) s='$'+(Math.trunc(abs/1e7)/100)+' billion';
+  else if(abs>=1e6) s='$'+(Math.trunc(abs/1e4)/100)+' million';
+  else if(abs>=1e3) s='$'+Math.trunc(abs/1e3)+'k';
+  else s='$'+abs.toLocaleString();
+  return neg?'-'+s:s;
 }
-function fmtM(n) {
-  if (n == null || isNaN(n)) return '';
-  const m = n/1e6;
-  if (m >= 1000) return '$'+(Math.trunc(m/10)/100)+'B';
-  if (m >= 100)  return '$'+Math.round(m)+'M';
-  if (m >= 10)   return '$'+Math.round(m*10)/10+'M';
-  return '$'+Math.round(m*100)/100+'M';
+function fmtM(n){
+  if(n==null||isNaN(n))return'';
+  const m=n/1e6;
+  if(m>=1000)return'$'+(Math.trunc(m/10)/100)+'B';
+  if(m>=100) return'$'+Math.round(m)+'M';
+  if(m>=10)  return'$'+Math.round(m*10)/10+'M';
+  return'$'+Math.round(m*100)/100+'M';
 }
-function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
 /* ── TOOLTIP ── */
 const ttEl=()=>document.getElementById('chart-tooltip');
 const ttLabel=()=>document.getElementById('tt-label');
 const ttValue=()=>document.getElementById('tt-value');
-
-function attachTooltip(canvas, hitAreas, opts) {
-  if (!canvas._hitAreas) canvas._hitAreas = [];
+function attachTooltip(canvas,hitAreas,opts){
+  if(!canvas._hitAreas)canvas._hitAreas=[];
   canvas._hitAreas.push(...hitAreas);
-  canvas._rawValues = opts.rawValues||false;
-  if (canvas._tooltipBound) return;
-  canvas._tooltipBound = true;
-  canvas.addEventListener('mousemove', e => {
-    const rect=canvas.getBoundingClientRect(), mx=e.clientX-rect.left, my=e.clientY-rect.top;
+  canvas._rawValues=opts.rawValues||false;
+  if(canvas._tooltipBound)return;
+  canvas._tooltipBound=true;
+  canvas.addEventListener('mousemove',e=>{
+    const rect=canvas.getBoundingClientRect(),mx=e.clientX-rect.left,my=e.clientY-rect.top;
     const hit=canvas._hitAreas.find(h=>mx>=h.x&&mx<=h.x+h.w&&my>=h.y&&my<=h.y+h.h);
-    if (hit) {
-      ttLabel().textContent = hit.dsLabel ? `${hit.label} · ${hit.dsLabel}` : hit.label;
-      ttValue().textContent = canvas._rawValues ? hit.value.toLocaleString()+' assets' : fmt(hit.value);
+    if(hit){
+      ttLabel().textContent=hit.dsLabel?`${hit.label} · ${hit.dsLabel}`:hit.label;
+      ttValue().textContent=canvas._rawValues?hit.value.toLocaleString()+' assets':fmt(hit.value);
       ttEl().style.borderLeft=`3px solid ${hit.color}`;
-      ttEl().style.left=(e.clientX+14)+'px'; ttEl().style.top=(e.clientY-28)+'px';
-      ttEl().classList.add('visible'); canvas.style.cursor='crosshair';
-    } else { ttEl().classList.remove('visible'); canvas.style.cursor=''; }
+      ttEl().style.left=(e.clientX+14)+'px';ttEl().style.top=(e.clientY-28)+'px';
+      ttEl().classList.add('visible');canvas.style.cursor='crosshair';
+    }else{ttEl().classList.remove('visible');canvas.style.cursor='';}
   });
-  canvas.addEventListener('mouseleave',()=>{ ttEl().classList.remove('visible'); canvas.style.cursor=''; });
+  canvas.addEventListener('mouseleave',()=>{ttEl().classList.remove('visible');canvas.style.cursor='';});
 }
 
 /* ── CHART ENGINE ── */
-function setupCanvas(canvasId) {
-  const canvas=document.getElementById(canvasId); if (!canvas) return null;
-  const ctx=canvas.getContext('2d'), dpr=window.devicePixelRatio||1;
-  const W=canvas.parentElement.clientWidth||400, H=canvas.parentElement.clientHeight||200;
-  canvas.width=W*dpr; canvas.height=H*dpr;
-  canvas.style.width=W+'px'; canvas.style.height=H+'px';
-  ctx.scale(dpr,dpr); canvas._hitAreas=[];
-  return {ctx,W,H};
+function setupCanvas(id){
+  const canvas=document.getElementById(id);if(!canvas)return null;
+  const ctx=canvas.getContext('2d'),dpr=window.devicePixelRatio||1;
+  const W=canvas.parentElement.clientWidth||400,H=canvas.parentElement.clientHeight||200;
+  canvas.width=W*dpr;canvas.height=H*dpr;
+  canvas.style.width=W+'px';canvas.style.height=H+'px';
+  ctx.scale(dpr,dpr);canvas._hitAreas=[];
+  return{ctx,W,H};
 }
 
-function drawAxes(ctx, W, H, PAD, minTick, maxTick, tickSize, labels, opts) {
-  const cW=W-PAD.left-PAD.right, cH=H-PAD.top-PAD.bottom;
-  const tickCount=Math.min(Math.round((maxTick-minTick)/tickSize),8);
-  const toX=i=>PAD.left+(labels.length===1?cW/2:(i/(labels.length-1))*cW);
-  const toY=v=>PAD.top+cH-((v-minTick)/(maxTick-minTick))*cH;
-  ctx.font=`10px 'Space Mono',monospace`;
-  ctx.textAlign='right';
-  for (let i=0;i<=tickCount;i++) {
-    const val=minTick+i*tickSize, y=toY(val);
-    ctx.strokeStyle='rgba(62,62,60,0.08)'; ctx.lineWidth=1;
-    ctx.beginPath(); ctx.moveTo(PAD.left,y); ctx.lineTo(PAD.left+cW,y); ctx.stroke();
-    ctx.fillStyle='rgba(62,62,60,0.45)';
-    ctx.fillText(opts.rawValues?val.toLocaleString():fmtM(val),PAD.left-5,y+3.5);
-  }
-  ctx.textAlign='center'; ctx.fillStyle='rgba(62,62,60,0.5)';
-  labels.forEach((lb,i)=>ctx.fillText(lb,toX(i),H-PAD.bottom+14));
-  return {toX,toY,cW,cH};
-}
-
-function drawChart(canvasId, datasets, opts={}) {
-  const c=setupCanvas(canvasId); if (!c) return;
-  const {ctx,W,H}=c;
+function drawChart(canvasId,datasets,opts={}){
+  const c=setupCanvas(canvasId);if(!c)return;
+  const{ctx,W,H}=c;
   const isBar=opts.type==='bar';
-  const labels=opts.labels||YEARS;
+  const labels=opts.labels||YEARS.map(y=>FILING_META[y].label);
+  const n=labels.length;
   const PAD={top:18,right:24,bottom:32,left:80};
+  const cW=W-PAD.left-PAD.right,cH=H-PAD.top-PAD.bottom;
   const allVals=datasets.flatMap(d=>d.values.filter(v=>v!=null&&!isNaN(v)));
-  if (!allVals.length) return;
-  const rawMax=Math.max(...allVals), rawMin=isBar?0:Math.min(...allVals)*0.88;
+  if(!allVals.length)return;
+  const rawMax=Math.max(...allVals),rawMin=isBar?0:Math.min(...allVals)*0.88;
   const isRaw=opts.rawValues;
   const steps=[1,2,5,10,20,50,100,200,500,1000,2000,5000];
-  const tickSize=isRaw
-    ?(steps.find(s=>(rawMax-rawMin)/s<=5)||steps[steps.length-1])
-    :(steps.find(s=>((rawMax-rawMin)/1e6)/s<=5)||steps[steps.length-1])*1e6;
-  const minTick=Math.floor(rawMin/tickSize)*tickSize, maxTick=Math.ceil(rawMax/tickSize)*tickSize;
-  const {toX,toY}=drawAxes(ctx,W,H,PAD,minTick,maxTick,tickSize,labels,opts);
-  const n=labels.length;
-
-  if (isBar) {
-    const barW=(W-PAD.left-PAD.right)/n*0.52, hits=[];
+  const tickSize=isRaw?(steps.find(s=>(rawMax-rawMin)/s<=5)||steps[steps.length-1]):(steps.find(s=>((rawMax-rawMin)/1e6)/s<=5)||steps[steps.length-1])*1e6;
+  const minTick=Math.floor(rawMin/tickSize)*tickSize,maxTick=Math.ceil(rawMax/tickSize)*tickSize;
+  const tickCount=Math.min(Math.round((maxTick-minTick)/tickSize),8);
+  const toX=i=>PAD.left+(n===1?cW/2:(i/(n-1))*cW);
+  const toY=v=>PAD.top+cH-((v-minTick)/(maxTick-minTick))*cH;
+  ctx.font=`10px 'Space Mono',monospace`;ctx.textAlign='right';
+  for(let i=0;i<=tickCount;i++){
+    const val=minTick+i*tickSize,y=toY(val);
+    ctx.strokeStyle='rgba(62,62,60,0.08)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(PAD.left,y);ctx.lineTo(PAD.left+cW,y);ctx.stroke();
+    ctx.fillStyle='rgba(62,62,60,0.45)';
+    ctx.fillText(isRaw?val.toLocaleString():fmtM(val),PAD.left-5,y+3.5);
+  }
+  ctx.textAlign='center';ctx.fillStyle='rgba(62,62,60,0.5)';
+  labels.forEach((lb,i)=>ctx.fillText(lb,toX(i),H-PAD.bottom+14));
+  if(isBar){
+    const barW=cW/n*0.52,hits=[];
     datasets[0].values.forEach((v,i)=>{
-      if (v==null) return;
-      const x=toX(i)-barW/2, bH=toY(minTick)-toY(v), y=toY(v);
+      if(v==null)return;
+      const x=toX(i)-barW/2,bH=toY(minTick)-toY(v),y=toY(v);
       ctx.fillStyle=datasets[0].colors?datasets[0].colors[i]:datasets[0].color;
-      ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(x,y,barW,bH,2); else ctx.rect(x,y,barW,bH); ctx.fill();
+      ctx.beginPath();if(ctx.roundRect)ctx.roundRect(x,y,barW,bH,2);else ctx.rect(x,y,barW,bH);ctx.fill();
       hits.push({x,y,w:barW,h:bH,value:v,label:labels[i],color:datasets[0].colors?datasets[0].colors[i]:datasets[0].color});
     });
     attachTooltip(document.getElementById(canvasId),hits,opts);
-  } else {
+  }else{
     datasets.forEach(ds=>{
       const pts=ds.values.map((v,i)=>v!=null?{x:toX(i),y:toY(v)}:null);
-      ctx.beginPath(); let st=false;
+      ctx.beginPath();let st=false;
       pts.forEach(p=>{if(!p)return;if(!st){ctx.moveTo(p.x,p.y);st=true;}else ctx.lineTo(p.x,p.y);});
       if(st){const vp=pts.filter(Boolean);ctx.lineTo(vp.at(-1).x,toY(minTick));ctx.lineTo(vp[0].x,toY(minTick));ctx.closePath();ctx.fillStyle=ds.color+'18';ctx.fill();}
-      ctx.beginPath(); st=false;
+      ctx.beginPath();st=false;
       pts.forEach(p=>{if(!p)return;if(!st){ctx.moveTo(p.x,p.y);st=true;}else ctx.lineTo(p.x,p.y);});
-      ctx.strokeStyle=ds.color; ctx.lineWidth=2.5; ctx.lineJoin='round'; ctx.stroke();
+      ctx.strokeStyle=ds.color;ctx.lineWidth=2.5;ctx.lineJoin='round';ctx.stroke();
       const dotHits=[];
       pts.forEach((p,i)=>{
         if(!p)return;
-        ctx.beginPath(); ctx.arc(p.x,p.y,4,0,Math.PI*2); ctx.fillStyle='#fff'; ctx.fill();
-        ctx.strokeStyle=ds.color; ctx.lineWidth=2.5; ctx.stroke();
+        ctx.beginPath();ctx.arc(p.x,p.y,4,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();
+        ctx.strokeStyle=ds.color;ctx.lineWidth=2.5;ctx.stroke();
         dotHits.push({x:p.x-10,y:p.y-10,w:20,h:20,value:ds.values[i],label:labels[i],color:ds.color,dsLabel:ds.label});
       });
       attachTooltip(document.getElementById(canvasId),dotHits,opts);
@@ -416,46 +478,48 @@ function drawChart(canvasId, datasets, opts={}) {
     if(datasets.length>1){
       let lx=PAD.left;
       datasets.forEach(ds=>{
-        ctx.fillStyle=ds.color; ctx.fillRect(lx,4,16,3);
-        ctx.fillStyle='rgba(62,62,60,0.55)'; ctx.font=`10px 'Ubuntu',sans-serif`;
-        ctx.textAlign='left'; ctx.fillText(ds.label,lx+20,10);
+        ctx.fillStyle=ds.color;ctx.fillRect(lx,4,16,3);
+        ctx.fillStyle='rgba(62,62,60,0.55)';ctx.font=`10px 'Ubuntu',sans-serif`;
+        ctx.textAlign='left';ctx.fillText(ds.label,lx+20,10);
         lx+=ctx.measureText(ds.label).width+40;
       });
     }
   }
 }
 
-function drawStackedBar(canvasId, datasets, labels) {
-  const c=setupCanvas(canvasId); if (!c) return;
-  const {ctx,W,H}=c;
+/* ── STACKED BAR (liabilities) ── */
+function drawStackedBar(canvasId,datasets,labels){
+  const c=setupCanvas(canvasId);if(!c)return;
+  const{ctx,W,H}=c;
   const PAD={top:18,right:24,bottom:32,left:80};
+  const cW=W-PAD.left-PAD.right,cH=H-PAD.top-PAD.bottom;
   const stackTotals=labels.map((_,i)=>datasets.reduce((s,d)=>s+(d.values[i]||0),0));
   const rawMax=Math.max(...stackTotals);
   const steps=[50,100,200,500,1000];
   const tickSizeM=steps.find(s=>(rawMax/1e6)/s<=5)||500;
-  const tickSize=tickSizeM*1e6, maxTick=Math.ceil(rawMax/tickSize)*tickSize;
+  const tickSize=tickSizeM*1e6,maxTick=Math.ceil(rawMax/tickSize)*tickSize;
   const tickCount=Math.round(maxTick/tickSize);
-  const n=labels.length, cW=W-PAD.left-PAD.right, cH=H-PAD.top-PAD.bottom;
+  const n=labels.length;
   const toX=i=>PAD.left+(n===1?cW/2:(i/(n-1))*cW);
   const toY=v=>PAD.top+cH-(v/maxTick)*cH;
   const barW=cW/n*0.52;
-  ctx.font=`10px 'Space Mono',monospace`; ctx.textAlign='right';
+  ctx.font=`10px 'Space Mono',monospace`;ctx.textAlign='right';
   for(let i=0;i<=tickCount;i++){
-    const val=i*tickSize, y=toY(val);
-    ctx.strokeStyle='rgba(62,62,60,0.08)'; ctx.lineWidth=1;
-    ctx.beginPath(); ctx.moveTo(PAD.left,y); ctx.lineTo(PAD.left+cW,y); ctx.stroke();
-    ctx.fillStyle='rgba(62,62,60,0.45)'; ctx.fillText(fmtM(val),PAD.left-5,y+3.5);
+    const val=i*tickSize,y=toY(val);
+    ctx.strokeStyle='rgba(62,62,60,0.08)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(PAD.left,y);ctx.lineTo(PAD.left+cW,y);ctx.stroke();
+    ctx.fillStyle='rgba(62,62,60,0.45)';ctx.fillText(fmtM(val),PAD.left-5,y+3.5);
   }
-  ctx.textAlign='center'; ctx.fillStyle='rgba(62,62,60,0.5)';
+  ctx.textAlign='center';ctx.fillStyle='rgba(62,62,60,0.5)';
   labels.forEach((lb,i)=>ctx.fillText(lb,toX(i),H-PAD.bottom+14));
   const canvas=document.getElementById(canvasId);
   labels.forEach((_,i)=>{
     let base=0;
     datasets.forEach(ds=>{
-      const v=ds.values[i]||0; if(!v){base+=v;return;}
-      const x=toX(i)-barW/2, bH=toY(base)-toY(base+v), y=toY(base+v);
+      const v=ds.values[i]||0;if(!v){base+=v;return;}
+      const x=toX(i)-barW/2,bH=toY(base)-toY(base+v),y=toY(base+v);
       ctx.fillStyle=ds.color;
-      ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(x,y,barW,bH,2); else ctx.rect(x,y,barW,bH); ctx.fill();
+      ctx.beginPath();if(ctx.roundRect)ctx.roundRect(x,y,barW,bH,2);else ctx.rect(x,y,barW,bH);ctx.fill();
       canvas._hitAreas.push({x,y,w:barW,h:bH,value:base+v,label:labels[i],color:ds.color,dsLabel:ds.label});
       base+=v;
     });
@@ -463,9 +527,62 @@ function drawStackedBar(canvasId, datasets, labels) {
   attachTooltip(canvas,canvas._hitAreas,{rawValues:false});
 }
 
-/* ── RENDER CHARTS from computed FILINGS array ── */
-function renderCharts(FILINGS) {
+/* ── 100% STACKED BAR (portfolio mix) ── */
+function draw100StackedBar(canvasId,datasets,labels,legendElId){
+  const c=setupCanvas(canvasId);if(!c)return;
+  const{ctx,W,H}=c;
+  const PAD={top:18,right:24,bottom:32,left:45};
+  const cW=W-PAD.left-PAD.right,cH=H-PAD.top-PAD.bottom;
+  const n=labels.length,barW=cW/n*0.65;
+  const toX=i=>PAD.left+(i/(n-1))*cW;
+  const toY=pct=>PAD.top+cH-(pct/100)*cH;
+  // y-axis % labels
+  ctx.font=`10px 'Space Mono',monospace`;ctx.textAlign='right';
+  for(let p=0;p<=100;p+=25){
+    const y=toY(p);
+    ctx.strokeStyle='rgba(62,62,60,0.08)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(PAD.left,y);ctx.lineTo(PAD.left+cW,y);ctx.stroke();
+    ctx.fillStyle='rgba(62,62,60,0.45)';ctx.fillText(p+'%',PAD.left-5,y+3.5);
+  }
+  ctx.textAlign='center';ctx.fillStyle='rgba(62,62,60,0.5)';
+  labels.forEach((lb,i)=>ctx.fillText(lb,toX(i),H-PAD.bottom+14));
+  const canvas=document.getElementById(canvasId);
+  labels.forEach((_,i)=>{
+    const total=datasets.reduce((s,d)=>s+(d.values[i]||0),0);
+    if(!total)return;
+    let base=0;
+    datasets.forEach(ds=>{
+      const v=ds.values[i]||0;if(!v){base+=v/total*100;return;}
+      const pct=v/total*100;
+      const x=toX(i)-barW/2,bH=toY(base)-toY(base+pct),y=toY(base+pct);
+      ctx.fillStyle=ds.color;
+      ctx.beginPath();if(ctx.roundRect)ctx.roundRect(x,y,barW,bH,1);else ctx.rect(x,y,barW,bH);ctx.fill();
+      // label inside bar if big enough
+      if(bH>16){
+        ctx.fillStyle='rgba(255,255,255,0.85)';ctx.font=`9px 'Space Mono',monospace`;ctx.textAlign='center';
+        ctx.fillText(Math.round(pct)+'%',toX(i),y+bH/2+3.5);
+      }
+      canvas._hitAreas.push({x,y,w:barW,h:bH,value:v,label:labels[i],color:ds.color,dsLabel:`${ds.label} (${Math.round(pct)}%)`});
+      base+=pct;
+    });
+  });
+  attachTooltip(canvas,canvas._hitAreas,{rawValues:false});
+  // legend
+  const legendEl=document.getElementById(legendElId);
+  if(legendEl){
+    legendEl.innerHTML=datasets.filter(d=>d.values.some(v=>v>0)).map(d=>`
+      <span class="chart-legend-item">
+        <span class="chart-legend-swatch" style="background:${d.color}"></span>${d.label}
+      </span>`).join('');
+  }
+}
+
+/* ── RENDER ALL CHARTS ── */
+function renderCharts(FILINGS,mixData){
   const labels=FILINGS.map(f=>f.label);
+  const yrs=FILINGS.map(f=>f.year);
+
+  // Portfolio-wide
   drawChart('c-networth',[{values:FILINGS.map(f=>f.netWorth),color:'#228D57'}],{labels});
   drawChart('c-assets-income',[
     {values:FILINGS.map(f=>f.assets),color:'#228D57',label:'Total Assets'},
@@ -475,103 +592,67 @@ function renderCharts(FILINGS) {
   drawChart('c-count',[{
     values:FILINGS.map(f=>f.count),color:'#85BB65',
     colors:['#228D57','#85BB65','#3E3E3C','#228D57','#85BB65'],
-  }],{type:'bar',rawValues:true,labels:FILINGS.map(f=>f.year)});
+  }],{type:'bar',rawValues:true,labels:yrs});
+
+  // Liability charts
   drawStackedBar('c-liab-type',[
     {label:'Mortgage / Loan',color:'#228D57',values:LIAB_TYPE.mortgageLoan},
     {label:'Litigation',color:'#e8b84b',values:LIAB_TYPE.litigation},
-  ],FILINGS.map(f=>f.year));
-  drawStackedBar('c-liab-creditor',LIAB_CREDITOR,FILINGS.map(f=>f.year));
-}
+  ],yrs);
+  drawStackedBar('c-liab-creditor',LIAB_CREDITOR,yrs);
 
-/* ── ASSET LOOKUP ── */
-let allData=[], nameIndex={};
+  // Income benchmarking
+  drawChart('c-income-raw',[{values:FILINGS.map(f=>f.income),color:'#e8b84b'}],{labels});
+  drawChart('c-income-annualized',[{values:FILINGS.map(f=>f.annualizedIncome),color:'#228D57'}],{labels});
 
-function normalizeName(s){
-  if(!s)return'';
-  return s.toLowerCase().replace(/underlying assets:.*/i,'').replace(/location:.*/i,'').replace(/value reported.*/i,'').replace(/\s+/g,' ').trim().slice(0,60);
-}
-function buildNameIndex(){
-  allData.forEach(r=>{
-    const key=normalizeName(r.asset); if(!key)return;
-    if(!nameIndex[key])nameIndex[key]=[];
-    nameIndex[key].push(r);
-  });
-  Object.keys(nameIndex).forEach(k=>{
-    if(new Set(nameIndex[k].map(r=>r.filing_year)).size<2)delete nameIndex[k];
-  });
-}
-function setupSearch(){
-  const input=document.getElementById('asset-search'), box=document.getElementById('suggestions-box');
-  let focusIdx=-1;
-  function showSuggestions(q){
-    if(!q||q.length<2){box.classList.remove('open');return;}
-    const ql=q.toLowerCase();
-    const matches=Object.entries(nameIndex).filter(([k])=>k.includes(ql))
-      .sort((a,b)=>new Set(b[1].map(r=>r.filing_year)).size-new Set(a[1].map(r=>r.filing_year)).size)
-      .slice(0,14);
-    if(!matches.length){box.classList.remove('open');return;}
-    box.innerHTML=matches.map(([key,rows])=>{
-      const years=[...new Set(rows.map(r=>r.filing_year))].sort();
-      const dn=rows.reduce((a,b)=>(b.asset||'').length>(a.asset||'').length?b:a).asset||key;
-      return `<div class="suggestion-item" data-key="${esc(key)}" role="option" tabindex="-1">
-        ${esc(dn.length>80?dn.slice(0,80)+'…':dn)}
-        <div class="suggestion-years">${years.map(y=>`<span style="color:${YR_COLORS[y]}">${y}</span>`).join(' · ')}</div>
-      </div>`;
-    }).join('');
-    box.classList.add('open'); focusIdx=-1;
-    box.querySelectorAll('.suggestion-item').forEach(el=>{
-      el.addEventListener('mousedown',e=>{
-        e.preventDefault();
-        input.value=nameIndex[el.dataset.key]?.reduce((a,b)=>(b.asset||'').length>(a.asset||'').length?b:a)?.asset||el.dataset.key;
-        renderAsset(el.dataset.key); box.classList.remove('open');
-      });
-    });
+  // Portfolio mix
+  if(mixData){
+    const mixDatasets_val=TYPE_GROUPS.map(g=>({label:g,color:TYPE_COLORS[g],values:FILINGS.map(f=>mixData[f.year]?.val[g]||0)}));
+    const mixDatasets_inc=TYPE_GROUPS.map(g=>({label:g,color:TYPE_COLORS[g],values:FILINGS.map(f=>mixData[f.year]?.inc[g]||0)}));
+    draw100StackedBar('c-mix-val',mixDatasets_val,labels,'mix-legend-val');
+    draw100StackedBar('c-mix-inc',mixDatasets_inc,labels,'mix-legend-inc');
+    renderMovers(FILINGS,mixData);
   }
-  input.addEventListener('input',()=>showSuggestions(input.value));
-  input.addEventListener('keydown',e=>{
-    const items=[...box.querySelectorAll('.suggestion-item')];
-    if(e.key==='ArrowDown'){e.preventDefault();focusIdx=Math.min(focusIdx+1,items.length-1);items.forEach((el,i)=>el.classList.toggle('focused',i===focusIdx));}
-    else if(e.key==='ArrowUp'){e.preventDefault();focusIdx=Math.max(focusIdx-1,0);items.forEach((el,i)=>el.classList.toggle('focused',i===focusIdx));}
-    else if(e.key==='Enter'&&focusIdx>=0){const el=items[focusIdx];input.value=nameIndex[el.dataset.key]?.reduce((a,b)=>(b.asset||'').length>(a.asset||'').length?b:a)?.asset||el.dataset.key;renderAsset(el.dataset.key);box.classList.remove('open');}
-    else if(e.key==='Escape')box.classList.remove('open');
-  });
-  document.addEventListener('click',e=>{if(!e.target.closest('.lookup-input-wrap'))box.classList.remove('open');});
 }
-function renderAsset(key){
-  const rows=nameIndex[key]; if(!rows)return;
-  const byYear={};
-  YEARS.forEach(y=>{const m=rows.filter(r=>r.filing_year===y);byYear[y]=m.length?m.sort((a,b)=>(b.median_value||0)-(a.median_value||0))[0]:null;});
-  const presentYears=YEARS.filter(y=>byYear[y]);
-  const dn=rows.reduce((a,b)=>(b.asset||'').length>(a.asset||'').length?b:a).asset||key;
-  const hasMulti=rows.length>presentYears.length;
-  const valData=YEARS.map(y=>byYear[y]?.median_value??null);
-  const incData=YEARS.map(y=>byYear[y]?.median_income??null);
-  const hasVal=valData.some(v=>v!=null&&v>0), hasInc=incData.some(v=>v!=null&&v>0);
-  const tableRows=YEARS.map(y=>{
-    const r=byYear[y];
-    if(!r)return`<tr><td><span class="yr-dot" style="background:${YR_COLORS[y]}"></span>${y}</td><td colspan="3" class="absent">Not present in this filing</td></tr>`;
-    return`<tr><td><span class="yr-dot" style="background:${YR_COLORS[y]}"></span>${y}</td><td class="val">${fmt(r.median_value)}</td><td class="val">${fmt(r.median_income)}</td><td style="color:rgba(62,62,60,.6);max-width:120px;word-break:break-word;line-height:1.3">${r.income_type?esc(r.income_type):'<span style="opacity:.3">—</span>'}</td></tr>`;
+
+/* ── TOP MOVERS TABLE ── */
+function renderMovers(FILINGS,mixData){
+  const container=document.getElementById('movers-container');
+  const pairs=[
+    {from:'2016',to:'2020'},{from:'2020',to:'2022'},
+    {from:'2022',to:'2024'},{from:'2024',to:'2025'},
+  ];
+  container.innerHTML=pairs.map(({from,to})=>{
+    const totValFrom=Object.values(mixData[from].val).reduce((s,v)=>s+v,0);
+    const totValTo  =Object.values(mixData[to].val).reduce((s,v)=>s+v,0);
+    const totIncFrom=Object.values(mixData[from].inc).reduce((s,v)=>s+v,0);
+    const totIncTo  =Object.values(mixData[to].inc).reduce((s,v)=>s+v,0);
+    const movers=TYPE_GROUPS.map(g=>{
+      const valFrom=totValFrom?(mixData[from].val[g]||0)/totValFrom*100:0;
+      const valTo  =totValTo  ?(mixData[to].val[g]||0)/totValTo*100:0;
+      const incFrom=totIncFrom?(mixData[from].inc[g]||0)/totIncFrom*100:0;
+      const incTo  =totIncTo  ?(mixData[to].inc[g]||0)/totIncTo*100:0;
+      return{g,valChg:valTo-valFrom,incChg:incTo-incFrom,valFrom,valTo,incFrom,incTo};
+    }).filter(m=>Math.abs(m.valChg)>=0.5||Math.abs(m.incChg)>=0.5)
+      .sort((a,b)=>Math.abs(b.valChg)+Math.abs(b.incChg)-(Math.abs(a.valChg)+Math.abs(a.incChg)))
+      .slice(0,6);
+
+    const fLabel=FILING_META[from].label,tLabel=FILING_META[to].label;
+    const rows=movers.map(m=>`<tr>
+      <td style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:${TYPE_COLORS[m.g]};flex-shrink:0"></span>${m.g}</td>
+      <td class="${m.valChg>=0?'change-pos':'change-neg'}">${m.valChg>=0?'+':''}${m.valChg.toFixed(1)}pp</td>
+      <td class="${m.incChg>=0?'change-pos':'change-neg'}">${m.incChg>=0?'+':''}${m.incChg.toFixed(1)}pp</td>
+    </tr>`).join('');
+
+    return `<div class="chart-card">
+      <div class="year-pair">${fLabel} → ${tLabel}</div>
+      <div class="chart-title" style="margin-bottom:.5rem">Biggest Shifts</div>
+      <table class="movers-table">
+        <thead><tr><th>Asset Type</th><th>Value Share</th><th>Income Share</th></tr></thead>
+        <tbody>${rows||'<tr><td colspan="3" style="opacity:.4;font-family:var(--sans)">No significant shifts</td></tr>'}</tbody>
+      </table>
+    </div>`;
   }).join('');
-  const panel=document.getElementById('asset-panel');
-  document.getElementById('lookup-placeholder').style.display='none';
-  panel.innerHTML=`<div class="asset-panel-header"><div>
-    <div class="asset-panel-name">${esc(dn.length>100?dn.slice(0,100)+'…':dn)}</div>
-    <div class="asset-panel-meta">Present in: ${presentYears.map(y=>`<span style="color:${YR_COLORS[y]}">${y}</span>`).join(' · ')}</div>
-    ${hasMulti?`<div class="asset-panel-note">⚑ Multiple rows matched — showing highest value per year.</div>`:''}
-  </div></div>
-  <div class="asset-panel-body">
-    <div>${(hasVal||hasInc)?`<div style="font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(62,62,60,.45);margin-bottom:.5rem">Value &amp; Income Over Time</div><div class="asset-chart-wrap"><canvas id="asset-chart" role="img"></canvas></div>`:`<div style="font-family:var(--mono);font-size:12px;color:rgba(62,62,60,.35);padding:2rem 0;text-align:center">No numeric value data</div>`}</div>
-    <div style="overflow-x:auto"><table class="asset-table"><thead><tr><th>Year</th><th>Est. Value</th><th>Est. Income</th><th>Income Type</th></tr></thead><tbody>${tableRows}</tbody></table></div>
-  </div>`;
-  panel.classList.add('visible');
-  if(hasVal||hasInc){
-    requestAnimationFrame(()=>{
-      const ds=[];
-      if(hasVal)ds.push({values:valData,color:'#228D57',label:'Est. Value'});
-      if(hasInc)ds.push({values:incData,color:'#e8b84b',label:'Est. Income'});
-      drawChart('asset-chart',ds,{labels:YEARS});
-    });
-  }
 }
 
 /* ── COVERAGE TIMELINE ── */
@@ -588,14 +669,14 @@ const COVERAGE=[
 const COV_COLORS={candidate:'#228D57',annual:'#85BB65',gap:'rgba(62,62,60,0.12)'};
 function monthLabel([y,m]){return['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][m-1]+' '+y;}
 function renderCoverageTimeline(){
-  const wrap=document.getElementById('coverage-timeline'); if(!wrap)return;
+  const wrap=document.getElementById('coverage-timeline');if(!wrap)return;
   const tMin=Math.min(...COVERAGE.map(c=>c.start[0]*12+c.start[1]))-1;
   const tMax=Math.max(...COVERAGE.map(c=>c.end[0]*12+c.end[1]))+1;
   const tRange=tMax-tMin;
   function toPos(y,m){return((y*12+m)-tMin)/tRange*100;}
-  const years=[];for(let y=Math.floor(tMin/12);y<=Math.ceil(tMax/12);y++)years.push(y);
+  const yrs=[];for(let y=Math.floor(tMin/12);y<=Math.ceil(tMax/12);y++)yrs.push(y);
   let html=`<div class="cov-axis" style="height:20px;">`;
-  years.forEach(y=>{const p=toPos(y,0);if(p<0||p>100)return;html+=`<span class="cov-axis-label" style="left:${p}%">${y}</span>`;});
+  yrs.forEach(y=>{const p=toPos(y,0);if(p<0||p>100)return;html+=`<span class="cov-axis-label" style="left:${p}%">${y}</span>`;});
   html+=`</div>`;
   COVERAGE.filter(c=>c.formType!=='gap').forEach(c=>{
     const l=toPos(c.start[0],c.start[1]),w=toPos(c.end[0],c.end[1])-l;
@@ -606,25 +687,109 @@ function renderCoverageTimeline(){
     const l=toPos(c.start[0],c.start[1]),w=toPos(c.end[0],c.end[1])-l;
     html+=`<div class="cov-row"><div class="cov-label" style="color:rgba(62,62,60,0.4)">${c.label}<span>${c.filed}</span></div><div class="cov-bar-wrap"><div class="cov-gap" style="left:${l}%;width:${w}%;"><span class="cov-gap-label">Coming soon</span></div></div></div>`;
   });
-  html+=`<div class="cov-note"><strong>How to read this:</strong> Each bar shows the time period whose financial activity is captured in that filing. Annual forms cover the full preceding calendar year. Candidate forms cover roughly 12 months before the filing date. The 2023 annual form was not processed due to an OGE lawsuit note.</div>`;
+  html+=`<div class="cov-note"><strong>How to read this:</strong> Each bar shows the time period captured in that filing. Annual forms cover the full preceding calendar year. Candidate forms cover roughly 12 months before the filing date. The 2023 annual form was not processed due to an OGE lawsuit note.</div>`;
   wrap.innerHTML=html;
 }
 
-/* ── MAIN: fetch both JSONs, compute everything, render ── */
-async function init() {
-  try {
-    const [assetRes, liabRes] = await Promise.all([
-      fetch('trump_assets.json'),
-      fetch('trump_liabilities.json'),
-    ]);
-    if(!assetRes.ok) throw new Error(`Assets: HTTP ${assetRes.status}`);
-    if(!liabRes.ok)  throw new Error(`Liabilities: HTTP ${liabRes.status}`);
-    allData = await assetRes.json();
-    const liabData = await liabRes.json();
+/* ── ASSET LOOKUP ── */
+let allData=[],nameIndex={};
+function normalizeName(s){
+  if(!s)return'';
+  return s.toLowerCase().replace(/underlying assets:.*/i,'').replace(/location:.*/i,'').replace(/value reported.*/i,'').replace(/\s+/g,' ').trim().slice(0,60);
+}
+function buildNameIndex(){
+  allData.forEach(r=>{
+    const key=normalizeName(r.asset);if(!key)return;
+    if(!nameIndex[key])nameIndex[key]=[];
+    nameIndex[key].push(r);
+  });
+  Object.keys(nameIndex).forEach(k=>{if(new Set(nameIndex[k].map(r=>r.filing_year)).size<2)delete nameIndex[k];});
+}
+function setupSearch(){
+  const input=document.getElementById('asset-search'),box=document.getElementById('suggestions-box');
+  let focusIdx=-1;
+  function showSuggestions(q){
+    if(!q||q.length<2){box.classList.remove('open');return;}
+    const ql=q.toLowerCase();
+    const matches=Object.entries(nameIndex).filter(([k])=>k.includes(ql))
+      .sort((a,b)=>new Set(b[1].map(r=>r.filing_year)).size-new Set(a[1].map(r=>r.filing_year)).size).slice(0,14);
+    if(!matches.length){box.classList.remove('open');return;}
+    box.innerHTML=matches.map(([key,rows])=>{
+      const years=[...new Set(rows.map(r=>r.filing_year))].sort();
+      const dn=rows.reduce((a,b)=>(b.asset||'').length>(a.asset||'').length?b:a).asset||key;
+      return`<div class="suggestion-item" data-key="${esc(key)}" role="option" tabindex="-1">
+        ${esc(dn.length>80?dn.slice(0,80)+'…':dn)}
+        <div class="suggestion-years">${years.map(y=>`<span style="color:${YR_COLORS[y]}">${y}</span>`).join(' · ')}</div>
+      </div>`;
+    }).join('');
+    box.classList.add('open');focusIdx=-1;
+    box.querySelectorAll('.suggestion-item').forEach(el=>{
+      el.addEventListener('mousedown',e=>{
+        e.preventDefault();
+        input.value=nameIndex[el.dataset.key]?.reduce((a,b)=>(b.asset||'').length>(a.asset||'').length?b:a)?.asset||el.dataset.key;
+        renderAsset(el.dataset.key);box.classList.remove('open');
+      });
+    });
+  }
+  input.addEventListener('input',()=>showSuggestions(input.value));
+  input.addEventListener('keydown',e=>{
+    const items=[...box.querySelectorAll('.suggestion-item')];
+    if(e.key==='ArrowDown'){e.preventDefault();focusIdx=Math.min(focusIdx+1,items.length-1);items.forEach((el,i)=>el.classList.toggle('focused',i===focusIdx));}
+    else if(e.key==='ArrowUp'){e.preventDefault();focusIdx=Math.max(focusIdx-1,0);items.forEach((el,i)=>el.classList.toggle('focused',i===focusIdx));}
+    else if(e.key==='Enter'&&focusIdx>=0){const el=items[focusIdx];input.value=nameIndex[el.dataset.key]?.reduce((a,b)=>(b.asset||'').length>(a.asset||'').length?b:a)?.asset||el.dataset.key;renderAsset(el.dataset.key);box.classList.remove('open');}
+    else if(e.key==='Escape')box.classList.remove('open');
+  });
+  document.addEventListener('click',e=>{if(!e.target.closest('.lookup-input-wrap'))box.classList.remove('open');});
+}
+function renderAsset(key){
+  const rows=nameIndex[key];if(!rows)return;
+  const byYear={};
+  YEARS.forEach(y=>{const m=rows.filter(r=>r.filing_year===y);byYear[y]=m.length?m.sort((a,b)=>(b.median_value||0)-(a.median_value||0))[0]:null;});
+  const presentYears=YEARS.filter(y=>byYear[y]);
+  const dn=rows.reduce((a,b)=>(b.asset||'').length>(a.asset||'').length?b:a).asset||key;
+  const hasMulti=rows.length>presentYears.length;
+  const valData=YEARS.map(y=>byYear[y]?.median_value??null);
+  const incData=YEARS.map(y=>byYear[y]?.median_income??null);
+  const hasVal=valData.some(v=>v!=null&&v>0),hasInc=incData.some(v=>v!=null&&v>0);
+  const tableRows=YEARS.map(y=>{
+    const r=byYear[y];
+    if(!r)return`<tr><td><span class="yr-dot" style="background:${YR_COLORS[y]}"></span>${y}</td><td colspan="3" class="absent">Not present in this filing</td></tr>`;
+    return`<tr><td><span class="yr-dot" style="background:${YR_COLORS[y]}"></span>${y}</td><td class="val">${fmt(r.median_value)}</td><td class="val">${fmt(r.median_income)}</td><td style="color:rgba(62,62,60,.6);max-width:120px;word-break:break-word;line-height:1.3">${r.income_type?esc(r.income_type):'<span style="opacity:.3">—</span>'}</td></tr>`;
+  }).join('');
+  const panel=document.getElementById('asset-panel');
+  document.getElementById('lookup-placeholder').style.display='none';
+  panel.innerHTML=`<div class="asset-panel-header"><div>
+    <div class="asset-panel-name">${esc(dn.length>100?dn.slice(0,100)+'…':dn)}</div>
+    <div class="asset-panel-meta">Present in: ${presentYears.map(y=>`<span style="color:${YR_COLORS[y]}">${y}</span>`).join(' · ')}</div>
+    ${hasMulti?`<div class="asset-panel-note">⚑ Multiple rows matched — showing highest value per year.</div>`:''}
+  </div></div>
+  <div class="asset-panel-body">
+    <div>${(hasVal||hasInc)?`<div style="font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(62,62,60,.45);margin-bottom:.5rem">Value &amp; Income Over Time</div><div class="asset-chart-wrap"><canvas id="asset-chart"></canvas></div>`:`<div style="font-family:var(--mono);font-size:12px;color:rgba(62,62,60,.35);padding:2rem 0;text-align:center">No numeric value data</div>`}</div>
+    <div style="overflow-x:auto"><table class="asset-table"><thead><tr><th>Year</th><th>Est. Value</th><th>Est. Income</th><th>Income Type</th></tr></thead><tbody>${tableRows}</tbody></table></div>
+  </div>`;
+  panel.classList.add('visible');
+  if(hasVal||hasInc){
+    requestAnimationFrame(()=>{
+      const ds=[];
+      if(hasVal)ds.push({values:valData,color:'#228D57',label:'Est. Value'});
+      if(hasInc)ds.push({values:incData,color:'#e8b84b',label:'Est. Income'});
+      drawChart('asset-chart',ds,{labels:YEARS});
+    });
+  }
+}
 
-    /* compute asset toplines from JSON */
+/* ── MAIN INIT ── */
+async function init(){
+  try{
+    const[assetRes,liabRes]=await Promise.all([fetch('trump_assets.json'),fetch('trump_liabilities.json')]);
+    if(!assetRes.ok)throw new Error(`Assets HTTP ${assetRes.status}`);
+    if(!liabRes.ok) throw new Error(`Liabilities HTTP ${liabRes.status}`);
+    allData=await assetRes.json();
+    const liabData=await liabRes.json();
+
+    // Compute asset toplines
     const totals={};
-    YEARS.forEach(y=>{ totals[y]={assets:0,income:0,count:0}; });
+    YEARS.forEach(y=>{totals[y]={assets:0,income:0,count:0};});
     allData.forEach(r=>{
       if(!totals[r.filing_year])return;
       totals[r.filing_year].assets+=(r.median_value||0);
@@ -632,32 +797,46 @@ async function init() {
       totals[r.filing_year].count++;
     });
 
-    /* compute liability totals from liabilities JSON */
+    // Compute liability totals
     const liabTotals={};
-    YEARS.forEach(y=>{ liabTotals[y]=0; });
-    liabData.forEach(r=>{
-      if(liabTotals[r.filing_year]!==undefined) liabTotals[r.filing_year]+=(r.median_value||0);
-    });
+    YEARS.forEach(y=>{liabTotals[y]=0;});
+    liabData.forEach(r=>{if(liabTotals[r.filing_year]!==undefined)liabTotals[r.filing_year]+=(r.median_value||0);});
 
-    /* compute liability breakdown charts */
     computeLiabBreakdown(liabData);
 
-    const FILINGS=YEARS.map(y=>({
-      year:y,
-      label:FILING_META[y].label,
-      assets:Math.round(totals[y].assets),
-      income:Math.round(totals[y].income),
-      liabilities:Math.round(liabTotals[y]),
-      netWorth:Math.round(totals[y].assets-liabTotals[y]),
-      count:totals[y].count,
-    }));
+    const FILINGS=YEARS.map(y=>{
+      const m=FILING_META[y];
+      const inc=Math.round(totals[y].income);
+      return{
+        year:y, label:m.label, months:m.months,
+        assets:Math.round(totals[y].assets),
+        income:inc,
+        annualizedIncome:Math.round(inc/m.months*12),
+        liabilities:Math.round(liabTotals[y]),
+        netWorth:Math.round(totals[y].assets-liabTotals[y]),
+        count:totals[y].count,
+      };
+    });
 
-    renderCharts(FILINGS);
+    // Compute portfolio mix
+    const mixData={};
+    YEARS.forEach(y=>{
+      mixData[y]={val:{},inc:{}};
+      TYPE_GROUPS.forEach(g=>{mixData[y].val[g]=0;mixData[y].inc[g]=0;});
+    });
+    allData.forEach(r=>{
+      if(!mixData[r.filing_year])return;
+      const g=getGroup(r.asset_type);
+      mixData[r.filing_year].val[g]+=(r.median_value||0);
+      mixData[r.filing_year].inc[g]+=(r.median_income||0);
+    });
+
+    renderCharts(FILINGS,mixData);
     buildNameIndex();
     setupSearch();
-    window.addEventListener('resize',()=>renderCharts(FILINGS));
+    window.addEventListener('resize',()=>renderCharts(FILINGS,mixData));
 
-  } catch(e) {
+  }catch(e){
     document.getElementById('lookup-placeholder').innerHTML=`⚠ Could not load data: ${e.message}`;
   }
 }
