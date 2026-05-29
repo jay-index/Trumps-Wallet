@@ -9,10 +9,10 @@
   :root {
     --black-olive: #3e3e3c;
     --dirty-white: #e8e9c9;
-    --sea-green: #52b788;
+    --sea-green: #228D57;
     --dollar-bill: #85bb65;
-    --rust: #c0392b;
-    --amber: #e67e22;
+    --amber: #e8b84b;
+    --sea-green-dark: #1a6e43;
     --rule: rgba(232,233,201,0.12);
     --rule-strong: rgba(232,233,201,0.22);
     --card-bg: rgba(232,233,201,0.05);
@@ -67,7 +67,7 @@
     font-weight: 400; letter-spacing: -0.01em;
     color: var(--dirty-white); margin-bottom: 0.4rem;
   }
-  h1 span { color: var(--rust); }
+  h1 span { color: var(--sea-green); }
 
   .header-desc {
     color: rgba(232,233,201,0.6); font-size: 13px;
@@ -84,7 +84,7 @@
   }
   .header-meta a:hover { color: var(--dirty-white); }
   .header-badge {
-    background: rgba(192,57,43,0.2); border: 1px solid rgba(192,57,43,0.4);
+    background: rgba(232,184,75,0.2); border: 1px solid rgba(232,184,75,0.4);
     color: #e57373; font-family: var(--mono); font-size: 10px;
     letter-spacing: 0.08em; padding: 2px 7px; border-radius: 3px;
     display: inline-flex; align-items: center; gap: 4px;
@@ -133,7 +133,7 @@
   }
   .filing-form { font-family: var(--mono); font-size: 10px; color: rgba(232,233,201,0.4); margin-top: 2px; }
   .filing-total {
-    font-family: var(--mono); font-size: 11px; color: var(--rust);
+    font-family: var(--mono); font-size: 11px; color: var(--amber);
     margin-top: 0.5rem;
   }
   .filing-count { font-family: var(--mono); font-size: 10px; color: rgba(232,233,201,0.35); }
@@ -146,12 +146,12 @@
   .trend-bar-track { background: rgba(232,233,201,0.07); border-radius: 2px; height: 20px; position: relative; overflow: hidden; }
   .trend-bar-fill {
     height: 100%; border-radius: 2px;
-    background: linear-gradient(90deg, var(--rust), rgba(192,57,43,0.6));
+    background: linear-gradient(90deg, #228D57, rgba(34,141,87,0.55));
     transition: width 0.6s ease;
     display: flex; align-items: center; padding-left: 8px;
   }
   .trend-bar-label { font-family: var(--mono); font-size: 9px; color: rgba(232,233,201,0.7); white-space: nowrap; }
-  .trend-amount { font-family: var(--mono); font-size: 11px; color: var(--rust); text-align: right; }
+  .trend-amount { font-family: var(--mono); font-size: 11px; color: var(--amber); text-align: right; }
 
   /* ABOUT BOX */
   .about-box {
@@ -258,19 +258,19 @@
   .type-badge {
     display: inline-block; padding: 1px 7px; border-radius: 3px;
     font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
-    background: rgba(192,57,43,0.15); border: 1px solid rgba(192,57,43,0.3);
+    background: rgba(232,184,75,0.15); border: 1px solid rgba(232,184,75,0.3);
     color: #e57373;
   }
   .type-badge.litigation {
-    background: rgba(230,126,34,0.15); border-color: rgba(230,126,34,0.3);
-    color: #f39c12;
+    background: rgba(232,184,75,0.15); border-color: rgba(232,184,75,0.35);
+    color: #e8b84b;
   }
   .type-badge.loan {
-    background: rgba(82,183,136,0.12); border-color: rgba(82,183,136,0.25);
-    color: var(--sea-green);
+    background: rgba(133,187,101,0.12); border-color: rgba(133,187,101,0.25);
+    color: var(--dollar-bill);
   }
   td.amount-cell {
-    font-family: var(--mono); font-size: 11px; color: var(--rust);
+    font-family: var(--mono); font-size: 11px; color: var(--amber);
     white-space: nowrap; text-align: right;
   }
   td.rate-cell {
@@ -314,7 +314,7 @@
     line-height: 1.4; margin-bottom: 1.25rem; padding-right: 2rem;
   }
   .detail-amount {
-    font-family: var(--mono); font-size: 1.4rem; color: var(--rust);
+    font-family: var(--mono); font-size: 1.4rem; color: var(--amber);
     margin-bottom: 1.5rem;
   }
   .detail-grid {
@@ -365,7 +365,7 @@
 
   @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes spin { to { transform: rotate(360deg); } }
-  .loader { display: inline-block; width: 14px; height: 14px; border: 2px solid var(--rule); border-top-color: var(--rust); border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 0.5rem; }
+  .loader { display: inline-block; width: 14px; height: 14px; border: 2px solid var(--rule); border-top-color: var(--sea-green); border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 0.5rem; }
 
   @media (max-width: 800px) {
     .detail-grid { grid-template-columns: 1fr; }
@@ -668,7 +668,7 @@ function openDetail(r) {
       <div class="detail-field"><label>Filed Date</label><div class="val">${r.filed}</div></div>
     </div>
     ${r.comments ? `<div class="detail-rule"></div><div class="detail-section-label">Full Description</div><div class="detail-notes">${r.comments}</div>` : ''}
-    ${isLitigation ? `<div class="detail-rule"></div><div class="detail-notes" style="color:rgba(243,156,18,0.8);">⚠ Litigation liability — amount reflects court judgment or bond, not necessarily final settled amount.</div>` : ''}
+    ${isLitigation ? `<div class="detail-rule"></div><div class="detail-notes" style="color:rgba(232,184,75,0.85);">⚠ Litigation liability — amount reflects court judgment or bond, not necessarily final settled amount.</div>` : ''}
   `;
   panel.classList.add('open');
   panel.focus();
