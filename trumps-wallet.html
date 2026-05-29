@@ -22,7 +22,6 @@
   .skip-nav{position:absolute;top:-100px;left:1rem;background:var(--sea-green);color:#fff;padding:0.5rem 1rem;border-radius:var(--radius);font-family:var(--sans);font-size:14px;z-index:1000;transition:top 0.2s;text-decoration:none;}
   .skip-nav:focus{top:1rem;}
 
-  /* HEADER */
   header{background:var(--black-olive);color:var(--dirty-white);padding:2.5rem 2rem 2rem;position:relative;overflow:hidden;}
   header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(232,233,201,0.03) 60px,rgba(232,233,201,0.03) 61px);pointer-events:none;}
   .header-inner{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:0.6rem;}
@@ -36,16 +35,13 @@
   .header-meta{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;margin-top:0.25rem;}
   .header-meta a{font-family:var(--mono);font-size:12px;color:var(--dollar-bill);text-decoration:none;letter-spacing:0.05em;border-bottom:1px solid rgba(133,187,101,0.4);padding-bottom:1px;transition:color 0.15s;}
   .header-meta a:hover{color:var(--dirty-white);}
-  .header-meta a:focus-visible{outline:2px solid var(--sea-green);outline-offset:3px;border-radius:2px;}
   .late-fee-badge{font-family:var(--mono);font-size:11px;background:rgba(255,180,50,0.15);color:#e8b84b;border:1px solid rgba(232,184,75,0.3);padding:2px 8px;border-radius:var(--radius);letter-spacing:0.06em;}
 
-  /* LAYOUT */
   main{max-width:1200px;margin:0 auto;padding:2rem 1.5rem 4rem;}
   section+section{margin-top:2.5rem;}
   .section-label{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--sea-green);margin-bottom:1rem;display:flex;align-items:center;gap:0.6rem;}
   .section-label::after{content:'';flex:1;height:1px;background:var(--rule-strong);}
 
-  /* FILING CARDS */
   .timeline{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0.85rem;}
   .filing-card{background:#fff;border:2px solid var(--rule);border-radius:var(--radius);padding:1.1rem 1.1rem 0.9rem;cursor:pointer;transition:border-color 0.15s,box-shadow 0.15s,transform 0.12s;position:relative;overflow:hidden;animation:fadeUp 0.35s ease both;}
   .filing-card:nth-child(1){animation-delay:0.05s;}.filing-card:nth-child(2){animation-delay:0.10s;}.filing-card:nth-child(3){animation-delay:0.15s;}.filing-card:nth-child(4){animation-delay:0.20s;}.filing-card:nth-child(5){animation-delay:0.25s;}
@@ -67,13 +63,11 @@
   .filter-hint{font-family:var(--mono);font-size:13px;letter-spacing:0.04em;color:rgba(62,62,60,0.5);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
   .filter-hint::before{content:'↑';color:var(--sea-green);font-size:16px;}
 
-  /* DATA NOTE */
   .data-note{background:var(--green-light);border:1px solid rgba(34,141,87,0.2);border-radius:var(--radius);padding:0.9rem 1.1rem;font-size:13px;font-family:var(--sans);color:rgba(62,62,60,0.75);line-height:1.6;}
   .data-note strong{color:var(--black-olive);font-weight:500;}
   .data-note p+p{margin-top:0.5rem;}
   .data-note a{color:var(--sea-green);}
 
-  /* FILTER BAR */
   .filter-bar{display:flex;flex-wrap:wrap;gap:0.75rem;align-items:flex-end;}
   .filter-group{display:flex;flex-direction:column;gap:0.3rem;flex:1;min-width:150px;}
   .filter-group label{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(62,62,60,0.55);}
@@ -87,21 +81,17 @@
   .search-wrap::before{content:'⌕';position:absolute;left:0.65rem;top:50%;transform:translateY(-50%);font-size:15px;color:rgba(62,62,60,0.4);pointer-events:none;}
   .reset-btn{font-family:var(--mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;background:none;border:1px solid var(--rule-strong);border-radius:var(--radius);padding:0.5rem 1rem;color:rgba(62,62,60,0.6);cursor:pointer;white-space:nowrap;transition:all 0.15s;height:36px;}
   .reset-btn:hover{border-color:var(--sea-green);color:var(--sea-green);}
-  .reset-btn:focus-visible{outline:2px solid var(--sea-green);outline-offset:2px;}
 
-  /* ACTIVE YEAR BANNER */
   .active-year-banner{display:none;align-items:center;justify-content:space-between;background:var(--sea-green);color:#fff;padding:0.5rem 1rem;border-radius:var(--radius);font-family:var(--mono);font-size:12px;margin-bottom:0.75rem;}
   .active-year-banner.visible{display:flex;}
   .banner-clear{background:none;border:1px solid rgba(255,255,255,0.4);color:#fff;border-radius:var(--radius);padding:2px 10px;font-family:var(--mono);font-size:11px;cursor:pointer;}
   .banner-clear:hover{background:rgba(255,255,255,0.15);}
 
-  /* RESULTS META */
   .results-meta{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.75rem;margin-top:1rem;}
   .results-count{font-family:var(--mono);font-size:12px;color:rgba(62,62,60,0.6);}
   .results-count strong{color:var(--black-olive);font-weight:700;}
   .sort-info{font-family:var(--mono);font-size:11px;color:rgba(62,62,60,0.4);}
 
-  /* TABLE */
   .table-wrap{overflow-x:auto;border:1px solid var(--rule);border-radius:var(--radius);background:#fff;}
   table{width:100%;border-collapse:collapse;font-size:13px;}
   thead{background:var(--black-olive);color:var(--dirty-white);position:sticky;top:0;z-index:2;}
@@ -109,8 +99,6 @@
   th:hover{background:rgba(232,233,201,0.08);}
   th.sort-asc::after{content:' ↑';color:var(--dollar-bill);}
   th.sort-desc::after{content:' ↓';color:var(--dollar-bill);}
-  th:focus-visible{outline:2px solid var(--dollar-bill);outline-offset:-2px;}
-  /* column widths */
   th:nth-child(1),td:nth-child(1){width:60px;}
   th:nth-child(2),td:nth-child(2){min-width:320px;max-width:460px;}
   th:nth-child(3),td:nth-child(3){min-width:130px;}
@@ -135,16 +123,13 @@
   .badge-flag{background:rgba(232,184,75,0.2);color:#9a6e00;}
   .null-val{color:rgba(62,62,60,0.28);font-family:var(--mono);font-size:12px;}
 
-  /* PAGINATION */
   .pagination{display:flex;align-items:center;justify-content:center;gap:0.4rem;margin-top:1.25rem;flex-wrap:wrap;}
   .page-btn{font-family:var(--mono);font-size:12px;padding:0.35rem 0.65rem;border:1px solid var(--rule-strong);border-radius:var(--radius);background:#fff;color:var(--black-olive);cursor:pointer;transition:all 0.12s;min-width:36px;text-align:center;}
   .page-btn:hover{border-color:var(--sea-green);color:var(--sea-green);}
   .page-btn.active{background:var(--sea-green);color:#fff;border-color:var(--sea-green);}
   .page-btn:disabled{opacity:0.35;cursor:default;}
-  .page-btn:focus-visible{outline:2px solid var(--sea-green);outline-offset:2px;}
   .page-ellipsis{font-family:var(--mono);font-size:12px;color:rgba(62,62,60,0.4);padding:0 0.25rem;}
 
-  /* DETAIL DRAWER */
   .drawer-backdrop{display:none;position:fixed;inset:0;background:rgba(62,62,60,0.45);z-index:100;backdrop-filter:blur(2px);}
   .drawer-backdrop.open{display:block;}
   .drawer{position:fixed;top:0;right:-540px;bottom:0;width:100%;max-width:520px;background:var(--dirty-white);z-index:101;overflow-y:auto;transition:right 0.28s cubic-bezier(0.4,0,0.2,1);box-shadow:-8px 0 40px rgba(62,62,60,0.18);display:flex;flex-direction:column;}
@@ -153,7 +138,6 @@
   .drawer-title{font-family:var(--mono);font-size:13px;font-weight:700;line-height:1.4;flex:1;}
   .drawer-close{background:none;border:1px solid rgba(232,233,201,0.3);color:var(--dirty-white);border-radius:var(--radius);width:32px;height:32px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.15s;}
   .drawer-close:hover{background:rgba(232,233,201,0.1);}
-  .drawer-close:focus-visible{outline:2px solid var(--sea-green);outline-offset:2px;}
   .drawer-body{padding:1.25rem 1.5rem;flex:1;}
   .drawer-section{margin-bottom:1.5rem;}
   .drawer-section-title{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--sea-green);margin-bottom:0.6rem;padding-bottom:0.4rem;border-bottom:1px solid var(--rule-strong);}
@@ -165,14 +149,12 @@
   .drawer-val.muted{color:rgba(62,62,60,0.35);font-family:var(--mono);font-size:12px;}
   .drawer-flag-banner{background:rgba(232,184,75,0.15);border:1px solid rgba(232,184,75,0.35);border-radius:var(--radius);padding:0.6rem 0.85rem;font-family:var(--sans);font-size:12px;color:#7a5500;margin-bottom:1rem;display:flex;gap:0.5rem;align-items:flex-start;}
 
-  /* LOADING / EMPTY */
   .state-msg{text-align:center;padding:4rem 2rem;font-family:var(--mono);font-size:13px;color:rgba(62,62,60,0.45);}
   .state-msg .icon{font-size:2rem;display:block;margin-bottom:0.75rem;}
   .loader{display:inline-block;width:18px;height:18px;border:2px solid var(--rule);border-top-color:var(--sea-green);border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:0.5rem;}
   @keyframes spin{to{transform:rotate(360deg);}}
   @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 
-  /* FOOTER */
   footer{background:var(--black-olive);color:rgba(232,233,201,0.6);padding:2.5rem 2rem;font-size:12px;font-family:var(--sans);font-weight:300;line-height:1.8;}
   .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
   .footer-col-title{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--dollar-bill);margin-bottom:0.6rem;}
@@ -181,7 +163,6 @@
   .footer-rule{height:1px;background:rgba(232,233,201,0.1);margin:0;grid-column:1/-1;}
   .footer-bottom{grid-column:1/-1;color:rgba(232,233,201,0.4);font-size:11px;}
 
-  /* RESPONSIVE */
   @media(max-width:700px){
     header{padding:1.75rem 1rem 1.5rem;}
     main{padding:1.5rem 1rem 3rem;}
@@ -201,7 +182,7 @@
     <div class="header-nav">
       <a href="trumps-wallet.html" class="active">Asset Browser</a>
       <span style="color:rgba(232,233,201,0.2)">·</span>
-      <a href="trumps-wallet-trends.html">Trends Over Time →</a>
+      <a href="trumps-wallet-trends.html">Trends Over Time</a>
       <span style="color:rgba(232,233,201,.2)">·</span>
       <a href="trumps-wallet-liabilities.html">Liabilities</a>
     </div>
@@ -279,7 +260,7 @@
             <th tabindex="0" data-col="median_income" aria-sort="none">Est. Income</th>
             <th tabindex="0" data-col="income_type"  aria-sort="none">Income Type</th>
             <th tabindex="0" data-col="filed_date"   aria-sort="none">Filed Date</th>
-            <th tabindex="0" data-col="flag_for_reporting" aria-sort="none">Flagged</th>
+            <th tabindex="0" data-col="flagged"      aria-sort="none">Flagged</th>
           </tr>
         </thead>
         <tbody id="table-body">
@@ -291,7 +272,6 @@
   </section>
 </main>
 
-<!-- DETAIL DRAWER -->
 <div class="drawer-backdrop" id="drawer-backdrop" aria-hidden="true"></div>
 <aside class="drawer" id="detail-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" aria-hidden="true">
   <div class="drawer-header">
@@ -312,7 +292,7 @@
       <a href="https://huntrjay.substack.com" target="_blank" rel="noopener">Substack</a>
     </div>
     <div>
-      <div class="footer-col-title">Data & Attribution</div>
+      <div class="footer-col-title">Data &amp; Attribution</div>
       Data sourced from public OGE Form 278 disclosures. Any use must be attributed to Hunter Index with a link to hunterindex.org.<br>
       Questions: <a href="mailto:jay@hunterindex.org">jay@hunterindex.org</a> · 202-240-2414
     </div>
@@ -322,13 +302,15 @@
 </footer>
 
 <script>
-const FILINGS=[
-  {year:'2025',label:'2025 Annual',formType:'Annual (278)',filed:'Jun. 13, 2025',period:'Jan. 1 – Dec. 31, 2024',netWorth:2446544516,totalAssets:2759577024,totalIncome:615998373,numAssets:3573,note:'Filed late — fee paid May 13, 2026'},
-  {year:'2024',label:'2024 Candidate',formType:'Candidate (278)',filed:'Aug. 13, 2024',period:'Jan. 2023 – Aug. 13, 2024',netWorth:1674070796,totalAssets:2074570801,totalIncome:796287858,numAssets:4531,note:null},
-  {year:'2022',label:'2022 Candidate',formType:'Candidate (278)',filed:'Apr. 14, 2023',period:'Jan. 2022 – Apr. 14, 2023',netWorth:1037193200,totalAssets:1567193204,totalIncome:1287625989,numAssets:2319,note:'4 outside positions: CIC Digital LLC, CIC Ventures LLC, Mar-A-Lago Club, Trump Media & Technology Group'},
-  {year:'2020',label:'2020 Annual',formType:'Annual (278)',filed:'Jul. 31, 2020',period:'Jan. 1 – Dec. 31, 2019',netWorth:1325878071,totalAssets:1733378076,totalIncome:466703975,numAssets:221,note:null},
-  {year:'2016',label:'2016 Candidate',formType:'Candidate (278)',filed:'May 16, 2016',period:'Jan. 2015 – May 16, 2016',netWorth:1339963645,totalAssets:1748013651,totalIncome:669524867,numAssets:509,note:null},
-];
+/* ── FILING METADATA — display labels only, no numbers ── */
+const FILING_META = {
+  '2025': { label:'2025 Annual',     formType:'Annual (278)',     filed:'Jun. 13, 2025', period:'Jan. 1 – Dec. 31, 2024',    note:'Filed late — fee paid May 13, 2026' },
+  '2024': { label:'2024 Candidate',  formType:'Candidate (278)',  filed:'Aug. 13, 2024', period:'Jan. 2023 – Aug. 13, 2024', note:null },
+  '2022': { label:'2022 Candidate',  formType:'Candidate (278)',  filed:'Apr. 14, 2023', period:'Jan. 2022 – Apr. 14, 2023', note:'4 outside positions: CIC Digital LLC, CIC Ventures LLC, Mar-A-Lago Club, Trump Media & Technology Group' },
+  '2020': { label:'2020 Annual',     formType:'Annual (278)',     filed:'Jul. 31, 2020', period:'Jan. 1 – Dec. 31, 2019',    note:null },
+  '2016': { label:'2016 Candidate',  formType:'Candidate (278)',  filed:'May 16, 2016',  period:'Jan. 2015 – May 16, 2016',  note:null },
+};
+const YEARS = ['2025','2024','2022','2020','2016'];
 
 function fmt(n){
   if(n==null||n==='')return null;
@@ -345,36 +327,40 @@ function fmtCell(n){const r=fmt(n);return r?`<strong>${r}</strong>`:'<span class
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 
 let activeYear=null;
+let computedFilings={};
+
 function renderCards(){
-  const grid=document.getElementById('filing-grid');grid.innerHTML='';
-  FILINGS.forEach(f=>{
-    const isActive=activeYear===f.year;
-    const card=document.createElement('div');
-    card.className='filing-card'+(isActive?' active':'');
-    card.setAttribute('role','button');card.setAttribute('tabindex','0');
-    card.setAttribute('aria-pressed',isActive?'true':'false');
-    card.innerHTML=`
-      <div class="card-year">${f.year}</div>
-      <div class="card-form">${f.formType}</div>
-      <div class="card-period">${f.period}</div>
-      <div class="card-filed">Filed ${f.filed}</div>
-      ${f.note?`<div style="font-size:11px;color:rgba(62,62,60,0.55);margin-bottom:0.5rem;font-family:var(--sans);line-height:1.4">${f.note}</div>`:''}
+  const grid=document.getElementById('filing-grid');
+  grid.innerHTML=YEARS.map(year=>{
+    const meta=FILING_META[year];
+    const stats=computedFilings[year]||{};
+    const isActive=activeYear===year;
+    return `<div class="filing-card${isActive?' active':''}" data-year="${year}" role="button" tabindex="0" aria-pressed="${isActive}">
+      <div class="card-year">${year}</div>
+      <div class="card-form">${meta.formType}</div>
+      <div class="card-period">${meta.period}</div>
+      <div class="card-filed">Filed ${meta.filed}</div>
+      ${meta.note?`<div style="font-size:11px;color:rgba(62,62,60,0.55);margin-bottom:0.5rem;font-family:var(--sans);line-height:1.4">${meta.note}</div>`:''}
       <div class="card-divider"></div>
       <div class="card-stats">
-        <div class="card-stat"><span class="card-stat-label">Net worth</span><span class="card-stat-val">${fmt(f.netWorth)??'—'}</span></div>
-        <div class="card-stat"><span class="card-stat-label">Total assets</span><span class="card-stat-val">${fmt(f.totalAssets)??'—'}</span></div>
-        <div class="card-stat"><span class="card-stat-label">Total income</span><span class="card-stat-val">${fmt(f.totalIncome)??'—'}</span></div>
-        <div class="card-stat"><span class="card-stat-label">Asset count</span><span class="card-stat-val">${f.numAssets.toLocaleString()}</span></div>
-      </div>`;
-    card.addEventListener('click',()=>toggleYear(f.year));
-    card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleYear(f.year);}});
-    grid.appendChild(card);
+        <div class="card-stat"><span class="card-stat-label">Net worth</span><span class="card-stat-val">${fmt(stats.netWorth)??'—'}</span></div>
+        <div class="card-stat"><span class="card-stat-label">Total assets</span><span class="card-stat-val">${fmt(stats.totalAssets)??'—'}</span></div>
+        <div class="card-stat"><span class="card-stat-label">Total income</span><span class="card-stat-val">${fmt(stats.totalIncome)??'—'}</span></div>
+        <div class="card-stat"><span class="card-stat-label">Asset count</span><span class="card-stat-val">${stats.numAssets!=null?stats.numAssets.toLocaleString():'—'}</span></div>
+      </div>
+    </div>`;
+  }).join('');
+  grid.querySelectorAll('.filing-card').forEach(card=>{
+    card.addEventListener('click',()=>toggleYear(card.dataset.year));
+    card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleYear(card.dataset.year);}});
   });
 }
+
 function toggleYear(year){activeYear=activeYear===year?null:year;renderCards();updateBanner();currentPage=1;applyFilters();}
+
 function updateBanner(){
   const banner=document.getElementById('active-year-banner'),text=document.getElementById('banner-text');
-  if(activeYear){const f=FILINGS.find(f=>f.year===activeYear);text.textContent=`Showing: ${f.label} · ${f.period}`;banner.classList.add('visible');}
+  if(activeYear){const m=FILING_META[activeYear];text.textContent=`Showing: ${m.label} · ${m.period}`;banner.classList.add('visible');}
   else banner.classList.remove('visible');
 }
 document.getElementById('banner-clear').addEventListener('click',()=>{activeYear=null;renderCards();updateBanner();currentPage=1;applyFilters();});
@@ -385,14 +371,41 @@ let sortCol='filing_year',sortDir='desc';
 
 async function loadData(){
   try{
-    const res=await fetch('trump_assets.json');
-    if(!res.ok)throw new Error(`HTTP ${res.status}`);
-    allData=await res.json();
-    initFilters();applyFilters();
+    const [assetRes,liabRes]=await Promise.all([
+      fetch('trump_assets.json'),
+      fetch('trump_liabilities.json'),
+    ]);
+    if(!assetRes.ok)throw new Error(`Assets: HTTP ${assetRes.status}`);
+    if(!liabRes.ok)throw new Error(`Liabilities: HTTP ${liabRes.status}`);
+    allData=await assetRes.json();
+    const liabData=await liabRes.json();
+
+    /* compute filing card stats from JSON */
+    const liabTotals={};
+    YEARS.forEach(y=>{liabTotals[y]=0;});
+    liabData.forEach(r=>{if(liabTotals[r.filing_year]!==undefined)liabTotals[r.filing_year]+=(r.median_value||0);});
+
+    YEARS.forEach(y=>{
+      const rows=allData.filter(r=>r.filing_year===y);
+      const totalAssets=rows.reduce((s,r)=>s+(r.median_value||0),0);
+      const totalIncome=rows.reduce((s,r)=>s+(r.median_income||0),0);
+      computedFilings[y]={
+        totalAssets:Math.round(totalAssets),
+        totalIncome:Math.round(totalIncome),
+        liabilities:Math.round(liabTotals[y]),
+        netWorth:Math.round(totalAssets-liabTotals[y]),
+        numAssets:rows.length,
+      };
+    });
+
+    renderCards();
+    initFilters();
+    applyFilters();
   }catch(e){
-    document.getElementById('table-body').innerHTML=`<tr><td colspan="9"><div class="state-msg"><span class="icon">⚠</span>Could not load asset data. Ensure <code>trump_assets.json</code> is in the same directory.<br><small style="opacity:0.6">${e.message}</small></div></td></tr>`;
+    document.getElementById('table-body').innerHTML=`<tr><td colspan="9"><div class="state-msg"><span class="icon">⚠</span>Could not load asset data.<br><small style="opacity:0.6">${e.message}</small></div></td></tr>`;
   }
 }
+
 function initFilters(){
   const types=[...new Set(allData.map(r=>r.asset_type).filter(Boolean))].sort();
   const owners=[...new Set(allData.map(r=>r.owner).filter(Boolean))].sort();
@@ -400,34 +413,19 @@ function initFilters(){
   types.forEach(t=>{const o=document.createElement('option');o.value=t;o.textContent=t;ts.appendChild(o);});
   owners.forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;os.appendChild(o);});
 }
-/* ── FUZZY SEARCH ──────────────────────────────────────────────
-   Strips punctuation/spaces from both query and haystack, then:
-   1. Exact substring match  → score 100 (highest)
-   2. All query chars appear in order (subsequence) → score 40–99
-      boosted by how compact the match is
-   3. All query words match somewhere → score 10–39
-   No match → score 0 (excluded)
-──────────────────────────────────────────────────────────────── */
-function tokenize(s){return s.toLowerCase().replace(/[\s\-.,&'"/()]/g,'');}
 
+function tokenize(s){return s.toLowerCase().replace(/[\s\-.,&'"/()]/g,'');}
 function fuzzyScore(query,text){
   if(!query)return 100;
   const q=tokenize(query),t=tokenize(text);
   if(!q||!t)return 0;
-  // 1. exact substring
   if(t.includes(q))return 100;
-  // 2. original words all present (handles "mar a lago" → "mar-a-lago")
   const words=query.toLowerCase().split(/\s+/).filter(Boolean);
   const tOrig=text.toLowerCase();
   if(words.length>1&&words.every(w=>tOrig.includes(w)))return 60;
-  // 3. subsequence match in stripped text
   let qi=0,first=-1,last=-1;
   for(let ti=0;ti<t.length&&qi<q.length;ti++){if(t[ti]===q[qi]){if(qi===0)first=ti;last=ti;qi++;}}
-  if(qi===q.length){
-    // score by compactness: shorter span = higher score
-    const span=last-first+1;
-    return Math.max(10,55-Math.floor(span/2));
-  }
+  if(qi===q.length){const span=last-first+1;return Math.max(10,55-Math.floor(span/2));}
   return 0;
 }
 
@@ -437,18 +435,15 @@ function applyFilters(){
   const type=document.getElementById('type-filter').value;
   const owner=document.getElementById('owner-filter').value;
   const flag=document.getElementById('flag-filter').value;
-
-  // Score and filter
   const scored=[];
   allData.forEach(r=>{
     if(activeYear&&r.filing_year!==activeYear)return;
     if(type&&r.asset_type!==type)return;
     if(owner&&(r.owner||'').toLowerCase()!==owner.toLowerCase())return;
-    if(flag==='flagged'&&!r.flag_for_reporting)return;
+    if(flag==='flagged'&&!r.flagged)return;
     if(q){
-      // Score against asset name first (weighted), then other fields
       const nameScore=fuzzyScore(q,r.asset||'')*2;
-      const otherScore=fuzzyScore(q,[r.asset_type,r.owner,r.income_type,r.reported_value,r.notes].filter(Boolean).join(' '));
+      const otherScore=fuzzyScore(q,[r.asset_type,r.owner,r.income_type,r.reported_value].filter(Boolean).join(' '));
       const best=Math.max(nameScore,otherScore);
       if(best===0)return;
       scored.push({r,score:best});
@@ -456,39 +451,24 @@ function applyFilters(){
       scored.push({r,score:0});
     }
   });
-
-  // Sort: if query active, sort by fuzzy score desc first, then apply column sort as tiebreak
   if(q){
     scored.sort((a,b)=>{
       if(b.score!==a.score)return b.score-a.score;
-      // tiebreak by column sort
-      let av=a.r[sortCol],bv=b.r[sortCol];
-      if(av==null&&bv==null)return 0;if(av==null)return 1;if(bv==null)return -1;
-      if(typeof av==='number'&&typeof bv==='number')return sortDir==='asc'?av-bv:bv-av;
-      return sortDir==='asc'?String(av).localeCompare(String(bv)):String(bv).localeCompare(String(av));
+      return colSort(a.r,b.r);
     });
   } else {
-    scored.sort((a,b)=>{
-      let av=a.r[sortCol],bv=b.r[sortCol];
-      if(av==null&&bv==null)return 0;if(av==null)return 1;if(bv==null)return -1;
-      if(typeof av==='number'&&typeof bv==='number')return sortDir==='asc'?av-bv:bv-av;
-      return sortDir==='asc'?String(av).localeCompare(String(bv)):String(bv).localeCompare(String(av));
-    });
+    scored.sort((a,b)=>colSort(a.r,b.r));
   }
-
   filtered=scored.map(s=>s.r);
   currentPage=Math.min(currentPage,Math.ceil(filtered.length/PAGE_SIZE)||1);
   renderTable();renderPagination();updateCount();
 }
 
-function getAssetId(r){
-  // Return the most relevant asset ID for the filing year
-  if(r.filing_year==='2016')return r['2016_asset_ID'];
-  if(r.filing_year==='2020')return r['2020_asset_ID'];
-  if(r.filing_year==='2022')return r['2022_asset_ID'];
-  if(r.filing_year==='2024')return r['2024_asset_ID'];
-  if(r.filing_year==='2025')return r['2025_asset_ID'];
-  return null;
+function colSort(a,b){
+  let av=a[sortCol],bv=b[sortCol];
+  if(av==null&&bv==null)return 0;if(av==null)return 1;if(bv==null)return -1;
+  if(typeof av==='number'&&typeof bv==='number')return sortDir==='asc'?av-bv:bv-av;
+  return sortDir==='asc'?String(av).localeCompare(String(bv)):String(bv).localeCompare(String(av));
 }
 
 function renderTable(){
@@ -497,9 +477,8 @@ function renderTable(){
   if(!page.length){tbody.innerHTML=`<tr><td colspan="9"><div class="state-msg"><span class="icon">🔍</span>No assets match your filters.</div></td></tr>`;return;}
   tbody.innerHTML=page.map((r,i)=>{
     const idx=(currentPage-1)*PAGE_SIZE+i;
-    const flagBadge=r.flag_for_reporting?' <span class="badge badge-flag" title="Flagged for editorial review">⚑</span>':'';
-    const assetId=getAssetId(r);
-    return `<tr class="${r.flag_for_reporting?'flagged':''}" data-idx="${idx}" tabindex="0" aria-label="View details for ${esc(r.asset||'asset')}">
+    const flagBadge=r.flagged?' <span class="badge badge-flag" title="Flagged for editorial review">⚑</span>':'';
+    return `<tr class="${r.flagged?'flagged':''}" data-idx="${idx}" tabindex="0">
       <td class="mono-sm"><span class="badge badge-year">${r.filing_year}</span></td>
       <td class="asset-name">${esc(r.asset||'—')}${flagBadge}</td>
       <td class="mono-sm">${esc(r.asset_type||'—')}</td>
@@ -508,7 +487,7 @@ function renderTable(){
       <td class="mono-val">${fmtCell(r.median_income)}</td>
       <td class="wrap-sm">${esc(r.income_type||'—')}</td>
       <td class="mono-sm">${r.filed_date?esc(r.filed_date):'<span class="null-val">—</span>'}</td>
-      <td class="mono-sm">${r.flag_for_reporting?'<span class="badge badge-flag">⚑ Yes</span>':'<span class="null-val">—</span>'}</td>
+      <td class="mono-sm">${r.flagged?'<span class="badge badge-flag">⚑ Yes</span>':'<span class="null-val">—</span>'}</td>
     </tr>`;
   }).join('');
   tbody.querySelectorAll('tr[data-idx]').forEach(row=>{
@@ -520,7 +499,7 @@ function renderTable(){
 let lastFocused=null;
 function openDrawer(r){
   lastFocused=document.activeElement;
-  const filing=FILINGS.find(f=>f.year===r.filing_year);
+  const meta=FILING_META[r.filing_year]||{};
   function drow(label,val,mono=false){
     const v=(val!=null&&val!=='');
     const display=v?(mono?`<span class="mono">${esc(String(val))}</span>`:esc(String(val))):'<span class="muted">—</span>';
@@ -530,17 +509,15 @@ function openDrawer(r){
     const v=fmt(n);
     return `<div class="drawer-row"><span class="drawer-label">${label}</span><span class="drawer-val mono">${v?`<strong>${v}</strong>`:'<span class="muted">—</span>'}</span></div>`;
   }
-  const flagHtml=r.flag_for_reporting
-    ?`<div class="drawer-flag-banner">⚑ <span><strong>Flagged for editorial review.</strong>${r.reporting_notes?' '+esc(r.reporting_notes):''}</span></div>`:'';
-
+  const flagHtml=r.flagged?`<div class="drawer-flag-banner">⚑ <span><strong>Flagged for editorial review.</strong></span></div>`:'';
   document.getElementById('drawer-title').textContent=r.asset||'Asset Detail';
   document.getElementById('drawer-body').innerHTML=`
     ${flagHtml}
     <div class="drawer-section">
       <div class="drawer-section-title">Filing</div>
       ${drow('Filing year',r.filing_year)}
-      ${drow('Form type',filing?filing.formType:null)}
-      ${drow('Period covered',filing?filing.period:null)}
+      ${drow('Form type',meta.formType)}
+      ${drow('Period covered',meta.period)}
       ${drow('Filed date',r.filed_date)}
       ${drow('Owner',r.owner)}
     </div>
@@ -549,30 +526,14 @@ function openDrawer(r){
       ${drow('Full name',r.asset)}
       ${drow('Asset type',r.asset_type)}
       ${drow('Reported value',r.reported_value)}
-      ${dfmt('Calc. min value',r.calc_min_value)}
-      ${dfmt('Calc. max value',r.calc_max_value)}
       ${dfmt('Median value',r.median_value)}
     </div>
     <div class="drawer-section">
       <div class="drawer-section-title">Income</div>
       ${drow('Income type',r.income_type)}
-      ${drow('Reported income',r.income)}
-      ${dfmt('Calc. min income',r.calc_min_income)}
-      ${dfmt('Calc. max income',r.calc_max_income)}
+      ${drow('Reported income',r.reported_income)}
       ${dfmt('Median income',r.median_income)}
-    </div>
-    <div class="drawer-section">
-      <div class="drawer-section-title">Cross-references</div>
-      ${drow('PID',r.PID,true)}
-      ${drow('2016 asset ID',r['2016_asset_ID'],true)}
-      ${drow('2020 asset ID',r['2020_asset_ID'],true)}
-      ${drow('2022 asset ID',r['2022_asset_ID'],true)}
-      ${drow('2024 asset ID',r['2024_asset_ID'],true)}
-      ${drow('2025 asset ID',r['2025_asset_ID'],true)}
-    </div>
-    ${r.notes?`<div class="drawer-section"><div class="drawer-section-title">Notes</div><div style="font-family:var(--sans);font-size:13px;line-height:1.6;color:var(--black-olive)">${esc(r.notes)}</div></div>`:''}
-    ${r.reporting_notes&&!r.flag_for_reporting?`<div class="drawer-section"><div class="drawer-section-title">Reporting Notes</div><div style="font-family:var(--sans);font-size:13px;line-height:1.6;color:var(--black-olive)">${esc(r.reporting_notes)}</div></div>`:''}
-  `;
+    </div>`;
   document.getElementById('detail-drawer').classList.add('open');
   document.getElementById('detail-drawer').setAttribute('aria-hidden','false');
   document.getElementById('drawer-backdrop').classList.add('open');
@@ -600,7 +561,7 @@ function renderPagination(){
   pages.push({label:'Next ›',page:currentPage+1,disabled:currentPage===total});
   pag.innerHTML=pages.map(p=>{
     if(p.ellipsis)return`<span class="page-ellipsis">…</span>`;
-    return`<button class="page-btn${p.active?' active':''}${p.disabled?' disabled':''}" ${p.disabled?'disabled':''} data-page="${p.page}" ${p.active?'aria-current="page"':''}>${p.label}</button>`;
+    return`<button class="page-btn${p.active?' active':''}${p.disabled?' disabled':''}" ${p.disabled?'disabled':''} data-page="${p.page}">${p.label}</button>`;
   }).join('');
   pag.querySelectorAll('.page-btn:not(.disabled)').forEach(btn=>{
     btn.addEventListener('click',()=>{currentPage=Number(btn.dataset.page);renderTable();renderPagination();document.querySelector('.table-wrap').scrollIntoView({behavior:'smooth',block:'start'});});
@@ -627,7 +588,6 @@ document.querySelectorAll('th[data-col]').forEach(th=>{
     th.setAttribute('aria-sort',sortDir==='asc'?'ascending':'descending');
     currentPage=1;applyFilters();
   });
-  th.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();th.click();}});
 });
 
 document.getElementById('search-input').addEventListener('input',()=>{currentPage=1;applyFilters();});
@@ -642,6 +602,7 @@ document.getElementById('reset-btn').addEventListener('click',()=>{
   activeYear=null;renderCards();updateBanner();currentPage=1;applyFilters();
 });
 
+/* Initial card render with dashes while JSON loads */
 renderCards();
 loadData();
 </script>
