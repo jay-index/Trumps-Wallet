@@ -191,6 +191,19 @@
         <div class="chart-subtitle">Median estimate of all reported liabilities</div>
         <div class="chart-canvas-wrap"><canvas id="c-liabilities" role="img" aria-label="Total liabilities by filing year"></canvas></div>
       </div>
+    <!-- CHART: LIABILITY TYPE BREAKDOWN (Mortgage vs. Litigation) -->
+      <div class="chart-card" style="animation-delay:0.15s">
+      <div class="chart-title">Liability Breakdown by Type</div>
+      <div class="chart-sub">Mortgage/loan debt vs. litigation liabilities — median estimates across five filings</div>
+      <canvas id="c-liab-type" height="220"></canvas>
+      </div>
+
+  <!-- CHART: CREDITOR CONCENTRATION -->
+      <div class="chart-card" style="animation-delay:0.2s">
+      <div class="chart-title">Creditor Concentration Over Time</div>
+      <div class="chart-sub">Estimated liability held by key lenders across five filings (median values, $M)</div>
+      <canvas id="c-liab-creditor" height="260"></canvas>
+      </div>
       <div class="chart-card">
         <div class="chart-title">Number of Disclosed Assets</div>
         <div class="chart-subtitle">Count of individual asset rows per filing</div>
@@ -783,6 +796,71 @@ window.addEventListener('load', () => {
     renderSummaryCharts();
   });
 });
+  // ── LIABILITY TYPE BREAKDOWN CHART ──────────────────────────
+(function() {
+  const YEARS = ['2016', '2020', '2022', '2024', '2025'];
+  const mortgageLoan = [408050006, 407500004, 530000004, 297500002.5, 210032508];
+  const litigation   = [0, 0, 0, 103000002.5, 103000002.5];
+
+  const ctx = document.getElementById('c-liab-type');
+  if (!ctx) return;
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: YEARS,
+      datasets: [
+        { label: 'Mortgage / Loan', data: mortgageLoan.map(v => +(v/1e6).toFixed(1)), backgroundColor: 'rgba(34,141,87,0.75)', borderColor: '#228D57', borderWidth: 1 },
+        { label: 'Litigation',      data: litigation.map(v => +(v/1e6).toFixed(1)),   backgroundColor: 'rgba(232,184,75,0.65)', borderColor: '#e8b84b', borderWidth: 1 }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { labels: { color: 'rgba(232,233,201,0.6)', font: { family: 'Courier New', size: 11 }, boxWidth: 12 } },
+        tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: $${ctx.parsed.y.toFixed(0)}M+` } }
+      },
+      scales: {
+        x: { stacked: true, ticks: { color: 'rgba(232,233,201,0.5)', font: { family: 'Courier New', size: 11 } }, grid: { color: 'rgba(232,233,201,0.06)' } },
+        y: { stacked: true, ticks: { color: 'rgba(232,233,201,0.5)', font: { family: 'Courier New', size: 11 }, callback: v => '$' + v + 'M' }, grid: { color: 'rgba(232,233,201,0.06)' } }
+      }
+    }
+  });
+})();
+
+// ── CREDITOR CONCENTRATION CHART ────────────────────────────
+(function() {
+  const YEARS = ['2016', '2020', '2022', '2024', '2025'];
+  const deutscheBank  = [152.5, 187.5, 175.0,  37.5,   0];
+  const ladderCapital = [165.0, 165.0, 165.0, 115.0, 115.0];
+  const axosBank      = [0,     0,     100.0, 100.0, 100.0];
+  const other         = [90.55, 55.0,   90.0, 148.0,  98.0];
+
+  const ctx = document.getElementById('c-liab-creditor');
+  if (!ctx) return;
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: YEARS,
+      datasets: [
+        { label: 'Deutsche Bank',                              data: deutscheBank,  backgroundColor: 'rgba(34,141,87,0.8)',    borderColor: '#228D57',              borderWidth: 1 },
+        { label: 'Ladder Capital',                             data: ladderCapital, backgroundColor: 'rgba(133,187,101,0.7)', borderColor: '#85bb65',              borderWidth: 1 },
+        { label: 'Axos Bank',                                  data: axosBank,      backgroundColor: 'rgba(232,233,201,0.25)',borderColor: 'rgba(232,233,201,0.5)', borderWidth: 1 },
+        { label: 'Other (litigation, intercompany, other lenders)', data: other,   backgroundColor: 'rgba(232,184,75,0.55)', borderColor: '#e8b84b',              borderWidth: 1 }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { labels: { color: 'rgba(232,233,201,0.6)', font: { family: 'Courier New', size: 10 }, boxWidth: 12 } },
+        tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: $${ctx.parsed.y}M+` } }
+      },
+      scales: {
+        x: { stacked: true, ticks: { color: 'rgba(232,233,201,0.5)', font: { family: 'Courier New', size: 11 } }, grid: { color: 'rgba(232,233,201,0.06)' } },
+        y: { stacked: true, ticks: { color: 'rgba(232,233,201,0.5)', font: { family: 'Courier New', size: 11 }, callback: v => '$' + v + 'M' }, grid: { color: 'rgba(232,233,201,0.06)' } }
+      }
+    }
+  });
+})();
 </script>
 </body>
 </html>
