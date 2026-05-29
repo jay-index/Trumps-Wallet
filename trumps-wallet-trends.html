@@ -341,23 +341,25 @@ function computeLiabBreakdown(liabData){
 }
 
 /* ── PORTFOLIO MIX COLORS ── */
-const TYPE_GROUPS = ['Real Estate','Golf Club','Mar-a-Lago','Securities','Ownership Interests','Crypto & NFTs','Other'];
+const TYPE_GROUPS = ['Golf Club','Mar-a-Lago','Trump Corporation','Real Estate','Securities','Ownership Interests','Crypto & NFTs','Other'];
 const TYPE_COLORS = {
-  'Real Estate':         '#228D57',
-  'Golf Club':           '#85BB65',
+  'Golf Club':           '#228D57',
   'Mar-a-Lago':          '#e8b84b',
+  'Trump Corporation':   '#e07b4a',
+  'Real Estate':         '#85BB65',
   'Securities':          '#5b8fd4',
-  'Ownership Interests': '#e07b4a',
-  'Crypto & NFTs':       '#9b59b6',
-  'Other':               'rgba(62,62,60,0.35)',
+  'Ownership Interests': '#9b59b6',
+  'Crypto & NFTs':       '#c0392b',
+  'Other':               'rgba(62,62,60,0.30)',
 };
 function getGroup(t){
   t = String(t||'').trim();
-  if(['Real Estate','Real Property'].includes(t)) return 'Real Estate';
   if(t==='Golf Club') return 'Golf Club';
   if(t==='Mar-A-Lago') return 'Mar-a-Lago';
+  if(t==='Trump Corporation') return 'Trump Corporation';
+  if(['Real Estate','Real Property'].includes(t)) return 'Real Estate';
   if(['Stock','Brokerage','Corporate Securities','Government Securities and Agency Debt'].includes(t)) return 'Securities';
-  if(['Ownership Interest (Engaged in a Trade or Business)','Trump Corporation'].includes(t)) return 'Ownership Interests';
+  if(t==='Ownership Interest (Engaged in a Trade or Business)') return 'Ownership Interests';
   if(['Cryptocurrency','NFTs'].includes(t)) return 'Crypto & NFTs';
   return 'Other';
 }
