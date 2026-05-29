@@ -23,7 +23,6 @@
   .skip-nav{position:absolute;top:-100px;left:1rem;background:var(--sea-green);color:#fff;padding:.5rem 1rem;border-radius:var(--radius);font-family:var(--sans);font-size:14px;z-index:1000;transition:top .2s;text-decoration:none;}
   .skip-nav:focus{top:1rem;}
 
-  /* ── HEADER ── */
   header{background:var(--black-olive);color:var(--dirty-white);padding:2.5rem 2rem 2rem;position:relative;overflow:hidden;}
   header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(232,233,201,.03) 60px,rgba(232,233,201,.03) 61px);pointer-events:none;}
   .header-inner{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:.6rem;}
@@ -37,31 +36,22 @@
   .header-meta a{font-family:var(--mono);font-size:12px;color:var(--dollar-bill);text-decoration:none;letter-spacing:.05em;border-bottom:1px solid rgba(133,187,101,.4);padding-bottom:1px;}
   .header-meta a:hover{color:var(--dirty-white);}
 
-  /* ── LAYOUT ── */
   main{max-width:1200px;margin:0 auto;padding:2rem 1.5rem 4rem;}
   section+section{margin-top:3rem;}
   .section-label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--sea-green);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem;}
   .section-label::after{content:'';flex:1;height:1px;background:var(--rule-strong);}
   .section-desc{font-family:var(--sans);font-size:13px;color:rgba(62,62,60,.6);margin-bottom:1.25rem;font-weight:300;}
 
-  /* ── CHART GRID ── */
   .charts-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;}
   .chart-card{background:#fff;border:1px solid var(--rule);border-radius:var(--radius);padding:1.25rem 1.25rem 1rem;animation:fadeUp .4s ease both;}
-  .chart-card:nth-child(1){animation-delay:.05s;}.chart-card:nth-child(2){animation-delay:.10s;}.chart-card:nth-child(3){animation-delay:.15s;}.chart-card:nth-child(4){animation-delay:.20s;}
+  .chart-card:nth-child(1){animation-delay:.05s;}.chart-card:nth-child(2){animation-delay:.10s;}.chart-card:nth-child(3){animation-delay:.15s;}.chart-card:nth-child(4){animation-delay:.20s;}.chart-card:nth-child(5){animation-delay:.25s;}.chart-card:nth-child(6){animation-delay:.30s;}
   .chart-title{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--black-olive);margin-bottom:.15rem;font-weight:700;}
   .chart-subtitle{font-family:var(--sans);font-size:11px;color:rgba(62,62,60,.45);margin-bottom:.9rem;font-weight:300;}
   .chart-canvas-wrap{position:relative;width:100%;height:200px;}
   canvas{display:block;}
 
-  /* ── ASSET LOOKUP ── */
   .lookup-input-wrap{position:relative;max-width:580px;}
-  .lookup-input-wrap input{
-    font-family:var(--sans);font-size:14px;
-    padding:.6rem .9rem .6rem 2.25rem;
-    border:1px solid var(--rule-strong);border-radius:var(--radius);
-    background:#fff;color:var(--black-olive);width:100%;
-    transition:border-color .15s,box-shadow .15s;
-  }
+  .lookup-input-wrap input{font-family:var(--sans);font-size:14px;padding:.6rem .9rem .6rem 2.25rem;border:1px solid var(--rule-strong);border-radius:var(--radius);background:#fff;color:var(--black-olive);width:100%;transition:border-color .15s,box-shadow .15s;}
   .lookup-input-wrap input:focus{outline:none;border-color:var(--sea-green);box-shadow:0 0 0 2px rgba(34,141,87,.15);}
   .lookup-input-wrap::before{content:'⌕';position:absolute;left:.7rem;top:50%;transform:translateY(-50%);font-size:16px;color:rgba(62,62,60,.4);pointer-events:none;}
   .suggestions{position:absolute;top:100%;left:0;right:0;background:#fff;border:1px solid var(--rule-strong);border-top:none;border-radius:0 0 var(--radius) var(--radius);z-index:20;max-height:260px;overflow-y:auto;display:none;box-shadow:var(--shadow);}
@@ -70,9 +60,7 @@
   .suggestion-item:last-child{border-bottom:none;}
   .suggestion-item:hover,.suggestion-item.focused{background:var(--green-light);}
   .suggestion-years{font-family:var(--mono);font-size:10px;color:rgba(62,62,60,.4);margin-top:2px;}
-  .suggestion-note{font-family:var(--mono);font-size:10px;color:rgba(34,141,87,.7);margin-top:1px;}
 
-  /* ── ASSET RESULT PANEL ── */
   .asset-panel{display:none;margin-top:1.5rem;background:#fff;border:1px solid var(--rule);border-radius:var(--radius);overflow:hidden;}
   .asset-panel.visible{display:block;}
   .asset-panel-header{background:var(--black-olive);color:var(--dirty-white);padding:1rem 1.25rem;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;}
@@ -90,43 +78,36 @@
   .asset-table .absent{color:rgba(62,62,60,.25);font-style:italic;font-family:var(--sans);font-size:11px;}
   .yr-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle;flex-shrink:0;}
 
-  /* ── EMPTY / LOADING ── */
   .lookup-placeholder{font-family:var(--mono);font-size:12px;color:rgba(62,62,60,.38);text-align:center;padding:2.5rem;border:1px dashed var(--rule-strong);border-radius:var(--radius);margin-top:1rem;}
   .loader{display:inline-block;width:16px;height:16px;border:2px solid var(--rule);border-top-color:var(--sea-green);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:.5rem;}
 
-  /* ── COVERAGE TIMELINE ── */
-  .coverage-wrap { background:#fff; border:1px solid var(--rule); border-radius:var(--radius); padding:1.5rem 1.5rem 1rem; overflow-x:auto; }
-  .cov-axis { display:flex; border-bottom:2px solid var(--rule-strong); margin-bottom:0.75rem; margin-left:120px; position:relative; }
-  .cov-axis-label { font-family:var(--mono); font-size:10px; color:rgba(62,62,60,0.45); position:absolute; transform:translateX(-50%); top:4px; }
-  .cov-row { display:flex; align-items:center; margin-bottom:0.6rem; }
-  .cov-row:last-child { margin-bottom:0; }
-  .cov-label { font-family:var(--mono); font-size:11px; color:var(--black-olive); width:120px; flex-shrink:0; line-height:1.3; }
-  .cov-label span { display:block; font-family:var(--sans); font-size:10px; color:rgba(62,62,60,0.45); font-weight:300; }
-  .cov-bar-wrap { flex:1; position:relative; height:28px; min-width:500px; }
-  .cov-segment { position:absolute; height:20px; top:4px; border-radius:2px; display:flex; align-items:center; justify-content:center; overflow:hidden; transition:opacity 0.15s; }
-  .cov-segment:hover { opacity:0.85; }
-  .cov-segment-label { font-family:var(--mono); font-size:9px; color:#fff; white-space:nowrap; padding:0 6px; letter-spacing:0.04em; overflow:hidden; text-overflow:ellipsis; }
-  .cov-gap { position:absolute; height:20px; top:4px; background:rgba(62,62,60,0.07); border-radius:2px; border:1px dashed rgba(62,62,60,0.15); }
-  .cov-gap-label { font-family:var(--mono); font-size:9px; color:rgba(62,62,60,0.35); white-space:nowrap; padding:0 4px; display:flex; align-items:center; height:100%; }
-  .cov-note { font-family:var(--sans); font-size:11px; color:rgba(62,62,60,0.5); margin-top:0.75rem; padding-top:0.75rem; border-top:1px solid var(--rule); line-height:1.5; }
-  .cov-note strong { color:var(--black-olive); }
-  .coverage-legend { display:flex; gap:1.5rem; flex-wrap:wrap; margin-top:0.75rem; }
-  .cov-leg-item { font-family:var(--sans); font-size:12px; color:rgba(62,62,60,0.65); display:flex; align-items:center; gap:0.4rem; }
-  .cov-leg-dot { width:12px; height:12px; border-radius:2px; flex-shrink:0; }
+  .coverage-wrap{background:#fff;border:1px solid var(--rule);border-radius:var(--radius);padding:1.5rem 1.5rem 1rem;overflow-x:auto;}
+  .cov-axis{display:flex;border-bottom:2px solid var(--rule-strong);margin-bottom:0.75rem;margin-left:120px;position:relative;}
+  .cov-axis-label{font-family:var(--mono);font-size:10px;color:rgba(62,62,60,0.45);position:absolute;transform:translateX(-50%);top:4px;}
+  .cov-row{display:flex;align-items:center;margin-bottom:0.6rem;}
+  .cov-row:last-child{margin-bottom:0;}
+  .cov-label{font-family:var(--mono);font-size:11px;color:var(--black-olive);width:120px;flex-shrink:0;line-height:1.3;}
+  .cov-label span{display:block;font-family:var(--sans);font-size:10px;color:rgba(62,62,60,0.45);font-weight:300;}
+  .cov-bar-wrap{flex:1;position:relative;height:28px;min-width:500px;}
+  .cov-segment{position:absolute;height:20px;top:4px;border-radius:2px;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:opacity 0.15s;}
+  .cov-segment:hover{opacity:0.85;}
+  .cov-segment-label{font-family:var(--mono);font-size:9px;color:#fff;white-space:nowrap;padding:0 6px;letter-spacing:0.04em;overflow:hidden;text-overflow:ellipsis;}
+  .cov-gap{position:absolute;height:20px;top:4px;background:rgba(62,62,60,0.07);border-radius:2px;border:1px dashed rgba(62,62,60,0.15);}
+  .cov-gap-label{font-family:var(--mono);font-size:9px;color:rgba(62,62,60,0.35);white-space:nowrap;padding:0 4px;display:flex;align-items:center;height:100%;}
+  .cov-note{font-family:var(--sans);font-size:11px;color:rgba(62,62,60,0.5);margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid var(--rule);line-height:1.5;}
+  .cov-note strong{color:var(--black-olive);}
+  .coverage-legend{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.75rem;}
+  .cov-leg-item{font-family:var(--sans);font-size:12px;color:rgba(62,62,60,0.65);display:flex;align-items:center;gap:0.4rem;}
+  .cov-leg-dot{width:12px;height:12px;border-radius:2px;flex-shrink:0;}
 
-  /* ── TOOLTIP ── */
-  .chart-tooltip{
-    position:fixed;pointer-events:none;z-index:200;
-    background:var(--black-olive);color:var(--dirty-white);
-    font-family:var(--mono);font-size:11px;font-weight:700;
-    padding:5px 10px;border-radius:var(--radius);
-    white-space:nowrap;opacity:0;transition:opacity .1s;
-    box-shadow:0 2px 8px rgba(62,62,60,0.25);
-  }
+  .chart-legend{display:flex;gap:1rem;flex-wrap:wrap;margin-top:.5rem;}
+  .chart-legend-item{font-family:var(--sans);font-size:11px;color:rgba(62,62,60,.6);display:flex;align-items:center;gap:.35rem;}
+  .chart-legend-swatch{width:12px;height:10px;border-radius:2px;flex-shrink:0;}
+
+  .chart-tooltip{position:fixed;pointer-events:none;z-index:200;background:var(--black-olive);color:var(--dirty-white);font-family:var(--mono);font-size:11px;font-weight:700;padding:5px 10px;border-radius:var(--radius);white-space:nowrap;opacity:0;transition:opacity .1s;box-shadow:0 2px 8px rgba(62,62,60,0.25);}
   .chart-tooltip.visible{opacity:1;}
   .chart-tooltip .tt-label{font-family:var(--sans);font-size:10px;font-weight:300;color:rgba(232,233,201,.6);display:block;margin-bottom:1px;}
 
-  /* ── FOOTER ── */
   footer{background:var(--black-olive);color:rgba(232,233,201,.6);padding:2.5rem 2rem;font-size:12px;font-family:var(--sans);font-weight:300;line-height:1.8;}
   .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
   .footer-col-title{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dollar-bill);margin-bottom:.6rem;}
@@ -171,7 +152,6 @@
 
 <main id="main-content">
 
-  <!-- SUMMARY CHARTS -->
   <section aria-labelledby="trends-heading">
     <div class="section-label" id="trends-heading">Portfolio-Wide Trends</div>
     <p class="section-desc">Median estimates from OGE-reported ranges across all five filings. Note: filing years cover different time periods — see the Asset Browser for coverage details.</p>
@@ -191,18 +171,25 @@
         <div class="chart-subtitle">Median estimate of all reported liabilities</div>
         <div class="chart-canvas-wrap"><canvas id="c-liabilities" role="img" aria-label="Total liabilities by filing year"></canvas></div>
       </div>
-    <!-- CHART: LIABILITY TYPE BREAKDOWN (Mortgage vs. Litigation) -->
-      <div class="chart-card" style="animation-delay:0.15s">
-      <div class="chart-title">Liability Breakdown by Type</div>
-      <div class="chart-subtitle">Mortgage/loan debt vs. litigation liabilities — median estimates across five filings</div>
-     <div class="chart-canvas-wrap"><canvas id="c-liab-type" role="img" aria-label="Liability breakdown by type"></canvas></div>
+      <div class="chart-card">
+        <div class="chart-title">Liability Breakdown by Type</div>
+        <div class="chart-subtitle">Mortgage/loan debt vs. litigation liabilities — median estimates across five filings</div>
+        <div class="chart-canvas-wrap"><canvas id="c-liab-type" role="img" aria-label="Liability breakdown by type"></canvas></div>
+        <div class="chart-legend">
+          <span class="chart-legend-item"><span class="chart-legend-swatch" style="background:#228D57"></span>Mortgage / Loan</span>
+          <span class="chart-legend-item"><span class="chart-legend-swatch" style="background:#e8b84b"></span>Litigation</span>
+        </div>
       </div>
-
-  <!-- CHART: CREDITOR CONCENTRATION -->
-      <div class="chart-card" style="animation-delay:0.2s">
-      <div class="chart-title">Creditor Concentration Over Time</div>
-      <div class="chart-subtitle">Estimated liability held by key lenders across five filings (median values, $M)</div>
-      <div class="chart-canvas-wrap"><canvas id="c-liab-creditor" role="img" aria-label="Creditor concentration over time"></canvas></div>
+      <div class="chart-card">
+        <div class="chart-title">Creditor Concentration Over Time</div>
+        <div class="chart-subtitle">Estimated liability held by key lenders, $M median</div>
+        <div class="chart-canvas-wrap"><canvas id="c-liab-creditor" role="img" aria-label="Creditor concentration over time"></canvas></div>
+        <div class="chart-legend">
+          <span class="chart-legend-item"><span class="chart-legend-swatch" style="background:#228D57"></span>Deutsche Bank</span>
+          <span class="chart-legend-item"><span class="chart-legend-swatch" style="background:#85BB65"></span>Ladder Capital</span>
+          <span class="chart-legend-item"><span class="chart-legend-swatch" style="background:#e8b84b"></span>Axos Bank</span>
+          <span class="chart-legend-item"><span class="chart-legend-swatch" style="background:#3E3E3C"></span>Other</span>
+        </div>
       </div>
       <div class="chart-card">
         <div class="chart-title">Number of Disclosed Assets</div>
@@ -212,7 +199,6 @@
     </div>
   </section>
 
-  <!-- COVERAGE TIMELINE -->
   <section aria-labelledby="coverage-heading">
     <div class="section-label" id="coverage-heading">What Time Periods Are Covered</div>
     <p class="section-desc">Each OGE filing covers a different window of time. This shows exactly what months are represented in the database — useful when searching for a specific asset or income stream.</p>
@@ -224,7 +210,6 @@
     </div>
   </section>
 
-  <!-- ASSET LOOKUP -->
   <section aria-labelledby="lookup-heading">
     <div class="section-label" id="lookup-heading">Individual Asset Tracker</div>
     <p class="section-desc">Search for a specific asset to see how its value and income have changed across filing years. Assets are matched by name. Note: asset IDs will be manually linked in a future update — name matching may surface near-duplicates.</p>
@@ -249,7 +234,7 @@
       <a href="https://huntrjay.substack.com" target="_blank" rel="noopener">Substack</a>
     </div>
     <div>
-      <div class="footer-col-title">Data & Attribution</div>
+      <div class="footer-col-title">Data &amp; Attribution</div>
       Data from public OGE Form 278 disclosures. Any use must be attributed to Hunter Index with a link to hunterindex.org.<br>
       <a href="mailto:jay@hunterindex.org">jay@hunterindex.org</a> · 202-240-2414
     </div>
@@ -259,44 +244,115 @@
 </footer>
 
 <script>
-/* ── TOPLINE DATA ── */
 const FILINGS = [
-  { year:'2016', label:'May 2016',   netWorth:1339963645,  assets:1748013651, income:669524867,  liabilities:408050005,  count:509  },
-  { year:'2020', label:'Dec. 2019',  netWorth:1325878071,  assets:1733378076, income:466703975,  liabilities:407500004,  count:221  },
-  { year:'2022', label:'Apr. 2023',  netWorth:1037193200,  assets:1567193204, income:1287625989, liabilities:530000004,  count:2319 },
-  { year:'2024', label:'Aug. 2024',  netWorth:1674070796,  assets:2074570801, income:796287858,  liabilities:400500005,  count:4531 },
-  { year:'2025', label:'Dec. 2024',  netWorth:2446544516,  assets:2759577024, income:615998373,  liabilities:313032508,  count:3573 },
+  { year:'2016', label:'May 2016',  netWorth:1339963645, assets:1748013651, income:669524867,  liabilities:408050005, count:509  },
+  { year:'2020', label:'Dec. 2019', netWorth:1325878071, assets:1733378076, income:466703975,  liabilities:407500004, count:221  },
+  { year:'2022', label:'Apr. 2023', netWorth:1037193200, assets:1567193204, income:1287625989, liabilities:530000004, count:2319 },
+  { year:'2024', label:'Aug. 2024', netWorth:1674070796, assets:2074570801, income:796287858,  liabilities:400500005, count:4531 },
+  { year:'2025', label:'Dec. 2024', netWorth:2446544516, assets:2759577024, income:615998373,  liabilities:313032508, count:3573 },
 ];
 const YR_COLORS = { '2016':'#228D57','2020':'#85BB65','2022':'#3E3E3C','2024':'#228D57','2025':'#85BB65' };
 
-/* ── NUMBER FORMAT ── */
 function fmt(n) {
   if (n == null) return '—';
   const v = Number(n); if (isNaN(v)) return '—';
   const neg = v < 0, abs = Math.abs(v);
   let s;
-  if (abs >= 1e9)      s = '$' + (Math.trunc(abs / 1e7) / 100) + ' billion';
-  else if (abs >= 1e6) s = '$' + (Math.trunc(abs / 1e4) / 100) + ' million';
-  else if (abs >= 1e3) s = '$' + Math.trunc(abs / 1e3) + 'k';
+  if (abs >= 1e9)      s = '$' + (Math.trunc(abs/1e7)/100) + ' billion';
+  else if (abs >= 1e6) s = '$' + (Math.trunc(abs/1e4)/100) + ' million';
+  else if (abs >= 1e3) s = '$' + Math.trunc(abs/1e3) + 'k';
   else                 s = '$' + abs.toLocaleString();
   return neg ? '-' + s : s;
 }
 
-/* Format axis label always in millions */
 function fmtM(n) {
   if (n == null || isNaN(n)) return '';
   const m = n / 1e6;
-  if (m >= 1000) return '$' + (Math.trunc(m / 10) / 100) + 'B';
+  if (m >= 1000) return '$' + (Math.trunc(m/10)/100) + 'B';
   if (m >= 100)  return '$' + Math.round(m) + 'M';
-  if (m >= 10)   return '$' + Math.round(m * 10) / 10 + 'M';
-  return '$' + Math.round(m * 100) / 100 + 'M';
+  if (m >= 10)   return '$' + Math.round(m*10)/10 + 'M';
+  return '$' + Math.round(m*100)/100 + 'M';
 }
 
 function esc(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-/* ── CANVAS CHART ENGINE ── */
+/* ── STACKED BAR CHART (for liability breakdowns) ── */
+function drawStackedBar(canvasId, datasets, labels) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const wrap = canvas.parentElement;
+  const W = wrap.clientWidth || 400;
+  const H = wrap.clientHeight || 200;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width  = W + 'px';
+  canvas.style.height = H + 'px';
+  ctx.scale(dpr, dpr);
+
+  const n = labels.length;
+  const PAD = { top: 18, right: 16, bottom: 32, left: 68 };
+  const cW = W - PAD.left - PAD.right;
+  const cH = H - PAD.top  - PAD.bottom;
+  canvas._hitAreas = [];
+
+  /* compute stacked totals */
+  const stackTotals = labels.map((_, i) => datasets.reduce((sum, ds) => sum + (ds.values[i] || 0), 0));
+  const rawMax = Math.max(...stackTotals);
+  const rawMin = 0;
+  const steps = [50,100,200,500,1000];
+  const tickSizeM = steps.find(s => (rawMax/1e6) / s <= 5) || 500;
+  const tickSize = tickSizeM * 1e6;
+  const maxTick = Math.ceil(rawMax / tickSize) * tickSize;
+  const tickCount = Math.round(maxTick / tickSize);
+
+  const toX = i => PAD.left + (n === 1 ? cW/2 : (i/(n-1)) * cW);
+  const toY = v => PAD.top + cH - (v / maxTick) * cH;
+  const barW = (cW / n) * 0.52;
+
+  /* grid + y labels */
+  ctx.font = `10px 'Space Mono',monospace`;
+  ctx.textAlign = 'right';
+  for (let i = 0; i <= tickCount; i++) {
+    const val = i * tickSize;
+    const y   = toY(val);
+    ctx.strokeStyle = 'rgba(62,62,60,0.08)';
+    ctx.lineWidth   = 1;
+    ctx.beginPath(); ctx.moveTo(PAD.left, y); ctx.lineTo(PAD.left + cW, y); ctx.stroke();
+    ctx.fillStyle = 'rgba(62,62,60,0.45)';
+    ctx.fillText(fmtM(val), PAD.left - 5, y + 3.5);
+  }
+
+  /* x labels */
+  ctx.textAlign = 'center';
+  ctx.fillStyle = 'rgba(62,62,60,0.5)';
+  labels.forEach((lb, i) => ctx.fillText(lb, toX(i), H - PAD.bottom + 14));
+
+  /* stacked bars */
+  labels.forEach((lb, i) => {
+    let base = 0;
+    datasets.forEach(ds => {
+      const v = ds.values[i] || 0;
+      if (v === 0) { base += v; return; }
+      const x  = toX(i) - barW/2;
+      const bH = toY(base) - toY(base + v);
+      const y  = toY(base + v);
+      ctx.fillStyle = ds.color;
+      ctx.beginPath();
+      if (ctx.roundRect) ctx.roundRect(x, y, barW, bH, 2); else ctx.rect(x, y, barW, bH);
+      ctx.fill();
+      canvas._hitAreas.push({ x, y, w: barW, h: bH, value: base + v, label: lb, color: ds.color, dsLabel: ds.label });
+      base += v;
+    });
+  });
+
+  attachTooltip(canvas, canvas._hitAreas, { rawValues: false });
+}
+
+/* ── LINE / BAR CHART ENGINE ── */
 function drawChart(canvasId, datasets, opts = {}) {
   const canvas = document.getElementById(canvasId);
   if (!canvas) return;
@@ -317,31 +373,25 @@ function drawChart(canvasId, datasets, opts = {}) {
   const PAD = { top: 18, right: 16, bottom: 32, left: 68 };
   const cW = W - PAD.left - PAD.right;
   const cH = H - PAD.top  - PAD.bottom;
-  /* reset hit areas for this canvas on each render */
   canvas._hitAreas = [];
 
-  /* value range */
   const allVals = datasets.flatMap(d => d.values.filter(v => v != null && !isNaN(v)));
   if (!allVals.length) return;
   const rawMax = Math.max(...allVals);
   const rawMin = isBar ? 0 : Math.min(...allVals) * 0.88;
-  /* nice tick spacing in millions */
   const isRaw = opts.rawValues;
   const range = rawMax - rawMin;
-  const stepsRaw = isRaw
-    ? [1,5,10,50,100,250,500,1000,2000,5000]
-    : [1,2,5,10,20,50,100,200,500,1000,2000,5000];
+  const stepsRaw = [1,5,10,50,100,250,500,1000,2000,5000];
   const tickSize = isRaw
-    ? (stepsRaw.find(s => (range / s) <= 5) || stepsRaw[stepsRaw.length-1])
-    : (stepsRaw.find(s => ((rawMax-rawMin)/1e6) / s <= 5) || stepsRaw[stepsRaw.length-1]) * 1e6;
-  const minTick = Math.floor(rawMin / tickSize) * tickSize;
-  const maxTick = Math.ceil(rawMax  / tickSize) * tickSize;
-  const tickCount = Math.min(Math.round((maxTick - minTick) / tickSize), 8);
+    ? (stepsRaw.find(s => (range/s) <= 5) || stepsRaw[stepsRaw.length-1])
+    : (stepsRaw.find(s => ((rawMax-rawMin)/1e6)/s <= 5) || stepsRaw[stepsRaw.length-1]) * 1e6;
+  const minTick = Math.floor(rawMin/tickSize) * tickSize;
+  const maxTick = Math.ceil(rawMax/tickSize)  * tickSize;
+  const tickCount = Math.min(Math.round((maxTick-minTick)/tickSize), 8);
 
-  const toX = i => PAD.left + (n === 1 ? cW / 2 : (i / (n - 1)) * cW);
-  const toY = v => PAD.top + cH - ((v - minTick) / (maxTick - minTick)) * cH;
+  const toX = i => PAD.left + (n === 1 ? cW/2 : (i/(n-1)) * cW);
+  const toY = v => PAD.top + cH - ((v-minTick)/(maxTick-minTick)) * cH;
 
-  /* grid + y-axis labels */
   ctx.font = `10px 'Space Mono',monospace`;
   ctx.textAlign = 'right';
   for (let i = 0; i <= tickCount; i++) {
@@ -349,22 +399,21 @@ function drawChart(canvasId, datasets, opts = {}) {
     const y   = toY(val);
     ctx.strokeStyle = 'rgba(62,62,60,0.08)';
     ctx.lineWidth   = 1;
-    ctx.beginPath(); ctx.moveTo(PAD.left, y); ctx.lineTo(PAD.left + cW, y); ctx.stroke();
-    ctx.fillStyle   = 'rgba(62,62,60,0.45)';
-    ctx.fillText(opts.rawValues ? val.toLocaleString() : fmtM(val), PAD.left - 5, y + 3.5);
+    ctx.beginPath(); ctx.moveTo(PAD.left, y); ctx.lineTo(PAD.left+cW, y); ctx.stroke();
+    ctx.fillStyle = 'rgba(62,62,60,0.45)';
+    ctx.fillText(opts.rawValues ? val.toLocaleString() : fmtM(val), PAD.left-5, y+3.5);
   }
 
-  /* x-axis labels */
-  ctx.textAlign   = 'center';
-  ctx.fillStyle   = 'rgba(62,62,60,0.5)';
-  labels.forEach((lb, i) => ctx.fillText(lb, toX(i), H - PAD.bottom + 14));
+  ctx.textAlign = 'center';
+  ctx.fillStyle = 'rgba(62,62,60,0.5)';
+  labels.forEach((lb, i) => ctx.fillText(lb, toX(i), H-PAD.bottom+14));
 
   if (isBar) {
-    const barW = (cW / n) * 0.52;
+    const barW = (cW/n) * 0.52;
     const hitAreas = [];
     datasets[0].values.forEach((v, i) => {
       if (v == null) return;
-      const x  = toX(i) - barW / 2;
+      const x  = toX(i) - barW/2;
       const bH = toY(minTick) - toY(v);
       const y  = toY(v);
       ctx.fillStyle = datasets[0].colors ? datasets[0].colors[i] : datasets[0].color;
@@ -377,87 +426,63 @@ function drawChart(canvasId, datasets, opts = {}) {
   } else {
     datasets.forEach(ds => {
       const pts = ds.values.map((v, i) => v != null ? { x: toX(i), y: toY(v) } : null);
-      /* fill */
       ctx.beginPath();
       let started = false;
-      pts.forEach(p => { if (!p) return; if (!started) { ctx.moveTo(p.x, p.y); started = true; } else ctx.lineTo(p.x, p.y); });
+      pts.forEach(p => { if (!p) return; if (!started) { ctx.moveTo(p.x, p.y); started=true; } else ctx.lineTo(p.x, p.y); });
       if (started) {
-        const validPts = pts.filter(Boolean);
-        ctx.lineTo(validPts.at(-1).x, toY(minTick));
-        ctx.lineTo(validPts[0].x, toY(minTick));
-        ctx.closePath();
-        ctx.fillStyle = ds.color + '18';
-        ctx.fill();
+        const vp = pts.filter(Boolean);
+        ctx.lineTo(vp.at(-1).x, toY(minTick)); ctx.lineTo(vp[0].x, toY(minTick));
+        ctx.closePath(); ctx.fillStyle = ds.color+'18'; ctx.fill();
       }
-      /* line */
       ctx.beginPath(); started = false;
-      pts.forEach(p => { if (!p) return; if (!started) { ctx.moveTo(p.x, p.y); started = true; } else ctx.lineTo(p.x, p.y); });
+      pts.forEach(p => { if (!p) return; if (!started) { ctx.moveTo(p.x, p.y); started=true; } else ctx.lineTo(p.x, p.y); });
       ctx.strokeStyle = ds.color; ctx.lineWidth = 2.5; ctx.lineJoin = 'round'; ctx.stroke();
-      /* dots */
       const dotHits = [];
       pts.forEach((p, i) => {
         if (!p) return;
-        ctx.beginPath(); ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
+        ctx.beginPath(); ctx.arc(p.x, p.y, 4, 0, Math.PI*2);
         ctx.fillStyle = '#fff'; ctx.fill();
         ctx.strokeStyle = ds.color; ctx.lineWidth = 2.5; ctx.stroke();
-        dotHits.push({ x: p.x - 10, y: p.y - 10, w: 20, h: 20, value: ds.values[i], label: labels[i], color: ds.color, dsLabel: ds.label });
+        dotHits.push({ x: p.x-10, y: p.y-10, w: 20, h: 20, value: ds.values[i], label: labels[i], color: ds.color, dsLabel: ds.label });
       });
       attachTooltip(canvas, dotHits, opts);
     });
-
-    /* legend (multi-dataset) */
     if (datasets.length > 1) {
       let lx = PAD.left;
       datasets.forEach(ds => {
-        ctx.fillStyle = ds.color;
-        ctx.fillRect(lx, 4, 16, 3);
-        ctx.fillStyle = 'rgba(62,62,60,0.55)';
-        ctx.font = `10px 'Ubuntu',sans-serif`;
-        ctx.textAlign = 'left';
-        ctx.fillText(ds.label, lx + 20, 10);
+        ctx.fillStyle = ds.color; ctx.fillRect(lx, 4, 16, 3);
+        ctx.fillStyle = 'rgba(62,62,60,0.55)'; ctx.font = `10px 'Ubuntu',sans-serif`;
+        ctx.textAlign = 'left'; ctx.fillText(ds.label, lx+20, 10);
         lx += ctx.measureText(ds.label).width + 40;
       });
     }
   }
 }
 
-/* ── TOOLTIP LOGIC ── */
 const ttEl    = () => document.getElementById('chart-tooltip');
 const ttLabel = () => document.getElementById('tt-label');
 const ttValue = () => document.getElementById('tt-value');
 
 function attachTooltip(canvas, hitAreas, opts) {
-  /* push hit areas (reset happens in drawChart) */
   if (!canvas._hitAreas) canvas._hitAreas = [];
   canvas._hitAreas.push(...hitAreas);
   canvas._rawValues = opts.rawValues || false;
   if (canvas._tooltipBound) return;
   canvas._tooltipBound = true;
-
   canvas.addEventListener('mousemove', e => {
     const rect = canvas.getBoundingClientRect();
-    const mx = e.clientX - rect.left;
-    const my = e.clientY - rect.top;
-    const hit = canvas._hitAreas.find(h => mx >= h.x && mx <= h.x + h.w && my >= h.y && my <= h.y + h.h);
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    const hit = canvas._hitAreas.find(h => mx >= h.x && mx <= h.x+h.w && my >= h.y && my <= h.y+h.h);
     if (hit) {
       const label = hit.dsLabel ? `${hit.label} · ${hit.dsLabel}` : hit.label;
-      const value = canvas._rawValues ? hit.value.toLocaleString() + ' assets' : fmt(hit.value);
-      ttLabel().textContent = label;
-      ttValue().textContent = value;
+      const value = canvas._rawValues ? hit.value.toLocaleString()+' assets' : fmt(hit.value);
+      ttLabel().textContent = label; ttValue().textContent = value;
       ttEl().style.borderLeft = `3px solid ${hit.color}`;
-      ttEl().style.left = (e.clientX + 14) + 'px';
-      ttEl().style.top  = (e.clientY - 28) + 'px';
-      ttEl().classList.add('visible');
-      canvas.style.cursor = 'crosshair';
-    } else {
-      ttEl().classList.remove('visible');
-      canvas.style.cursor = '';
-    }
+      ttEl().style.left = (e.clientX+14)+'px'; ttEl().style.top = (e.clientY-28)+'px';
+      ttEl().classList.add('visible'); canvas.style.cursor = 'crosshair';
+    } else { ttEl().classList.remove('visible'); canvas.style.cursor = ''; }
   });
-  canvas.addEventListener('mouseleave', () => {
-    ttEl().classList.remove('visible');
-    canvas.style.cursor = '';
-  });
+  canvas.addEventListener('mouseleave', () => { ttEl().classList.remove('visible'); canvas.style.cursor = ''; });
 }
 
 function renderSummaryCharts() {
@@ -472,11 +497,27 @@ function renderSummaryCharts() {
     color: '#85BB65',
     colors: ['#228D57','#85BB65','#3E3E3C','#228D57','#85BB65'],
   }], { type: 'bar', rawValues: true, labels: FILINGS.map(f => f.year) });
+
+  /* Liability type breakdown — stacked bar */
+  drawStackedBar('c-liab-type', [
+    { label: 'Mortgage / Loan', color: '#228D57',
+      values: [408050006, 407500004, 530000004, 297500002.5, 210032508] },
+    { label: 'Litigation',      color: '#e8b84b',
+      values: [0, 0, 0, 103000002.5, 103000002.5] },
+  ], FILINGS.map(f => f.year));
+
+  /* Creditor concentration — stacked bar */
+  drawStackedBar('c-liab-creditor', [
+    { label: 'Deutsche Bank',  color: '#228D57', values: [152500000, 187500000, 175000000, 37500000, 0] },
+    { label: 'Ladder Capital', color: '#85BB65', values: [165000000, 165000000, 165000000, 115000000, 115000000] },
+    { label: 'Axos Bank',      color: '#e8b84b', values: [0, 0, 100000000, 100000000, 100000000] },
+    { label: 'Other',          color: '#3E3E3C', values: [90550006, 55000004, 90000004, 148000005, 98032508] },
+  ], FILINGS.map(f => f.year));
 }
 
-/* ── ASSET DATA + NAME-BASED LOOKUP ── */
+/* ── ASSET LOOKUP ── */
 let allData = [];
-let nameIndex = {}; /* normalized name → [{filing_year, asset, median_value, median_income, income_type, owner}] */
+let nameIndex = {};
 
 async function loadData() {
   try {
@@ -492,13 +533,7 @@ async function loadData() {
 
 function normalizeName(s) {
   if (!s) return '';
-  return s.toLowerCase()
-    .replace(/underlying assets:.*/i, '')
-    .replace(/location:.*/i, '')
-    .replace(/value reported.*/i, '')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .slice(0, 60);
+  return s.toLowerCase().replace(/underlying assets:.*/i,'').replace(/location:.*/i,'').replace(/value reported.*/i,'').replace(/\s+/g,' ').trim().slice(0,60);
 }
 
 function buildNameIndex() {
@@ -508,7 +543,6 @@ function buildNameIndex() {
     if (!nameIndex[key]) nameIndex[key] = [];
     nameIndex[key].push(r);
   });
-  /* Keep only keys present in 2+ years */
   Object.keys(nameIndex).forEach(k => {
     const years = new Set(nameIndex[k].map(r => r.filing_year));
     if (years.size < 2) delete nameIndex[k];
@@ -523,36 +557,25 @@ function setupSearch() {
   function showSuggestions(q) {
     if (!q || q.length < 2) { box.classList.remove('open'); return; }
     const ql = q.toLowerCase();
-    const matches = Object.entries(nameIndex)
-      .filter(([k]) => k.includes(ql))
-      .sort((a, b) => {
-        const aYears = new Set(a[1].map(r => r.filing_year)).size;
-        const bYears = new Set(b[1].map(r => r.filing_year)).size;
-        return bYears - aYears;
-      })
-      .slice(0, 14);
-
+    const matches = Object.entries(nameIndex).filter(([k]) => k.includes(ql))
+      .sort((a,b) => new Set(b[1].map(r=>r.filing_year)).size - new Set(a[1].map(r=>r.filing_year)).size)
+      .slice(0,14);
     if (!matches.length) { box.classList.remove('open'); return; }
-
     box.innerHTML = matches.map(([key, rows]) => {
       const years = [...new Set(rows.map(r => r.filing_year))].sort();
-      /* use the longest/most descriptive asset name as display */
-      const displayName = rows.reduce((a, b) => (b.asset||'').length > (a.asset||'').length ? b : a).asset || key;
-      const truncated = displayName.length > 80 ? displayName.slice(0, 80) + '…' : displayName;
+      const displayName = rows.reduce((a,b) => (b.asset||'').length>(a.asset||'').length?b:a).asset || key;
+      const truncated = displayName.length > 80 ? displayName.slice(0,80)+'…' : displayName;
       return `<div class="suggestion-item" data-key="${esc(key)}" role="option" tabindex="-1">
         ${esc(truncated)}
-        <div class="suggestion-years">${years.map(y => `<span style="color:${YR_COLORS[y]}">${y}</span>`).join(' · ')}</div>
+        <div class="suggestion-years">${years.map(y=>`<span style="color:${YR_COLORS[y]}">${y}</span>`).join(' · ')}</div>
       </div>`;
     }).join('');
-    box.classList.add('open');
-    focusIdx = -1;
-
+    box.classList.add('open'); focusIdx = -1;
     box.querySelectorAll('.suggestion-item').forEach(el => {
       el.addEventListener('mousedown', e => {
         e.preventDefault();
         input.value = nameIndex[el.dataset.key]?.reduce((a,b)=>(b.asset||'').length>(a.asset||'').length?b:a)?.asset || el.dataset.key;
-        renderAsset(el.dataset.key);
-        box.classList.remove('open');
+        renderAsset(el.dataset.key); box.classList.remove('open');
       });
     });
   }
@@ -560,307 +583,111 @@ function setupSearch() {
   input.addEventListener('input', () => showSuggestions(input.value));
   input.addEventListener('keydown', e => {
     const items = [...box.querySelectorAll('.suggestion-item')];
-    if (e.key === 'ArrowDown') { e.preventDefault(); focusIdx = Math.min(focusIdx + 1, items.length - 1); items.forEach((el, i) => el.classList.toggle('focused', i === focusIdx)); }
-    else if (e.key === 'ArrowUp') { e.preventDefault(); focusIdx = Math.max(focusIdx - 1, 0); items.forEach((el, i) => el.classList.toggle('focused', i === focusIdx)); }
-    else if (e.key === 'Enter' && focusIdx >= 0) {
-      const el = items[focusIdx];
-      input.value = nameIndex[el.dataset.key]?.reduce((a,b)=>(b.asset||'').length>(a.asset||'').length?b:a)?.asset || el.dataset.key;
-      renderAsset(el.dataset.key);
-      box.classList.remove('open');
-    }
-    else if (e.key === 'Escape') box.classList.remove('open');
+    if (e.key==='ArrowDown') { e.preventDefault(); focusIdx=Math.min(focusIdx+1,items.length-1); items.forEach((el,i)=>el.classList.toggle('focused',i===focusIdx)); }
+    else if (e.key==='ArrowUp') { e.preventDefault(); focusIdx=Math.max(focusIdx-1,0); items.forEach((el,i)=>el.classList.toggle('focused',i===focusIdx)); }
+    else if (e.key==='Enter'&&focusIdx>=0) {
+      const el=items[focusIdx];
+      input.value=nameIndex[el.dataset.key]?.reduce((a,b)=>(b.asset||'').length>(a.asset||'').length?b:a)?.asset||el.dataset.key;
+      renderAsset(el.dataset.key); box.classList.remove('open');
+    } else if (e.key==='Escape') box.classList.remove('open');
   });
   document.addEventListener('click', e => { if (!e.target.closest('.lookup-input-wrap')) box.classList.remove('open'); });
 }
 
 function renderAsset(key) {
-  const rows = nameIndex[key];
-  if (!rows) return;
-
+  const rows = nameIndex[key]; if (!rows) return;
   const years = ['2016','2020','2022','2024','2025'];
   const byYear = {};
   years.forEach(y => {
-    const matches = rows.filter(r => r.filing_year === y);
-    /* if multiple rows match (same name, same year), pick highest value */
-    byYear[y] = matches.length ? matches.sort((a,b) => (b.median_value||0) - (a.median_value||0))[0] : null;
+    const m = rows.filter(r=>r.filing_year===y);
+    byYear[y] = m.length ? m.sort((a,b)=>(b.median_value||0)-(a.median_value||0))[0] : null;
   });
-
-  const presentYears = years.filter(y => byYear[y]);
-  const displayName  = rows.reduce((a,b) => (b.asset||'').length > (a.asset||'').length ? b : a).asset || key;
+  const presentYears = years.filter(y=>byYear[y]);
+  const displayName  = rows.reduce((a,b)=>(b.asset||'').length>(a.asset||'').length?b:a).asset||key;
   const hasMultiMatch = rows.length > presentYears.length;
-
-  const valData = years.map(y => byYear[y]?.median_value ?? null);
-  const incData = years.map(y => byYear[y]?.median_income ?? null);
-  const hasVal  = valData.some(v => v != null && v > 0);
-  const hasInc  = incData.some(v => v != null && v > 0);
-
-  /* table rows */
+  const valData = years.map(y=>byYear[y]?.median_value??null);
+  const incData = years.map(y=>byYear[y]?.median_income??null);
+  const hasVal  = valData.some(v=>v!=null&&v>0);
+  const hasInc  = incData.some(v=>v!=null&&v>0);
   const tableRows = years.map(y => {
     const r = byYear[y];
-    if (!r) return `<tr>
-      <td><span class="yr-dot" style="background:${YR_COLORS[y]}"></span>${y}</td>
-      <td colspan="3" class="absent">Not present in this filing</td>
-    </tr>`;
-    return `<tr>
-      <td><span class="yr-dot" style="background:${YR_COLORS[y]}"></span>${y}</td>
-      <td class="val">${fmt(r.median_value)}</td>
-      <td class="val">${fmt(r.median_income)}</td>
-      <td style="color:rgba(62,62,60,.6);max-width:120px;word-break:break-word;line-height:1.3">${r.income_type ? esc(r.income_type) : '<span style="opacity:.3">—</span>'}</td>
-    </tr>`;
+    if (!r) return `<tr><td><span class="yr-dot" style="background:${YR_COLORS[y]}"></span>${y}</td><td colspan="3" class="absent">Not present in this filing</td></tr>`;
+    return `<tr><td><span class="yr-dot" style="background:${YR_COLORS[y]}"></span>${y}</td><td class="val">${fmt(r.median_value)}</td><td class="val">${fmt(r.median_income)}</td><td style="color:rgba(62,62,60,.6);max-width:120px;word-break:break-word;line-height:1.3">${r.income_type?esc(r.income_type):'<span style="opacity:.3">—</span>'}</td></tr>`;
   }).join('');
-
   const panel = document.getElementById('asset-panel');
-  const placeholder = document.getElementById('lookup-placeholder');
-
+  document.getElementById('lookup-placeholder').style.display='none';
   panel.innerHTML = `
-    <div class="asset-panel-header">
-      <div>
-        <div class="asset-panel-name">${esc(displayName.length > 100 ? displayName.slice(0, 100) + '…' : displayName)}</div>
-        <div class="asset-panel-meta">Present in: ${presentYears.map(y => `<span style="color:${YR_COLORS[y]}">${y}</span>`).join(' · ')}</div>
-        ${hasMultiMatch ? `<div class="asset-panel-note">⚑ Multiple rows matched — showing highest value per year. Asset IDs will be manually linked in a future update.</div>` : ''}
-      </div>
-    </div>
+    <div class="asset-panel-header"><div>
+      <div class="asset-panel-name">${esc(displayName.length>100?displayName.slice(0,100)+'…':displayName)}</div>
+      <div class="asset-panel-meta">Present in: ${presentYears.map(y=>`<span style="color:${YR_COLORS[y]}">${y}</span>`).join(' · ')}</div>
+      ${hasMultiMatch?`<div class="asset-panel-note">⚑ Multiple rows matched — showing highest value per year.</div>`:''}
+    </div></div>
     <div class="asset-panel-body">
-      <div>
-        ${(hasVal || hasInc)
-          ? `<div style="font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(62,62,60,.45);margin-bottom:.5rem">Value &amp; Income Over Time</div>
-             <div class="asset-chart-wrap"><canvas id="asset-chart" role="img" aria-label="Asset value and income over time"></canvas></div>`
-          : `<div style="font-family:var(--mono);font-size:12px;color:rgba(62,62,60,.35);padding:2rem 0;text-align:center">No numeric value data available</div>`
-        }
-      </div>
-      <div style="overflow-x:auto">
-        <table class="asset-table" aria-label="Asset data by filing year">
-          <thead><tr><th>Year</th><th>Est. Value</th><th>Est. Income</th><th>Income Type</th></tr></thead>
-          <tbody>${tableRows}</tbody>
-        </table>
-      </div>
+      <div>${(hasVal||hasInc)?`<div style="font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(62,62,60,.45);margin-bottom:.5rem">Value &amp; Income Over Time</div><div class="asset-chart-wrap"><canvas id="asset-chart" role="img" aria-label="Asset value and income over time"></canvas></div>`:`<div style="font-family:var(--mono);font-size:12px;color:rgba(62,62,60,.35);padding:2rem 0;text-align:center">No numeric value data available</div>`}</div>
+      <div style="overflow-x:auto"><table class="asset-table" aria-label="Asset data by filing year"><thead><tr><th>Year</th><th>Est. Value</th><th>Est. Income</th><th>Income Type</th></tr></thead><tbody>${tableRows}</tbody></table></div>
     </div>`;
-
   panel.classList.add('visible');
-  placeholder.style.display = 'none';
-
-  if (hasVal || hasInc) {
+  if (hasVal||hasInc) {
     requestAnimationFrame(() => {
-      const ds = [];
-      if (hasVal) ds.push({ values: valData,  color: '#228D57', label: 'Est. Value' });
-      if (hasInc) ds.push({ values: incData,  color: '#e8b84b', label: 'Est. Income' });
-      drawChart('asset-chart', ds, { labels: years });
+      const ds=[];
+      if (hasVal) ds.push({values:valData,color:'#228D57',label:'Est. Value'});
+      if (hasInc) ds.push({values:incData,color:'#e8b84b',label:'Est. Income'});
+      drawChart('asset-chart',ds,{labels:years});
     });
   }
 }
 
 /* ── COVERAGE TIMELINE ── */
-/*
-  Each entry: { id, label, formType, start, end, color, note }
-  start/end: [year, month] where month is 1-based
-  Add new rows here as new filings are processed.
-  ─────────────────────────────────────────────── */
 const COVERAGE = [
-  {
-    id: '2016', label: '2016 Candidate', formType: 'candidate',
-    start: [2015, 1], end: [2016, 5],
-    filed: 'Filed May 16, 2016',
-    note: null,
-  },
-  {
-    id: '2020', label: '2020 Annual', formType: 'annual',
-    start: [2019, 1], end: [2019, 12],
-    filed: 'Filed Jul. 31, 2020',
-    note: null,
-  },
-  {
-    id: '2022', label: '2022 Candidate', formType: 'candidate',
-    start: [2022, 1], end: [2023, 4],
-    filed: 'Filed Apr. 14, 2023',
-    note: '4 outside positions disclosed',
-  },
-  {
-    id: '2024', label: '2024 Candidate', formType: 'candidate',
-    start: [2023, 1], end: [2024, 8],
-    filed: 'Filed Aug. 13, 2024',
-    note: null,
-  },
-  {
-    id: '2025', label: '2025 Annual', formType: 'annual',
-    start: [2024, 1], end: [2024, 12],
-    filed: 'Filed Jun. 13, 2025',
-    note: 'Filed late',
-  },
-  /* ── NOT YET PROCESSED ── */
-  {
-    id: '2017', label: '2017 Annual', formType: 'gap',
-    start: [2016, 1], end: [2016, 12],
-    filed: 'Coming soon',
-    note: null,
-  },
-  {
-    id: '2018', label: '2018 Annual', formType: 'gap',
-    start: [2017, 1], end: [2017, 12],
-    filed: 'Coming soon',
-    note: null,
-  },
-  {
-    id: '2021t', label: '2021 Termination', formType: 'gap',
-    start: [2020, 1], end: [2021, 1],
-    filed: 'Coming soon',
-    note: null,
-  },
+  { id:'2016', label:'2016 Candidate', formType:'candidate', start:[2015,1], end:[2016,5],  filed:'Filed May 16, 2016', note:null },
+  { id:'2020', label:'2020 Annual',    formType:'annual',    start:[2019,1], end:[2019,12], filed:'Filed Jul. 31, 2020', note:null },
+  { id:'2022', label:'2022 Candidate', formType:'candidate', start:[2022,1], end:[2023,4],  filed:'Filed Apr. 14, 2023', note:'4 outside positions disclosed' },
+  { id:'2024', label:'2024 Candidate', formType:'candidate', start:[2023,1], end:[2024,8],  filed:'Filed Aug. 13, 2024', note:null },
+  { id:'2025', label:'2025 Annual',    formType:'annual',    start:[2024,1], end:[2024,12], filed:'Filed Jun. 13, 2025', note:'Filed late' },
+  { id:'2017', label:'2017 Annual',    formType:'gap',       start:[2016,1], end:[2016,12], filed:'Coming soon', note:null },
+  { id:'2018', label:'2018 Annual',    formType:'gap',       start:[2017,1], end:[2017,12], filed:'Coming soon', note:null },
+  { id:'2021t',label:'2021 Termination',formType:'gap',      start:[2020,1], end:[2021,1],  filed:'Coming soon', note:null },
 ];
-
-const COLORS = { candidate: '#228D57', annual: '#85BB65', gap: 'rgba(62,62,60,0.12)' };
+const COV_COLORS = { candidate:'#228D57', annual:'#85BB65', gap:'rgba(62,62,60,0.12)' };
 
 function renderCoverageTimeline() {
-  const wrap = document.getElementById('coverage-timeline');
-  if (!wrap) return;
-
-  /* time bounds across all entries */
-  const allStarts = COVERAGE.map(c => c.start[0] * 12 + c.start[1]);
-  const allEnds   = COVERAGE.map(c => c.end[0]   * 12 + c.end[1]);
-  const tMin = Math.min(...allStarts) - 1;
-  const tMax = Math.max(...allEnds)   + 1;
-  const tRange = tMax - tMin;
-
-  function toPos(year, month) { return ((year * 12 + month) - tMin) / tRange * 100; }
-
-  /* axis year labels */
+  const wrap = document.getElementById('coverage-timeline'); if (!wrap) return;
+  const allStarts = COVERAGE.map(c=>c.start[0]*12+c.start[1]);
+  const allEnds   = COVERAGE.map(c=>c.end[0]*12+c.end[1]);
+  const tMin = Math.min(...allStarts)-1, tMax = Math.max(...allEnds)+1, tRange = tMax-tMin;
+  function toPos(year,month){ return ((year*12+month)-tMin)/tRange*100; }
   const years = [];
-  for (let y = Math.floor(tMin / 12); y <= Math.ceil(tMax / 12); y++) years.push(y);
-
+  for (let y=Math.floor(tMin/12);y<=Math.ceil(tMax/12);y++) years.push(y);
   let html = `<div class="cov-axis" style="height:20px;">`;
-  years.forEach(y => {
-    const pct = toPos(y, 0);
-    if (pct < 0 || pct > 100) return;
-    html += `<span class="cov-axis-label" style="left:${pct}%">${y}</span>`;
+  years.forEach(y=>{ const pct=toPos(y,0); if(pct<0||pct>100)return; html+=`<span class="cov-axis-label" style="left:${pct}%">${y}</span>`; });
+  html+=`</div>`;
+  const processed = COVERAGE.filter(c=>c.formType!=='gap');
+  const gaps      = COVERAGE.filter(c=>c.formType==='gap');
+  processed.forEach(c=>{
+    const left=toPos(c.start[0],c.start[1]),right=toPos(c.end[0],c.end[1]),width=right-left,color=COV_COLORS[c.formType];
+    html+=`<div class="cov-row"><div class="cov-label">${c.label}<span>${c.filed}</span></div><div class="cov-bar-wrap"><div class="cov-segment" style="left:${left}%;width:${width}%;background:${color};" title="${c.label}${c.note?' · '+c.note:''}"><span class="cov-segment-label">${monthLabel(c.start)} – ${monthLabel(c.end)}${c.note?' · '+c.note:''}</span></div></div></div>`;
   });
-  html += `</div>`;
-
-  /* rows */
-  const processed = COVERAGE.filter(c => c.formType !== 'gap');
-  const gaps      = COVERAGE.filter(c => c.formType === 'gap');
-
-  /* processed filings first */
-  processed.forEach(c => {
-    const left  = toPos(c.start[0], c.start[1]);
-    const right = toPos(c.end[0],   c.end[1]);
-    const width = right - left;
-    const color = COLORS[c.formType];
-    html += `<div class="cov-row">
-      <div class="cov-label">${c.label}<span>${c.filed}</span></div>
-      <div class="cov-bar-wrap">
-        <div class="cov-segment" style="left:${left}%;width:${width}%;background:${color};" title="${c.label}: ${monthLabel(c.start)} – ${monthLabel(c.end)}${c.note ? ' · ' + c.note : ''}">
-          <span class="cov-segment-label">${monthLabel(c.start)} – ${monthLabel(c.end)}${c.note ? ' · ' + c.note : ''}</span>
-        </div>
-      </div>
-    </div>`;
-  });
-
-  /* gap rows */
   if (gaps.length) {
-    html += `<div style="height:0.5rem"></div>`;
-    gaps.forEach(c => {
-      const left  = toPos(c.start[0], c.start[1]);
-      const right = toPos(c.end[0],   c.end[1]);
-      const width = right - left;
-      html += `<div class="cov-row">
-        <div class="cov-label" style="color:rgba(62,62,60,0.4)">${c.label}<span>${c.filed}</span></div>
-        <div class="cov-bar-wrap">
-          <div class="cov-gap" style="left:${left}%;width:${width}%;">
-            <span class="cov-gap-label">Coming soon</span>
-          </div>
-        </div>
-      </div>`;
+    html+=`<div style="height:0.5rem"></div>`;
+    gaps.forEach(c=>{
+      const left=toPos(c.start[0],c.start[1]),right=toPos(c.end[0],c.end[1]),width=right-left;
+      html+=`<div class="cov-row"><div class="cov-label" style="color:rgba(62,62,60,0.4)">${c.label}<span>${c.filed}</span></div><div class="cov-bar-wrap"><div class="cov-gap" style="left:${left}%;width:${width}%;"><span class="cov-gap-label">Coming soon</span></div></div></div>`;
     });
   }
-
-  html += `<div class="cov-note">
-    <strong>How to read this:</strong> Each bar shows the time period whose financial activity is captured in that filing.
-    Annual forms cover the full preceding calendar year. Candidate forms cover roughly 12 months before the filing date.
-    Gaps show forms that are coming soon to the database.
-    The 2023 annual form was not processed due to an OGE lawsuit note.
-  </div>`;
-
+  html+=`<div class="cov-note"><strong>How to read this:</strong> Each bar shows the time period whose financial activity is captured in that filing. Annual forms cover the full preceding calendar year. Candidate forms cover roughly 12 months before the filing date. Gaps show forms coming soon to the database. The 2023 annual form was not processed due to an OGE lawsuit note.</div>`;
   wrap.innerHTML = html;
 }
 
-function monthLabel([year, month]) {
-  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  return `${months[month - 1]} ${year}`;
+function monthLabel([year,month]){
+  return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][month-1]+' '+year;
 }
 
-/* ── INIT ── */
 window.addEventListener('load', () => {
   renderSummaryCharts();
   renderCoverageTimeline();
   loadData();
-  window.addEventListener('resize', () => {
-    renderSummaryCharts();
-  });
+  window.addEventListener('resize', renderSummaryCharts);
 });
-  // ── LIABILITY TYPE BREAKDOWN CHART ──────────────────────────
-(function() {
-  const YEARS = ['2016', '2020', '2022', '2024', '2025'];
-  const mortgageLoan = [408050006, 407500004, 530000004, 297500002.5, 210032508];
-  const litigation   = [0, 0, 0, 103000002.5, 103000002.5];
-
-  const ctx = document.getElementById('c-liab-type');
-  if (!ctx) return;
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: YEARS,
-      datasets: [
-        { label: 'Mortgage / Loan', data: mortgageLoan.map(v => +(v/1e6).toFixed(1)), backgroundColor: 'rgba(34,141,87,0.75)', borderColor: '#228D57', borderWidth: 1 },
-        { label: 'Litigation',      data: litigation.map(v => +(v/1e6).toFixed(1)),   backgroundColor: 'rgba(232,184,75,0.65)', borderColor: '#e8b84b', borderWidth: 1 }
-      ]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { labels: { color: 'rgba(232,233,201,0.6)', font: { family: 'Courier New', size: 11 }, boxWidth: 12 } },
-        tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: $${ctx.parsed.y.toFixed(0)}M+` } }
-      },
-      scales: {
-        x: { stacked: true, ticks: { color: 'rgba(232,233,201,0.5)', font: { family: 'Courier New', size: 11 } }, grid: { color: 'rgba(232,233,201,0.06)' } },
-        y: { stacked: true, ticks: { color: 'rgba(232,233,201,0.5)', font: { family: 'Courier New', size: 11 }, callback: v => '$' + v + 'M' }, grid: { color: 'rgba(232,233,201,0.06)' } }
-      }
-    }
-  });
-})();
-
-// ── CREDITOR CONCENTRATION CHART ────────────────────────────
-(function() {
-  const YEARS = ['2016', '2020', '2022', '2024', '2025'];
-  const deutscheBank  = [152.5, 187.5, 175.0,  37.5,   0];
-  const ladderCapital = [165.0, 165.0, 165.0, 115.0, 115.0];
-  const axosBank      = [0,     0,     100.0, 100.0, 100.0];
-  const other         = [90.55, 55.0,   90.0, 148.0,  98.0];
-
-  const ctx = document.getElementById('c-liab-creditor');
-  if (!ctx) return;
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: YEARS,
-      datasets: [
-        { label: 'Deutsche Bank',                              data: deutscheBank,  backgroundColor: 'rgba(34,141,87,0.8)',    borderColor: '#228D57',              borderWidth: 1 },
-        { label: 'Ladder Capital',                             data: ladderCapital, backgroundColor: 'rgba(133,187,101,0.7)', borderColor: '#85bb65',              borderWidth: 1 },
-        { label: 'Axos Bank',                                  data: axosBank,      backgroundColor: 'rgba(232,233,201,0.25)',borderColor: 'rgba(232,233,201,0.5)', borderWidth: 1 },
-        { label: 'Other (litigation, intercompany, other lenders)', data: other,   backgroundColor: 'rgba(232,184,75,0.55)', borderColor: '#e8b84b',              borderWidth: 1 }
-      ]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { labels: { color: 'rgba(232,233,201,0.6)', font: { family: 'Courier New', size: 10 }, boxWidth: 12 } },
-        tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: $${ctx.parsed.y}M+` } }
-      },
-      scales: {
-        x: { stacked: true, ticks: { color: 'rgba(232,233,201,0.5)', font: { family: 'Courier New', size: 11 } }, grid: { color: 'rgba(232,233,201,0.06)' } },
-        y: { stacked: true, ticks: { color: 'rgba(232,233,201,0.5)', font: { family: 'Courier New', size: 11 }, callback: v => '$' + v + 'M' }, grid: { color: 'rgba(232,233,201,0.06)' } }
-      }
-    }
-  });
-})();
 </script>
 </body>
 </html>
