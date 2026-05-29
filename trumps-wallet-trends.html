@@ -294,7 +294,7 @@ function drawStackedBar(canvasId, datasets, labels) {
   ctx.scale(dpr, dpr);
 
   const n = labels.length;
-  const PAD = { top: 18, right: 16, bottom: 32, left: 68 };
+  const PAD = { top: 18, right: 24, bottom: 32, left: 80 };
   const cW = W - PAD.left - PAD.right;
   const cH = H - PAD.top  - PAD.bottom;
   canvas._hitAreas = [];
@@ -370,7 +370,7 @@ function drawChart(canvasId, datasets, opts = {}) {
   const isBar = opts.type === 'bar';
   const labels = opts.labels || FILINGS.map(f => f.year);
   const n = labels.length;
-  const PAD = { top: 18, right: 16, bottom: 32, left: 68 };
+  const PAD = { top: 18, right: 24, bottom: 32, left: 80 };
   const cW = W - PAD.left - PAD.right;
   const cH = H - PAD.top  - PAD.bottom;
   canvas._hitAreas = [];
