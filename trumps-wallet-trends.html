@@ -50,6 +50,11 @@
   .chart-legend-item{font-family:var(--sans);font-size:11px;color:rgba(62,62,60,.6);display:flex;align-items:center;gap:.35rem;}
   .chart-legend-swatch{width:12px;height:10px;border-radius:2px;flex-shrink:0;}
 
+  /* DONUT YEAR BUTTONS */
+  .donut-yr-btn{font-family:var(--mono);font-size:11px;padding:.35rem .8rem;border:1px solid var(--rule-strong);border-radius:var(--radius);background:#fff;color:var(--black-olive);cursor:pointer;transition:all .15s;}
+  .donut-yr-btn:hover{border-color:var(--sea-green);color:var(--sea-green);}
+  .donut-yr-btn.active{background:var(--sea-green);color:#fff;border-color:var(--sea-green);}
+
   /* MOVERS TABLE */
   .movers-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:.5rem;}
   .movers-table th{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:.5rem .75rem;text-align:left;background:var(--black-olive);color:var(--dirty-white);}
@@ -232,20 +237,29 @@
   <section aria-labelledby="mix-heading">
     <div class="section-label" id="mix-heading">Portfolio Mix by Asset Type</div>
     <p class="section-desc">How the composition of Trump's disclosed portfolio has shifted across five filings — both by asset value and by income generation.</p>
+
+    <!-- Year selector -->
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.25rem;" id="donut-year-btns" role="group" aria-label="Select filing year"></div>
+
     <div class="charts-grid">
-      <div class="chart-card full-width">
-        <div class="chart-title">Asset Value Mix Over Time</div>
-        <div class="chart-subtitle">Share of total disclosed asset value by category — stacked to 100%</div>
-        <div class="chart-canvas-wrap tall"><canvas id="c-mix-val" role="img" aria-label="Asset value mix by type over time"></canvas></div>
-        <div class="chart-legend" id="mix-legend-val"></div>
+      <div class="chart-card">
+        <div class="chart-title">Asset Value Mix</div>
+        <div class="chart-subtitle" id="donut-val-subtitle">Share of total disclosed asset value by category</div>
+        <div style="position:relative;width:100%;display:flex;justify-content:center;padding:1rem 0;">
+          <canvas id="c-donut-val" width="260" height="260" role="img" aria-label="Asset value mix donut chart"></canvas>
+        </div>
       </div>
-      <div class="chart-card full-width">
-        <div class="chart-title">Income Mix Over Time</div>
-        <div class="chart-subtitle">Share of total disclosed income by category — stacked to 100%</div>
-        <div class="chart-canvas-wrap tall"><canvas id="c-mix-inc" role="img" aria-label="Income mix by type over time"></canvas></div>
-        <div class="chart-legend" id="mix-legend-inc"></div>
+      <div class="chart-card">
+        <div class="chart-title">Income Mix</div>
+        <div class="chart-subtitle" id="donut-inc-subtitle">Share of total disclosed income by category</div>
+        <div style="position:relative;width:100%;display:flex;justify-content:center;padding:1rem 0;">
+          <canvas id="c-donut-inc" width="260" height="260" role="img" aria-label="Income mix donut chart"></canvas>
+        </div>
       </div>
     </div>
+
+    <!-- Shared legend -->
+    <div class="chart-legend" id="donut-legend" style="margin-top:1rem;justify-content:center;"></div>
   </section>
 
   <!-- TOP MOVERS -->
@@ -529,54 +543,115 @@ function drawStackedBar(canvasId,datasets,labels){
   attachTooltip(canvas,canvas._hitAreas,{rawValues:false});
 }
 
-/* ── 100% STACKED BAR (portfolio mix) ── */
-function draw100StackedBar(canvasId,datasets,labels,legendElId){
-  const c=setupCanvas(canvasId);if(!c)return;
-  const{ctx,W,H}=c;
-  const PAD={top:18,right:24,bottom:32,left:45};
-  const cW=W-PAD.left-PAD.right,cH=H-PAD.top-PAD.bottom;
-  const n=labels.length,barW=cW/n*0.65;
-  const toX=i=>PAD.left+(i/(n-1))*cW;
-  const toY=pct=>PAD.top+cH-(pct/100)*cH;
-  // y-axis % labels
-  ctx.font=`10px 'Space Mono',monospace`;ctx.textAlign='right';
-  for(let p=0;p<=100;p+=25){
-    const y=toY(p);
-    ctx.strokeStyle='rgba(62,62,60,0.08)';ctx.lineWidth=1;
-    ctx.beginPath();ctx.moveTo(PAD.left,y);ctx.lineTo(PAD.left+cW,y);ctx.stroke();
-    ctx.fillStyle='rgba(62,62,60,0.45)';ctx.fillText(p+'%',PAD.left-5,y+3.5);
-  }
-  ctx.textAlign='center';ctx.fillStyle='rgba(62,62,60,0.5)';
-  labels.forEach((lb,i)=>ctx.fillText(lb,toX(i),H-PAD.bottom+14));
-  const canvas=document.getElementById(canvasId);
-  labels.forEach((_,i)=>{
-    const total=datasets.reduce((s,d)=>s+(d.values[i]||0),0);
-    if(!total)return;
-    let base=0;
-    datasets.forEach(ds=>{
-      const v=ds.values[i]||0;if(!v){base+=v/total*100;return;}
-      const pct=v/total*100;
-      const x=toX(i)-barW/2,bH=toY(base)-toY(base+pct),y=toY(base+pct);
-      ctx.fillStyle=ds.color;
-      ctx.beginPath();if(ctx.roundRect)ctx.roundRect(x,y,barW,bH,1);else ctx.rect(x,y,barW,bH);ctx.fill();
-      // label inside bar if big enough
-      if(bH>16){
-        ctx.fillStyle='rgba(255,255,255,0.85)';ctx.font=`9px 'Space Mono',monospace`;ctx.textAlign='center';
-        ctx.fillText(Math.round(pct)+'%',toX(i),y+bH/2+3.5);
-      }
-      canvas._hitAreas.push({x,y,w:barW,h:bH,value:v,label:labels[i],color:ds.color,dsLabel:`${ds.label} (${Math.round(pct)}%)`});
-      base+=pct;
-    });
+/* ── DONUT CHART ── */
+let activeMixYear = '2025';
+let storedMixData = null;
+
+function drawDonut(canvasId, data, total) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const SIZE = 260;
+  canvas.width  = SIZE * dpr; canvas.height = SIZE * dpr;
+  canvas.style.width = SIZE + 'px'; canvas.style.height = SIZE + 'px';
+  ctx.scale(dpr, dpr);
+
+  const cx = SIZE / 2, cy = SIZE / 2;
+  const outerR = SIZE * 0.42, innerR = SIZE * 0.26;
+  let startAngle = -Math.PI / 2;
+
+  canvas._hitAreas = [];
+
+  data.forEach(({label, value, color}) => {
+    if (!value) return;
+    const pct = value / total;
+    const sweep = pct * 2 * Math.PI;
+    const endAngle = startAngle + sweep;
+
+    ctx.beginPath();
+    ctx.moveTo(cx + Math.cos(startAngle) * innerR, cy + Math.sin(startAngle) * innerR);
+    ctx.arc(cx, cy, outerR, startAngle, endAngle);
+    ctx.arc(cx, cy, innerR, endAngle, startAngle, true);
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // percentage label inside wedge if big enough
+    if (pct > 0.06) {
+      const midAngle = startAngle + sweep / 2;
+      const labelR = (outerR + innerR) / 2;
+      const lx = cx + Math.cos(midAngle) * labelR;
+      const ly = cy + Math.sin(midAngle) * labelR;
+      ctx.fillStyle = '#fff';
+      ctx.font = `bold 10px 'Space Mono',monospace`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(Math.round(pct * 100) + '%', lx, ly);
+    }
+
+    // hit area (arc bounding box approximation)
+    const midAngle = startAngle + sweep / 2;
+    const hx = cx + Math.cos(midAngle) * (outerR * 0.7) - 14;
+    const hy = cy + Math.sin(midAngle) * (outerR * 0.7) - 14;
+    canvas._hitAreas.push({ x: hx, y: hy, w: 28, h: 28, value, label, color, dsLabel: Math.round(pct * 100) + '%' });
+
+    startAngle = endAngle;
   });
-  attachTooltip(canvas,canvas._hitAreas,{rawValues:false});
+
+  // center label
+  ctx.fillStyle = 'rgba(62,62,60,0.45)';
+  ctx.font = `10px 'Space Mono',monospace`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(fmtM(total), cx, cy);
+
+  attachTooltip(canvas, canvas._hitAreas, {rawValues: false});
+}
+
+function renderDonutCharts(mixData, year) {
+  if (!mixData || !mixData[year]) return;
+  const valData = mixData[year].val;
+  const incData = mixData[year].inc;
+  const totalVal = Object.values(valData).reduce((s,v)=>s+v,0);
+  const totalInc = Object.values(incData).reduce((s,v)=>s+v,0);
+  const meta = FILING_META[year];
+
+  document.getElementById('donut-val-subtitle').textContent = `${meta.label} · ${meta.months}-month filing`;
+  document.getElementById('donut-inc-subtitle').textContent  = `${meta.label} · ${meta.months}-month filing`;
+
+  const valSlices = TYPE_GROUPS.map(g => ({label:g, value:valData[g]||0, color:TYPE_COLORS[g]})).filter(d=>d.value>0);
+  const incSlices = TYPE_GROUPS.map(g => ({label:g, value:incData[g]||0, color:TYPE_COLORS[g]})).filter(d=>d.value>0);
+
+  drawDonut('c-donut-val', valSlices, totalVal);
+  drawDonut('c-donut-inc', incSlices, totalInc);
+
   // legend
-  const legendEl=document.getElementById(legendElId);
-  if(legendEl){
-    legendEl.innerHTML=datasets.filter(d=>d.values.some(v=>v>0)).map(d=>`
+  const legendEl = document.getElementById('donut-legend');
+  if (legendEl) {
+    legendEl.innerHTML = TYPE_GROUPS.filter(g => (valData[g]||0) + (incData[g]||0) > 0).map(g => `
       <span class="chart-legend-item">
-        <span class="chart-legend-swatch" style="background:${d.color}"></span>${d.label}
+        <span class="chart-legend-swatch" style="background:${TYPE_COLORS[g]}"></span>${g}
       </span>`).join('');
   }
+}
+
+function buildDonutYearBtns(mixData) {
+  const container = document.getElementById('donut-year-btns');
+  if (!container) return;
+  container.innerHTML = YEARS.map(y => `
+    <button class="donut-yr-btn${y===activeMixYear?' active':''}" data-year="${y}">${y}</button>
+  `).join('');
+  container.querySelectorAll('.donut-yr-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeMixYear = btn.dataset.year;
+      container.querySelectorAll('.donut-yr-btn').forEach(b => b.classList.toggle('active', b.dataset.year === activeMixYear));
+      renderDonutCharts(storedMixData, activeMixYear);
+    });
+  });
 }
 
 /* ── RENDER ALL CHARTS ── */
@@ -607,12 +682,11 @@ function renderCharts(FILINGS,mixData){
   drawChart('c-income-raw',[{values:FILINGS.map(f=>f.income),color:'#e8b84b'}],{labels});
   drawChart('c-income-annualized',[{values:FILINGS.map(f=>f.annualizedIncome),color:'#228D57'}],{labels});
 
-  // Portfolio mix
+  // Portfolio mix donuts
   if(mixData){
-    const mixDatasets_val=TYPE_GROUPS.map(g=>({label:g,color:TYPE_COLORS[g],values:FILINGS.map(f=>mixData[f.year]?.val[g]||0)}));
-    const mixDatasets_inc=TYPE_GROUPS.map(g=>({label:g,color:TYPE_COLORS[g],values:FILINGS.map(f=>mixData[f.year]?.inc[g]||0)}));
-    draw100StackedBar('c-mix-val',mixDatasets_val,labels,'mix-legend-val');
-    draw100StackedBar('c-mix-inc',mixDatasets_inc,labels,'mix-legend-inc');
+    storedMixData = mixData;
+    buildDonutYearBtns(mixData);
+    renderDonutCharts(mixData, activeMixYear);
     renderMovers(FILINGS,mixData);
   }
 }
@@ -836,7 +910,7 @@ async function init(){
     renderCharts(FILINGS,mixData);
     buildNameIndex();
     setupSearch();
-    window.addEventListener('resize',()=>renderCharts(FILINGS,mixData));
+    window.addEventListener('resize',()=>renderCharts(FILINGS,null));
 
   }catch(e){
     document.getElementById('lookup-placeholder').innerHTML=`⚠ Could not load data: ${e.message}`;
