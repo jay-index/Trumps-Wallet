@@ -219,6 +219,19 @@
         <div class="search-wrap"><input type="search" id="search-input" placeholder="Search by name, type, owner…" autocomplete="off"></div>
       </div>
       <div class="filter-group">
+        <label for="year-filter">Filing year</label>
+        <div class="select-wrap">
+          <select id="year-filter">
+            <option value="">All years</option>
+            <option value="2025">2025</option>
+            <option value="2024">2024</option>
+            <option value="2022">2022</option>
+            <option value="2020">2020</option>
+            <option value="2016">2016</option>
+          </select>
+        </div>
+      </div>
+      <div class="filter-group">
         <label for="type-filter">Asset type</label>
         <div class="select-wrap"><select id="type-filter"><option value="">All types</option></select></div>
       </div>
@@ -356,14 +369,22 @@ function renderCards(){
   });
 }
 
-function toggleYear(year){activeYear=activeYear===year?null:year;renderCards();updateBanner();currentPage=1;applyFilters();}
+function toggleYear(year){
+  activeYear=activeYear===year?null:year;
+  document.getElementById('year-filter').value=activeYear||'';
+  renderCards();updateBanner();currentPage=1;applyFilters();
+}
 
 function updateBanner(){
   const banner=document.getElementById('active-year-banner'),text=document.getElementById('banner-text');
   if(activeYear){const m=FILING_META[activeYear];text.textContent=`Showing: ${m.label} · ${m.period}`;banner.classList.add('visible');}
   else banner.classList.remove('visible');
 }
-document.getElementById('banner-clear').addEventListener('click',()=>{activeYear=null;renderCards();updateBanner();currentPage=1;applyFilters();});
+document.getElementById('banner-clear').addEventListener('click',()=>{
+  activeYear=null;
+  document.getElementById('year-filter').value='';
+  renderCards();updateBanner();currentPage=1;applyFilters();
+});
 
 let allData=[],filtered=[],currentPage=1;
 const PAGE_SIZE=50;
@@ -591,11 +612,16 @@ document.querySelectorAll('th[data-col]').forEach(th=>{
 });
 
 document.getElementById('search-input').addEventListener('input',()=>{currentPage=1;applyFilters();});
+document.getElementById('year-filter').addEventListener('change',()=>{
+  activeYear=document.getElementById('year-filter').value||null;
+  renderCards();updateBanner();currentPage=1;applyFilters();
+});
 document.getElementById('type-filter').addEventListener('change',()=>{currentPage=1;applyFilters();});
 document.getElementById('owner-filter').addEventListener('change',()=>{currentPage=1;applyFilters();});
 document.getElementById('flag-filter').addEventListener('change',()=>{currentPage=1;applyFilters();});
 document.getElementById('reset-btn').addEventListener('click',()=>{
   document.getElementById('search-input').value='';
+  document.getElementById('year-filter').value='';
   document.getElementById('type-filter').value='';
   document.getElementById('owner-filter').value='';
   document.getElementById('flag-filter').value='';
