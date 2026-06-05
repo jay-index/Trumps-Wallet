@@ -201,6 +201,14 @@
         <span class="search-icon">⌕</span>
         <input type="search" id="search-input" placeholder="Search creditor, property, or type…" aria-label="Search liabilities">
       </div>
+      <select id="year-filter" class="filter-select" aria-label="Filter by year">
+        <option value="">All years</option>
+        <option value="2025">2025</option>
+        <option value="2024">2024</option>
+        <option value="2022">2022</option>
+        <option value="2020">2020</option>
+        <option value="2016">2016</option>
+      </select>
       <select id="type-filter" class="filter-select" aria-label="Filter by type">
         <option value="">All types</option>
         <option value="mortgage">Mortgage</option>
@@ -219,7 +227,7 @@
             <th data-col="creditor" tabindex="0">Creditor</th>
             <th data-col="type" tabindex="0">Type</th>
             <th data-col="rate" tabindex="0">Rate / Term</th>
-            <th data-col="median_value" tabindex="0" style="text-align:right;">Est. Amount</th>
+            <th data-col="median_value" tabindex="0" style="text-align:right;">Est. Median</th>
           </tr>
         </thead>
         <tbody id="table-body">
@@ -336,6 +344,7 @@ function buildTrends() {
 
 function toggleYear(y) {
   activeYear = activeYear === y ? null : y;
+  document.getElementById('year-filter').value = activeYear || '';
   buildFilings(); updateYearBar(); renderTable();
 }
 
@@ -343,7 +352,10 @@ function updateYearBar() {
   const bar = document.getElementById('year-filter-bar');
   if (!activeYear) { bar.innerHTML = ''; return; }
   bar.innerHTML = `Showing <span class="year-tag">${activeYear}</span> only &nbsp;<button class="btn-clear-year" aria-label="Clear year filter">✕ Clear year filter</button>`;
-  bar.querySelector('.btn-clear-year').addEventListener('click', () => toggleYear(activeYear));
+  bar.querySelector('.btn-clear-year').addEventListener('click', () => {
+    document.getElementById('year-filter').value = '';
+    toggleYear(activeYear);
+  });
 }
 
 function getFiltered() {
@@ -386,10 +398,11 @@ function renderTable() {
       <td class="creditor-cell">${r.creditor||'—'}</td>
       <td>${typeBadge(r.type)}</td>
       <td class="rate-cell">${r.rate||'—'}</td>
-      <td class="amount-cell">${r.amount||'—'}</td>
+      <td class="amount-cell">${fmt(r.median_value)}</td>
     </tr>`).join('');
   const total = rows.reduce((s,r)=>s+(r.median_value||0),0);
-  footer.innerHTML = `<span>${rows.length}</span> liabilities · Est. total: <span>${fmt(total)}+</span>`;
+  const hasFloor = rows.some(r => r.amount && r.amount.includes('Over'));
+  footer.innerHTML = `<span>${rows.length}</span> liabilities · Est. total: <span>${fmt(total)}${hasFloor?'+':''}</span>`;
   tbody.querySelectorAll('tr').forEach((tr,i) => tr.addEventListener('click', () => openDetail(rows[i])));
   // sort arrows
   document.querySelectorAll('thead th').forEach(th => {
@@ -441,11 +454,16 @@ async function init() {
 }
 
 document.getElementById('search-input').addEventListener('input', e => { searchQ=e.target.value; renderTable(); });
+document.getElementById('year-filter').addEventListener('change', e => {
+  activeYear = e.target.value || null;
+  buildFilings(); updateYearBar(); renderTable();
+});
 document.getElementById('type-filter').addEventListener('change', e => { typeFilter=e.target.value; renderTable(); });
 document.getElementById('btn-clear-all').addEventListener('click', () => {
   searchQ=''; typeFilter=''; activeYear=null;
   document.getElementById('search-input').value='';
   document.getElementById('type-filter').value='';
+  document.getElementById('year-filter').value='';
   buildFilings(); updateYearBar(); renderTable();
 });
 document.getElementById('detail-close').addEventListener('click', closeDetail);
