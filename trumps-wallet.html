@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trump's Wallet — Hunter Index</title>
-<meta name="description" content="Trump's Wallet — tracking Donald Trump's personal finances across OGE financial disclosure filings. A Hunter Index accountability project.">
+<title>Trump's Wallet — Political Wallet</title>
+<meta name="description" content="Trump's Wallet — tracking Donald Trump's personal finances across OGE financial disclosure filings. A Political Wallet accountability project.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -187,10 +187,10 @@
       <a href="trumps-wallet-liabilities.html">Liabilities</a>
     </div>
     <h1>Trump's <span>Wallet</span></h1>
-    <p class="header-desc">Tracking Donald Trump's personal finances across public OGE financial disclosure filings. Asset-level data from five filing years, 2016–2025.</p>
+    <p class="header-desc">Tracking Donald Trump's personal finances across public OGE financial disclosure filings. Asset-level data from six filing years, 2016–2026.</p>
     <div class="header-meta">
-      <a href="https://hunterindex.org" target="_blank" rel="noopener">hunterindex.org</a>
-      <a href="https://huntrjay.substack.com" target="_blank" rel="noopener">Subscribe on Substack</a>
+      <a href="https://politicalwallet.org" target="_blank" rel="noopener">politicalwallet.org</a>
+      <a href="https://news.politicalwallet.org" target="_blank" rel="noopener">Subscribe on Substack</a>
       <span class="late-fee-badge">⚠ 2025 form filed late</span>
     </div>
   </div>
@@ -206,8 +206,8 @@
   <section aria-label="About this data">
     <div class="section-label">About This Data</div>
     <div class="data-note">
-      <p><strong>Source:</strong> All data processed directly from Donald Trump's OGE Form 278 filings. Original files obtained by Hunter Index (nonprofit, EIN 33-3157569) or partners. Any use must be attributed to Hunter Index with a link to <a href="https://hunterindex.org" target="_blank" rel="noopener">hunterindex.org</a>.</p>
-      <p><strong>Annual forms</strong> cover the preceding calendar year. <strong>Candidate forms</strong> cover ~12 months prior to filing. The 2023 annual form was not processed due to an OGE lawsuit note. Values are OGE-reported ranges; medians are calculated estimates. <strong>Not yet processed:</strong> 2017, 2018, 2021 termination report, 2026 transaction report (filed 2/26/2026). 2026 annual expected by August 13, 2026.</p>
+      <p><strong>Source:</strong> All data processed directly from Donald Trump's OGE Form 278 filings. Original files obtained by Hunter Index D/B/A Political Wallet (nonprofit, EIN 33-3157569) or partners. Any use must be attributed to Hunter Index D/B/A Political Wallet with a link to <a href="https://politicalwallet.org" target="_blank" rel="noopener">politicalwallet.org</a>.</p>
+      <p><strong>Annual forms</strong> cover the preceding calendar year. <strong>Candidate forms</strong> cover ~12 months prior to filing. The 2023 annual form was not processed due to an OGE lawsuit note. Values are OGE-reported ranges; medians are calculated estimates. <strong>Not yet processed:</strong> 2017, 2018, 2021 termination report.</p>
     </div>
   </section>
 
@@ -223,6 +223,7 @@
         <div class="select-wrap">
           <select id="year-filter">
             <option value="">All years</option>
+            <option value="2026">2026</option>
             <option value="2025">2025</option>
             <option value="2024">2024</option>
             <option value="2022">2022</option>
@@ -297,33 +298,34 @@
 <footer role="contentinfo">
   <div class="footer-inner">
     <div>
-      <div class="footer-col-title">Hunter Index</div>
-      Hunter Index covers the personal finances of politicians.<br>
+      <div class="footer-col-title">Political Wallet</div>
+      Political Wallet covers the personal finances of politicians.<br>
       We explain how government officials' personal finances &amp; policy decisions impact the public.<br>
       EIN: 33-3157569<br>
-      <a href="https://hunterindex.org" target="_blank" rel="noopener">hunterindex.org</a> ·
-      <a href="https://huntrjay.substack.com" target="_blank" rel="noopener">Substack</a>
+      <a href="https://politicalwallet.org" target="_blank" rel="noopener">politicalwallet.org</a> ·
+      <a href="https://news.politicalwallet.org" target="_blank" rel="noopener">Substack</a>
     </div>
     <div>
       <div class="footer-col-title">Data &amp; Attribution</div>
-      Data sourced from public OGE Form 278 disclosures. Any use must be attributed to Hunter Index with a link to hunterindex.org.<br>
-      Questions: <a href="mailto:jay@hunterindex.org">jay@hunterindex.org</a> · 202-240-2414
+      Data sourced from public OGE Form 278 disclosures. Any use must be attributed to Political Wallet with a link to politicalwallet.org.<br>
+      Questions: <a href="mailto:jay@politicalwallet.org">jay@politicalwallet.org</a> · 202-240-2414
     </div>
     <div class="footer-rule"></div>
-    <div class="footer-bottom">Data covers May 2015 – June 13, 2025. Updated as new filings are processed. Not legal or financial advice.</div>
+    <div class="footer-bottom">Data covers May 2015 – June 29, 2026. Updated as new filings are processed. Not legal or financial advice.</div>
   </div>
 </footer>
 
 <script>
 /* ── FILING METADATA — display labels only, no numbers ── */
 const FILING_META = {
+  '2026': { label:'2026 Annual',     formType:'Annual (278)',     filed:'Jun. 29, 2026', period:'Jan. 1 – Dec. 31, 2025',    note:'Filed under a 45-day extension — late fee paid' },
   '2025': { label:'2025 Annual',     formType:'Annual (278)',     filed:'Jun. 13, 2025', period:'Jan. 1 – Dec. 31, 2024',    note:'Filed late — fee paid May 13, 2026' },
   '2024': { label:'2024 Candidate',  formType:'Candidate (278)',  filed:'Aug. 13, 2024', period:'Jan. 2023 – Aug. 13, 2024', note:null },
   '2022': { label:'2022 Candidate',  formType:'Candidate (278)',  filed:'Apr. 14, 2023', period:'Jan. 2022 – Apr. 14, 2023', note:'4 outside positions: CIC Digital LLC, CIC Ventures LLC, Mar-A-Lago Club, Trump Media & Technology Group' },
   '2020': { label:'2020 Annual',     formType:'Annual (278)',     filed:'Jul. 31, 2020', period:'Jan. 1 – Dec. 31, 2019',    note:null },
   '2016': { label:'2016 Candidate',  formType:'Candidate (278)',  filed:'May 16, 2016',  period:'Jan. 2015 – May 16, 2016',  note:null },
 };
-const YEARS = ['2025','2024','2022','2020','2016'];
+const YEARS = ['2026','2025','2024','2022','2020','2016'];
 
 function fmt(n){
   if(n==null||n==='')return null;

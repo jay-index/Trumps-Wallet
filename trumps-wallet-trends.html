@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trump's Wallet — Trends Over Time — Hunter Index</title>
+<title>Trump's Wallet — Trends Over Time — Political Wallet</title>
 <meta name="description" content="How Donald Trump's assets, income, and net worth have changed across OGE disclosure filings.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -150,10 +150,10 @@
       <a href="trumps-wallet-liabilities.html">Liabilities</a>
     </div>
     <h1>Trump's <span>Wallet</span></h1>
-    <p class="header-desc">How Donald Trump's assets, income, and net worth have changed across five OGE disclosure filings, 2016–2025.</p>
+    <p class="header-desc">How Donald Trump's assets, income, and net worth have changed across six OGE disclosure filings, 2016–2026.</p>
     <div class="header-meta">
-      <a href="https://hunterindex.org" target="_blank" rel="noopener">hunterindex.org</a>
-      <a href="https://huntrjay.substack.com" target="_blank" rel="noopener">Subscribe on Substack</a>
+      <a href="https://politicalwallet.org" target="_blank" rel="noopener">politicalwallet.org</a>
+      <a href="https://news.politicalwallet.org" target="_blank" rel="noopener">Subscribe on Substack</a>
     </div>
   </div>
 </header>
@@ -163,7 +163,7 @@
   <!-- PORTFOLIO-WIDE TRENDS -->
   <section aria-labelledby="trends-heading">
     <div class="section-label" id="trends-heading">Portfolio-Wide Trends</div>
-    <p class="section-desc">Median estimates from OGE-reported ranges across all five filings. Note: filing years cover different time periods — see coverage timeline below.</p>
+    <p class="section-desc">Median estimates from OGE-reported ranges across all six filings. Note: filing years cover different time periods — see coverage timeline below.</p>
     <div class="charts-grid">
       <div class="chart-card">
         <div class="chart-title">Net Worth</div>
@@ -230,13 +230,14 @@
       <span>2022: 16 months (Jan 2022 – Apr 2023)</span>
       <span>2024: 20 months (Jan 2023 – Aug 2024)</span>
       <span>2025: 12 months (Jan–Dec 2024)</span>
+      <span>2026: 12 months (Jan–Dec 2025)</span>
     </div>
   </section>
 
   <!-- PORTFOLIO MIX -->
   <section aria-labelledby="mix-heading">
     <div class="section-label" id="mix-heading">Portfolio Mix by Asset Type</div>
-    <p class="section-desc">How the composition of Trump's disclosed portfolio has shifted across five filings — both by asset value and by income generation.</p>
+    <p class="section-desc">How the composition of Trump's disclosed portfolio has shifted across six filings — both by asset value and by income generation.</p>
 
     <!-- Year selector -->
     <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.25rem;" id="donut-year-btns" role="group" aria-label="Select filing year"></div>
@@ -298,26 +299,26 @@
 <footer role="contentinfo">
   <div class="footer-inner">
     <div>
-      <div class="footer-col-title">Hunter Index</div>
-      Hunter Index covers the personal finances of politicians.<br>
+      <div class="footer-col-title">Political Wallet</div>
+      Political Wallet covers the personal finances of politicians.<br>
       We explain how government officials' personal finances &amp; policy decisions impact the public.<br>
       EIN: 33-3157569<br>
-      <a href="https://hunterindex.org" target="_blank" rel="noopener">hunterindex.org</a> ·
-      <a href="https://huntrjay.substack.com" target="_blank" rel="noopener">Substack</a>
+      <a href="https://politicalwallet.org" target="_blank" rel="noopener">politicalwallet.org</a> ·
+      <a href="https://news.politicalwallet.org" target="_blank" rel="noopener">Substack</a>
     </div>
     <div>
       <div class="footer-col-title">Data &amp; Attribution</div>
-      Data from public OGE Form 278 disclosures. Any use must be attributed to Hunter Index with a link to hunterindex.org.<br>
-      <a href="mailto:jay@hunterindex.org">jay@hunterindex.org</a> · 202-240-2414
+      Data from public OGE Form 278 disclosures. Any use must be attributed to Political Wallet with a link to politicalwallet.org.<br>
+      <a href="mailto:jay@politicalwallet.org">jay@politicalwallet.org</a> · 202-240-2414
     </div>
     <div class="footer-rule"></div>
-    <div class="footer-bottom">Medians are calculated estimates from OGE-reported ranges. Data covers May 2015 – June 13, 2025.</div>
+    <div class="footer-bottom">Medians are calculated estimates from OGE-reported ranges. Data covers May 2015 – June 29, 2026.</div>
   </div>
 </footer>
 
 <script>
-const YEARS = ['2016','2020','2022','2024','2025'];
-const YR_COLORS = {'2016':'#228D57','2020':'#85BB65','2022':'#3E3E3C','2024':'#228D57','2025':'#85BB65'};
+const YEARS = ['2016','2020','2022','2024','2025','2026'];
+const YR_COLORS = {'2016':'#228D57','2020':'#85BB65','2022':'#3E3E3C','2024':'#228D57','2025':'#85BB65','2026':'#3E3E3C'};
 
 /* ── FILING METADATA ── */
 const FILING_META = {
@@ -326,6 +327,7 @@ const FILING_META = {
   '2022':{ label:'Apr. 2023', months:16 },
   '2024':{ label:'Aug. 2024', months:20 },
   '2025':{ label:'Dec. 2024', months:12 },
+  '2026':{ label:'Dec. 2025', months:12 },
 };
 
 /* ── LIABILITY DATA (from trump_liabilities.json) ── */
@@ -544,7 +546,7 @@ function drawStackedBar(canvasId,datasets,labels){
 }
 
 /* ── DONUT CHART ── */
-let activeMixYear = '2025';
+let activeMixYear = '2026';
 let storedMixData = null;
 
 function drawDonut(canvasId, data, total) {
@@ -696,7 +698,7 @@ function renderMovers(FILINGS,mixData){
   const container=document.getElementById('movers-container');
   const pairs=[
     {from:'2016',to:'2020'},{from:'2020',to:'2022'},
-    {from:'2022',to:'2024'},{from:'2024',to:'2025'},
+    {from:'2022',to:'2024'},{from:'2024',to:'2025'},{from:'2025',to:'2026'},
   ];
   container.innerHTML=pairs.map(({from,to})=>{
     const totValFrom=Object.values(mixData[from].val).reduce((s,v)=>s+v,0);
@@ -738,6 +740,7 @@ const COVERAGE=[
   {id:'2022',label:'2022 Candidate',formType:'candidate',start:[2022,1],end:[2023,4],filed:'Filed Apr. 14, 2023',note:'4 outside positions disclosed'},
   {id:'2024',label:'2024 Candidate',formType:'candidate',start:[2023,1],end:[2024,8],filed:'Filed Aug. 13, 2024',note:null},
   {id:'2025',label:'2025 Annual',formType:'annual',start:[2024,1],end:[2024,12],filed:'Filed Jun. 13, 2025',note:'Filed late'},
+  {id:'2026',label:'2026 Annual',formType:'annual',start:[2025,1],end:[2025,12],filed:'Filed Jun. 29, 2026',note:'Filed under 45-day extension'},
   {id:'2017',label:'2017 Annual',formType:'gap',start:[2016,1],end:[2016,12],filed:'Coming soon',note:null},
   {id:'2018',label:'2018 Annual',formType:'gap',start:[2017,1],end:[2017,12],filed:'Coming soon',note:null},
   {id:'2021t',label:'2021 Termination',formType:'gap',start:[2020,1],end:[2021,1],filed:'Coming soon',note:null},

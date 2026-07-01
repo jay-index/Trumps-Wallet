@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trump's Wallet — Liabilities — Hunter Index</title>
-<meta name="description" content="Tracking Donald Trump's liabilities across OGE financial disclosure filings. A Hunter Index accountability project.">
+<title>Trump's Wallet — Liabilities — Political Wallet</title>
+<meta name="description" content="Tracking Donald Trump's liabilities across OGE financial disclosure filings. A Political Wallet accountability project.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -166,10 +166,10 @@
       <a href="trumps-wallet-liabilities.html" class="active">Liabilities</a>
     </div>
     <h1>Trump's <span>Wallet</span> — Liabilities</h1>
-    <p class="header-desc">Donald Trump's disclosed debts, mortgages, and legal liabilities across five OGE filing years, 2016–2025.</p>
+    <p class="header-desc">Donald Trump's disclosed debts, mortgages, and legal liabilities across six OGE filing years, 2016–2026.</p>
     <div class="header-meta">
-      <a href="https://hunterindex.org" target="_blank" rel="noopener">hunterindex.org</a>
-      <a href="https://huntrjay.substack.com" target="_blank" rel="noopener">Subscribe on Substack</a>
+      <a href="https://politicalwallet.org" target="_blank" rel="noopener">politicalwallet.org</a>
+      <a href="https://news.politicalwallet.org" target="_blank" rel="noopener">Subscribe on Substack</a>
       <span class="header-badge">⚠ 2025 form filed late</span>
     </div>
   </div>
@@ -190,7 +190,7 @@
   </section>
 
   <div class="about-box" role="note" style="margin-bottom:2rem;">
-    <strong>Source:</strong> All data processed directly from Donald Trump's OGE Form 278 filings. Original files obtained by Hunter Index (nonprofit, EIN 33-3157569) or partners. Any use must be attributed to Hunter Index with a link to <a href="https://hunterindex.org" target="_blank" rel="noopener">hunterindex.org</a>.<br><br>
+    <strong>Source:</strong> All data processed directly from Donald Trump's OGE Form 278 filings. Original files obtained by Hunter Index D/B/A Political Wallet (nonprofit, EIN 33-3157569) or partners. Any use must be attributed to Hunter Index D/B/A Political Wallet with a link to <a href="https://politicalwallet.org" target="_blank" rel="noopener">politicalwallet.org</a>.<br><br>
     <strong>Note:</strong> Values are OGE-reported ranges; medians are calculated estimates. Litigation liabilities first appeared in the 2024 filing. Filing years covered: 2016, 2020, 2022, 2024, and 2025. "Over $50,000,000" indicates the disclosed floor — actual amounts may be substantially higher.
   </div>
 
@@ -203,6 +203,7 @@
       </div>
       <select id="year-filter" class="filter-select" aria-label="Filter by year">
         <option value="">All years</option>
+        <option value="2026">2026</option>
         <option value="2025">2025</option>
         <option value="2024">2024</option>
         <option value="2022">2022</option>
@@ -248,31 +249,32 @@
 <footer role="contentinfo">
   <div class="footer-inner">
     <div>
-      <div class="footer-col-title">Hunter Index</div>
-      Hunter Index covers the personal finances of politicians. We explain how government officials' personal finances &amp; policy decisions impact the public.<br>
+      <div class="footer-col-title">Political Wallet</div>
+      Political Wallet covers the personal finances of politicians. We explain how government officials' personal finances &amp; policy decisions impact the public.<br>
       EIN: 33-3157569<br>
-      <a href="https://hunterindex.org" target="_blank" rel="noopener">hunterindex.org</a> · <a href="https://huntrjay.substack.com" target="_blank" rel="noopener">Substack</a>
+      <a href="https://politicalwallet.org" target="_blank" rel="noopener">politicalwallet.org</a> · <a href="https://news.politicalwallet.org" target="_blank" rel="noopener">Substack</a>
     </div>
     <div>
       <div class="footer-col-title">Data &amp; Attribution</div>
-      Data sourced from public OGE Form 278 disclosures. Any use must be attributed to Hunter Index with a link to hunterindex.org.<br>
-      Questions: <a href="mailto:jay@hunterindex.org">jay@hunterindex.org</a> · 202-240-2414<br><br>
-      Data covers 2016–2025 disclosure filings. Not legal or financial advice.
+      Data sourced from public OGE Form 278 disclosures. Any use must be attributed to Political Wallet with a link to politicalwallet.org.<br>
+      Questions: <a href="mailto:jay@politicalwallet.org">jay@politicalwallet.org</a> · 202-240-2414<br><br>
+      Data covers 2016–2026 disclosure filings. Not legal or financial advice.
     </div>
     <div class="footer-rule"></div>
-    <div class="footer-bottom">© Hunter Index · Trump's Wallet — Liabilities · <a href="https://hunterindex.org" target="_blank" rel="noopener">hunterindex.org</a></div>
+    <div class="footer-bottom">© Political Wallet · Trump's Wallet — Liabilities · <a href="https://politicalwallet.org" target="_blank" rel="noopener">politicalwallet.org</a></div>
   </div>
 </footer>
 
 <script>
 const FILING_META = {
+  '2026': { formType:'Annual (278)',    filed:'Jun 29, 2026' },
   '2016': { formType:'Candidate (278)', filed:'May 16, 2016' },
   '2020': { formType:'Annual (278)',    filed:'Jul 31, 2020' },
-  '2022': { formType:'Annual (278)',    filed:'Apr 14, 2023' },
-  '2024': { formType:'Annual (278)',    filed:'Aug 13, 2024' },
+  '2022': { formType:'Candidate (278)', filed:'Apr 14, 2023' },
+  '2024': { formType:'Candidate (278)', filed:'Aug 13, 2024' },
   '2025': { formType:'Annual (278)',    filed:'Jun 13, 2025' },
 };
-const YEARS = ['2025','2024','2022','2020','2016'];
+const YEARS = ['2026','2025','2024','2022','2020','2016'];
 
 let DATA = [];
 let activeYear = null, sortCol = 'filing_year', sortDir = 'desc';
